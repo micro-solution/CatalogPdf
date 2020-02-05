@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CatalogPdf.frmMain">
+    <Position X="4.5" Y="0.5" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAABAC0QBSIQALQAIHCAAV9mAEo4QIAAgCICAAAABAA=</HashCode>
+      <FileName>FrmMain.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="presenter" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CatalogPdf.CatalogItem" Collapsed="true">
+    <Position X="9.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAABCDAAAGAAAECIAAACAIAAAAgAAAACAAAIRAQ=</HashCode>
+      <FileName>CatalogItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CatalogPdf.Presenter">
+    <Position X="15.75" Y="4.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAEAgAAAAAAAEAAgAAAAAAAABAAEAAkAAAgAAAAACAA=</HashCode>
+      <FileName>Presenter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CatalogPdf.Program" Collapsed="true">
+    <Position X="9.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CatalogPdf.Sticker">
+    <Position X="15.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAQAAAAAACAAAQCAAAgAAAAAAAAAAQAAAA=</HashCode>
+      <FileName>Sticker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CatalogPdf.Properties.Resources">
+    <Position X="11.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CatalogPdf.Properties.Settings">
+    <Position X="13.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAEIAAAAAABAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Settings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
