@@ -60,7 +60,7 @@
     <Reference Include="WindowsBase" />
     <Reference Include="XMLDB, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\архив\XMLDB.dll</HintPath>
+      <HintPath>..\..\XMLDB\XMLDB\bin\Release\XMLDB.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -70,11 +70,17 @@
     <Compile Include="FrmBookmark.Designer.cs">
       <DependentUpon>FrmBookmark.cs</DependentUpon>
     </Compile>
-    <Compile Include="CatalogItem.cs">
+    <Compile Include="FrmTableCatalog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmTableCatalog.Designer.cs">
+      <DependentUpon>FrmTableCatalog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LineCatalogDocument.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CatalogItem.Designer.cs">
-      <DependentUpon>CatalogItem.cs</DependentUpon>
+    <Compile Include="LineCatalogDocument.Designer.cs">
+      <DependentUpon>LineCatalogDocument.cs</DependentUpon>
     </Compile>
     <Compile Include="Controller.cs" />
     <Compile Include="FrmDocument.cs">
@@ -88,12 +94,6 @@
     </Compile>
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FrmSearchDocument.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmSearchDocument.Designer.cs">
-      <DependentUpon>FrmSearchDocument.cs</DependentUpon>
     </Compile>
     <Compile Include="LineBookmark.cs">
       <SubType>UserControl</SubType>
@@ -120,17 +120,18 @@
     <Compile Include="TomMarck.Designer.cs">
       <DependentUpon>TomMarck.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserSettings.cs" />
     <EmbeddedResource Include="FrmBookmark.resx">
       <DependentUpon>FrmBookmark.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CatalogItem.resx">
-      <DependentUpon>CatalogItem.cs</DependentUpon>
+    <EmbeddedResource Include="FrmTableCatalog.resx">
+      <DependentUpon>FrmTableCatalog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LineCatalogDocument.resx">
+      <DependentUpon>LineCatalogDocument.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmDocument.resx">
       <DependentUpon>FrmDocument.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmSearchDocument.resx">
-      <DependentUpon>FrmSearchDocument.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LineBookmark.resx">
       <DependentUpon>LineBookmark.cs</DependentUpon>

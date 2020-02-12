@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace CatalogPdf
 {
+    
     /// <summary>
     /// Элемент управления закладкой
     /// </summary>
@@ -20,9 +21,7 @@ namespace CatalogPdf
         public typeSticker TypeSticker { get; set; }
         public int Id;
         public string Content { get; set; }
-        public int Tome;       
-        public string DocumentPath { get; set; }
-        
+
 
         public delegate void UserEditBookmark(int id, int page, string title, string content);
         public delegate void UserDeleteBookmark(int id, typeSticker typeSticker);
@@ -53,13 +52,12 @@ namespace CatalogPdf
         public void Init()
         {
             LbTitle.Text = Title;
+            lbDocNumber.Text = DocNumber.ToString();
+            lbTome.Text = Tome.ToString();
             LbStartPage.Text = PageStart.ToString();
         }
 
-        private void LbTitleDocument_Click(object sender, EventArgs e)
-        {
-            
-        }
+
 
         /// <summary>
         /// Удалить закладку
@@ -80,6 +78,10 @@ namespace CatalogPdf
         private void LineBookmark_Enter(object sender, EventArgs e)
         {
             Goto_BookmarkPage?.Invoke(PageStart, Tome);
+        }
+        private void LbTitleDocument_Click(object sender, EventArgs e)
+        {
+            this.LineBookmark_Enter(this, e);
         }
 
         private void переименоватьToolStripMenuItem_Click(object sender, EventArgs e)
