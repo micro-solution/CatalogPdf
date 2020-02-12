@@ -849,6 +849,7 @@ namespace CatalogPdf
                     doc.AmountPage = frmDocument.AmountPage;
                     doc.DocType = frmDocument.TypeDocument;
                     doc.Date = frmDocument.Date;
+                    doc.EndPage = frmDocument.PageStart +  frmDocument.AmountPage - 1;
                     presenter.Save();
                     presenter.ChangeDocNumber(doc, frmDocument.Number);
                     InitPresenter();
