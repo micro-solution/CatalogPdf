@@ -60,7 +60,7 @@ namespace CatalogPdf
             TbTome.Text = Tome.ToString();
             TbNumber.Text = Number.ToString();
             TbAmountPages.Text = AmountPage.ToString();
-
+            tbTypeDocument.Text = TypeDocument;
 
             try
             {
