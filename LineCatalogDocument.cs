@@ -1,51 +1,34 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using XMLDBLib;
 
 namespace CatalogPdf
 {
-    public partial class CatalogItem : LineCatalog
+    public partial class LineCatalogDocument : LineCatalog
     {
 
-        /// <summary>
-        ///Том дела 
-        /// </summary>
-        public int IdTome { get; set; }
-        /// <summary>
-        ///  Заголовок Документа 
-        /// </summary>
-        public string NameDoc { get; set; }
-
-        /// <summary>
-        /// Путь к файлу
-        /// </summary>
-        public string FullName { get; set; }
-
-        public int PageStart { get; set; }
-        public int DocNumber { get; set; }
-        /// <summary>
-        /// Последняя страница
-        /// </summary>
-        private uint PageEnd { get; set; }
-
-
+       // internal Document document;
+      
         public delegate void UserChanges(string newName, string path);
         public delegate void UserChangeDocFile(string path);
         public delegate void UserChangeDocNum(int docNumber, string path);
 
 
-        public event UserChanges ChangeDocName;
-        public event UserChangeDocNum ChangeDocNumber;
+
+        public event UserChanges ChangeDocName;   
         public event UserChangeDocNum ChangeDoc;
         public event UserChangeDocFile ShowDoc;
         public event UserChangeDocFile DeleteDoc;
 
-        public CatalogItem()
+        public LineCatalogDocument()
         {
             InitializeComponent();
+            this.AllowDrop = true;
             Size = new Size(262, 22);
             BackColor = Color.FromArgb(247, 250, 250);
             UpgateView();
@@ -56,7 +39,7 @@ namespace CatalogPdf
         {
             if (!string.IsNullOrWhiteSpace(NameDoc))
             {
-                lbTome.Text = $"{IdTome}.";
+                lbTome.Text =Tome.ToString();
                 lbNumber.Text = DocNumber.ToString();
 
                 LbTitleDocument.Text = NameDoc;
@@ -68,6 +51,8 @@ namespace CatalogPdf
 
 
         private bool clicked;
+        
+
         /// <summary>
         /// Переход к редактированию поля или открытие документа
         /// </summary>
@@ -89,10 +74,13 @@ namespace CatalogPdf
                 ShowDoc.Invoke(FullName);
             }
         }
+        //private void activa
+
+
         private void CatalogItem_Enter(object sender, EventArgs e)
         {
-            BackColor = Color.FromArgb(240, 246, 255);
-            ShowDoc.Invoke(FullName);
+            BackColor = UserSettings.catalogDocItem_ActiveColor;//    Color.FromArgb(240, 246, 255);
+            ShowDoc.Invoke(FullName);           
         }
 
         #region Изменить текст в лейблах
@@ -180,24 +168,7 @@ namespace CatalogPdf
         private void ToolStripMenuEditDocument_Click(object sender, System.EventArgs e)
         {
             ChangeDoc?.Invoke(DocNumber, FullName);
-        }
-
-
-        private void названиеToolStripMenuItem_Click(object sender, EventArgs e)
-        { ChangeNameDocControl(); }
-        private void номерToolStripMenuItem_Click(object sender, EventArgs e)
-        { 
-            
-            ChangeDocNum(lbNumber);
-        
-        }
-        private void ChangeDocNum(Label lbindex)
-        {
-            int number;
-            if (int.TryParse(lbindex.Text, out number))
-            { ChangeDocNumber?.Invoke(number, FullName); }
-
-        }
+        }     
         private void удалитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DeleteDoc.Invoke(FullName);
@@ -209,5 +180,7 @@ namespace CatalogPdf
         {
             BackColor = Color.FromArgb(247, 250, 250);
         }
+
+     
     }
 }

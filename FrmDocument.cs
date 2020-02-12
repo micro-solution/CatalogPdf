@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using XMLDBLib;
 
 namespace CatalogPdf
 {
@@ -25,32 +27,50 @@ namespace CatalogPdf
         public int AmountPage { get; set; }
         public int Tome { get; set; }
 
+        public List<Document> documents { get; set; }
+
+        internal DataPresenter presenter { get; set; }
+
         public string TypeDocument { get; set; }
-        public string Date { get; set; }
+        public DateTime Date { get; set; }
 
         public FrmDocument()
         {
             InitializeComponent();
             DialogResult = DialogResult.None;
+          
         }
+
+        /// <summary>
+        /// Заполнение полей формыж
+        /// </summary>
         public void Init()
         {
+            //tbName.TabIndex = 1;
+            //TbTome.TabIndex = 2;
+            //TbNumber.TabIndex = 3;
+            //tbPage.TabIndex = 4;
+            //tbTypeDocument.TabIndex = 5;
+            //dateTimePicker1.TabIndex = 6;
+            //btnSave.TabIndex = 7;
+
             TbFullName.Text = Fullname;
             tbName.Text = NameDocument;
             tbPage.Text = PageStart.ToString();
             TbTome.Text = Tome.ToString();
             TbNumber.Text = Number.ToString();
-            TbAmountPages.Text = AmountPage.ToString(); 
-            if (Date== "01.01.0001 0:00:00")
-            {
-                tbDate.Text = DateTime.Now.ToString("M/d/yyyy");
-            }
-            else
-            {
-                tbDate.Text = Date;
-            }
-            tbTypeDocument.Text = TypeDocument;
+            TbAmountPages.Text = AmountPage.ToString();
 
+
+            try
+            {
+            dateTimePicker1.Value = dateTimePicker1.MinDate > Date ? DateTime.Now : Date;
+                
+            }
+            catch(Exception e)
+            {
+                Debug.WriteLine(e.Message); 
+            }
         }
 
 
@@ -78,7 +98,7 @@ namespace CatalogPdf
             if (!string.IsNullOrWhiteSpace(fildTome))
             { Tome = int.Parse(fildTome); }
 
-            Date = tbDate.Text;
+            Date = dateTimePicker1.Value;
             TypeDocument = tbTypeDocument.Text;
 
 
@@ -99,15 +119,95 @@ namespace CatalogPdf
         {
             if (!(char.IsDigit(e.KeyChar) || e.KeyChar == (char)Keys.Back)) e.Handled = true;
         }
-
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-            tbDate.Text = dateTimePicker1.Value.ToShortDateString();
-        }
+         
 
         private void TbAmountPages_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!(char.IsDigit(e.KeyChar) || e.KeyChar == (char)Keys.Back)) e.Handled = true;
+        }
+
+        private void TbNumber_TextChanged(object sender, EventArgs e)
+        {
+            int newNum = 0;            
+            int.TryParse(TbNumber.Text, out newNum);
+
+            int newTome = 0;
+            int.TryParse(TbTome.Text, out newTome);
+
+            List<Document> currentTomeDocs = documents.Where(x => x.Tome == newTome && x.File.FullName != Fullname).ToList();
+           currentTomeDocs  = currentTomeDocs?.OrderBy(d => d.Number).ToList(); 
+           currentTomeDocs = currentTomeDocs.Take(newNum-1).ToList();
+           // Document previousDoc = currentTomeDocs.Count>0 ? currentTomeDocs.Last(): null;
+           int countPage = 0;         
+                currentTomeDocs.ForEach(d => countPage += d.AmountPage);
+        
+                tbPage.Text =  $"{countPage + 2}";
+          
+        }
+        private int lastPage=-1;
+        private void tbPage_TextChanged(object sender, EventArgs e)
+        {
+            int.TryParse(TbTome.Text, out int newTome);
+            int.TryParse(tbPage.Text, out int pageTb);
+           /// if(presenter.Catalog.IsFreePage(pageTb) && presenter.Catalog.IsFreePage(pageTb+ AmountPage -1)) 
+           if (presenter.isFreeRangePage(pageTb, pageTb + AmountPage - 1, newTome,Fullname))
+            {
+               
+                tbPage.ForeColor = Color.Black;
+            }
+            else
+            {
+             
+                tbPage.ForeColor = Color.Red;
+            }
+        }
+
+        private void GetLastPage()
+        {
+
+            int.TryParse(TbTome.Text, out int newTome);           
+           List<Document> currentTomeDocs = documents?.Where(x => x.Tome == newTome && x.File.FullName != Fullname).ToList();
+         
+            Document lastDocument = currentTomeDocs.Count > 0 ? currentTomeDocs?.OrderBy(x => x.StartPage).Last() :null;
+            if (lastDocument != null)
+            {
+            int amoumtPageLastDoc = lastDocument.AmountPage != 0 ? lastDocument.AmountPage : presenter.GetCountPages(lastDocument);
+            lastPage = lastDocument.StartPage + amoumtPageLastDoc-1;
+            }
+            else
+            {
+                lastPage = 0;
+            }
+            
+        }
+
+        private void TbTome_TextChanged(object sender, EventArgs e)
+        {
+            int.TryParse(TbTome.Text, out int newTome);
+            if (newTome != Tome)
+            {
+            List<Document> currentTomeDocs = documents?.Where(x => x.Tome == newTome && x.File.FullName != Fullname).ToList();
+                Document lastDocument= currentTomeDocs.Count > 0 ? currentTomeDocs.OrderBy(x => x.EndPage).Last() : null;
+
+                int maxEndPage;
+                if (lastDocument != null)
+                {
+                    maxEndPage = lastDocument.EndPage;///currentTomeDocs.Count > 0?  currentTomeDocs.Max(x => x.EndPage):0 ;// OrderBy(x => x.EndPage).Last() : null;
+                    TbNumber.Text = currentTomeDocs.Count > lastDocument.Number ? $"{currentTomeDocs.Count + 1}" : $"{ lastDocument.Number+1}";
+                }
+                else
+                {
+                maxEndPage = 0;
+                TbNumber.Text = "1";
+                }
+                tbPage.Text = $"{maxEndPage + 1}";
+            }
+            else
+            {
+                tbPage.Text = $"{PageStart}";
+                TbNumber.Text = $"{Number}";
+            }
+
         }
     }
 }

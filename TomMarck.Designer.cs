@@ -28,9 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TomMarck));
             this.LbTitle = new System.Windows.Forms.Label();
-            this.btnSelectTome = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // LbTitle
@@ -39,32 +37,19 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.LbTitle.AutoEllipsis = true;
             this.LbTitle.AutoSize = true;
-            this.LbTitle.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.LbTitle.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.LbTitle.Location = new System.Drawing.Point(6, 4);
             this.LbTitle.Name = "LbTitle";
-            this.LbTitle.Size = new System.Drawing.Size(147, 18);
+            this.LbTitle.Size = new System.Drawing.Size(135, 16);
             this.LbTitle.TabIndex = 3;
             this.LbTitle.Text = "Метка тома [ Том I ]";
-            // 
-            // btnSelectTome
-            // 
-            this.btnSelectTome.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSelectTome.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSelectTome.BackgroundImage")));
-            this.btnSelectTome.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnSelectTome.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSelectTome.Location = new System.Drawing.Point(182, 3);
-            this.btnSelectTome.Name = "btnSelectTome";
-            this.btnSelectTome.Size = new System.Drawing.Size(22, 23);
-            this.btnSelectTome.TabIndex = 4;
-            this.btnSelectTome.UseVisualStyleBackColor = true;
-            this.btnSelectTome.Click += new System.EventHandler(this.btnSelectTome_Click);
             // 
             // TomMarck
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.Controls.Add(this.btnSelectTome);
             this.Controls.Add(this.LbTitle);
+            this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Name = "TomMarck";
             this.Size = new System.Drawing.Size(216, 28);
             this.ResumeLayout(false);
@@ -75,6 +60,5 @@
         #endregion
 
         private System.Windows.Forms.Label LbTitle;
-        private System.Windows.Forms.Button btnSelectTome;
     }
 }

@@ -34,6 +34,9 @@
             this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.переименоватьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.lbTome = new System.Windows.Forms.Label();
+            this.lbDocNumber = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.contextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,21 +45,23 @@
             this.LbStartPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.LbStartPage.AutoSize = true;
             this.LbStartPage.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.LbStartPage.Location = new System.Drawing.Point(222, 3);
+            this.LbStartPage.Location = new System.Drawing.Point(209, 3);
             this.LbStartPage.Name = "LbStartPage";
             this.LbStartPage.Size = new System.Drawing.Size(35, 15);
             this.LbStartPage.TabIndex = 7;
             this.LbStartPage.Text = "стр 1";
+            this.toolTip1.SetToolTip(this.LbStartPage, "Страница");
             // 
             // LbTitle
             // 
             this.LbTitle.AutoSize = true;
             this.LbTitle.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.LbTitle.Location = new System.Drawing.Point(3, 3);
+            this.LbTitle.Location = new System.Drawing.Point(51, 3);
             this.LbTitle.Name = "LbTitle";
             this.LbTitle.Size = new System.Drawing.Size(119, 15);
             this.LbTitle.TabIndex = 6;
             this.LbTitle.Text = "Название закладки";
+            this.toolTip1.SetToolTip(this.LbTitle, "Название закладки");
             this.LbTitle.Click += new System.EventHandler(this.LbTitleDocument_Click);
             // 
             // contextMenu
@@ -81,11 +86,35 @@
             this.toolStripMenuItem1.Text = "Удалить";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
+            // lbTome
+            // 
+            this.lbTome.AutoSize = true;
+            this.lbTome.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbTome.Location = new System.Drawing.Point(5, 4);
+            this.lbTome.Name = "lbTome";
+            this.lbTome.Size = new System.Drawing.Size(14, 15);
+            this.lbTome.TabIndex = 8;
+            this.lbTome.Text = "1";
+            this.toolTip1.SetToolTip(this.lbTome, "Том");
+            // 
+            // lbDocNumber
+            // 
+            this.lbDocNumber.AutoSize = true;
+            this.lbDocNumber.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbDocNumber.Location = new System.Drawing.Point(24, 4);
+            this.lbDocNumber.Name = "lbDocNumber";
+            this.lbDocNumber.Size = new System.Drawing.Size(14, 15);
+            this.lbDocNumber.TabIndex = 8;
+            this.lbDocNumber.Text = "1";
+            this.toolTip1.SetToolTip(this.lbDocNumber, "Документ");
+            // 
             // LineBookmark
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ContextMenuStrip = this.contextMenu;
+            this.Controls.Add(this.lbDocNumber);
+            this.Controls.Add(this.lbTome);
             this.Controls.Add(this.LbStartPage);
             this.Controls.Add(this.LbTitle);
             this.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -104,5 +133,8 @@
         private System.Windows.Forms.ContextMenuStrip contextMenu;
         private System.Windows.Forms.ToolStripMenuItem переименоватьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.Label lbTome;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Label lbDocNumber;
     }
 }

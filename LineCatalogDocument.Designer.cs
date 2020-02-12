@@ -1,6 +1,6 @@
 ﻿namespace CatalogPdf
 {
-    partial class CatalogItem
+    partial class LineCatalogDocument
     {
         /// <summary> 
         /// Обязательная переменная конструктора.
@@ -38,6 +38,7 @@
             this.lbNumber = new System.Windows.Forms.Label();
             this.LbStartPage = new System.Windows.Forms.Label();
             this.LbTitleDocument = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.contextMenuCatalogItem.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -85,19 +86,25 @@
             // 
             // lbTome
             // 
+            this.lbTome.AutoEllipsis = true;
             this.lbTome.AutoSize = true;
-            this.lbTome.Font = new System.Drawing.Font("Arial", 9F);
-            this.lbTome.Location = new System.Drawing.Point(3, 3);
+            this.lbTome.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lbTome.Enabled = false;
+            this.lbTome.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbTome.Location = new System.Drawing.Point(3, 6);
             this.lbTome.Name = "lbTome";
-            this.lbTome.Size = new System.Drawing.Size(17, 15);
+            this.lbTome.Size = new System.Drawing.Size(14, 15);
             this.lbTome.TabIndex = 5;
-            this.lbTome.Text = "1.";
+            this.lbTome.Text = "1";
             // 
             // lbNumber
             // 
+            this.lbNumber.AutoEllipsis = true;
             this.lbNumber.AutoSize = true;
+            this.lbNumber.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lbNumber.Enabled = false;
             this.lbNumber.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lbNumber.Location = new System.Drawing.Point(19, 3);
+            this.lbNumber.Location = new System.Drawing.Point(19, 6);
             this.lbNumber.Name = "lbNumber";
             this.lbNumber.Size = new System.Drawing.Size(14, 15);
             this.lbNumber.TabIndex = 4;
@@ -107,11 +114,13 @@
             // 
             this.LbStartPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.LbStartPage.AutoEllipsis = true;
-            this.LbStartPage.Cursor = System.Windows.Forms.Cursors.Default;
+            this.LbStartPage.AutoSize = true;
+            this.LbStartPage.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.LbStartPage.Enabled = false;
             this.LbStartPage.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.LbStartPage.Location = new System.Drawing.Point(194, 4);
+            this.LbStartPage.Location = new System.Drawing.Point(261, 6);
             this.LbStartPage.Name = "LbStartPage";
-            this.LbStartPage.Size = new System.Drawing.Size(60, 19);
+            this.LbStartPage.Size = new System.Drawing.Size(59, 15);
             this.LbStartPage.TabIndex = 3;
             this.LbStartPage.Text = "стр. 1000";
             // 
@@ -119,8 +128,9 @@
             // 
             this.LbTitleDocument.AutoEllipsis = true;
             this.LbTitleDocument.AutoSize = true;
+            this.LbTitleDocument.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LbTitleDocument.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.LbTitleDocument.Location = new System.Drawing.Point(37, 3);
+            this.LbTitleDocument.Location = new System.Drawing.Point(37, 6);
             this.LbTitleDocument.Name = "LbTitleDocument";
             this.LbTitleDocument.Size = new System.Drawing.Size(134, 15);
             this.LbTitleDocument.TabIndex = 2;
@@ -129,9 +139,11 @@
             this.LbTitleDocument.DoubleClick += new System.EventHandler(this.LbTitleDocument_DoubleClick);
             this.LbTitleDocument.MouseClick += new System.Windows.Forms.MouseEventHandler(this.LbTitleDocument_MouseClick);
             // 
-            // CatalogItem
+            // LineCatalogDocument
             // 
+            this.AllowDrop = true;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ContextMenuStrip = this.contextMenuCatalogItem;
             this.Controls.Add(this.lbTome);
@@ -139,9 +151,9 @@
             this.Controls.Add(this.LbStartPage);
             this.Controls.Add(this.LbTitleDocument);
             this.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.DoubleBuffered = true;
-            this.Name = "CatalogItem";
-            this.Size = new System.Drawing.Size(259, 23);
+            this.Name = "LineCatalogDocument";
+            this.Size = new System.Drawing.Size(323, 32);
+           
             this.Enter += new System.EventHandler(this.CatalogItem_Enter);
             this.Leave += new System.EventHandler(this.CatalogItem_Leave);
             this.contextMenuCatalogItem.ResumeLayout(false);
@@ -163,5 +175,6 @@
         private System.Windows.Forms.ToolStripMenuItem добавитьФайлВКаталогToolStripMenuItem;
         private System.Windows.Forms.Label lbTome;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuEditDocument;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
