@@ -44,6 +44,7 @@ namespace CatalogPdf
             this.удалитьФайлИзКаталогаИПапкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.btnTableCatalog = new System.Windows.Forms.ToolStripButton();
             this.spacePanel = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.btnPreviousPage = new System.Windows.Forms.ToolStripButton();
@@ -86,7 +87,7 @@ namespace CatalogPdf
             this.pdfRenderer = new PdfiumViewer.PdfRenderer();
             this.flowPanelComments = new System.Windows.Forms.FlowLayoutPanel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnTableCatalog = new System.Windows.Forms.ToolStripButton();
+            this.addSpase = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitConteiner)).BeginInit();
             this.splitConteiner.Panel1.SuspendLayout();
@@ -184,6 +185,7 @@ namespace CatalogPdf
             // MenuFile
             // 
             this.MenuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addSpase,
             this.открытьАктивныйФайлToolStripMenuItem,
             this.добавитьФайлВКаталогToolStripMenuItem,
             this.удалитьФайлИзКаталогаИПапкиToolStripMenuItem});
@@ -232,6 +234,18 @@ namespace CatalogPdf
             this.toolStripButton4.Text = "btnSettings";
             this.toolStripButton4.ToolTipText = "Настройки";
             this.toolStripButton4.Visible = false;
+            // 
+            // btnTableCatalog
+            // 
+            this.btnTableCatalog.AutoSize = false;
+            this.btnTableCatalog.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnTableCatalog.Image = ((System.Drawing.Image)(resources.GetObject("btnTableCatalog.Image")));
+            this.btnTableCatalog.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnTableCatalog.Name = "btnTableCatalog";
+            this.btnTableCatalog.Size = new System.Drawing.Size(28, 28);
+            this.btnTableCatalog.Text = "Таблица каталога";
+            this.btnTableCatalog.ToolTipText = "Таблица каталога";
+            this.btnTableCatalog.Click += new System.EventHandler(this.toolStripButton6_Click);
             // 
             // spacePanel
             // 
@@ -681,17 +695,12 @@ namespace CatalogPdf
             // 
             this.toolTip1.IsBalloon = true;
             // 
-            // btnTableCatalog
+            // addSpase
             // 
-            this.btnTableCatalog.AutoSize = false;
-            this.btnTableCatalog.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnTableCatalog.Image = ((System.Drawing.Image)(resources.GetObject("btnTableCatalog.Image")));
-            this.btnTableCatalog.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnTableCatalog.Name = "btnTableCatalog";
-            this.btnTableCatalog.Size = new System.Drawing.Size(28, 28);
-            this.btnTableCatalog.Text = "Таблица каталога";
-            this.btnTableCatalog.ToolTipText = "Таблица каталога";
-            this.btnTableCatalog.Click += new System.EventHandler(this.toolStripButton6_Click);
+            this.addSpase.Name = "addSpase";
+            this.addSpase.Size = new System.Drawing.Size(239, 22);
+            this.addSpase.Text = "Добавить пустой документ";
+            this.addSpase.Click += new System.EventHandler(this.addSpase_Click);
             // 
             // frmMain
             // 
@@ -791,6 +800,7 @@ namespace CatalogPdf
         private ToolStripLabel lbCurrentTome;
         private ToolStripSeparator toolStripSeparator8;
         private ToolStripButton btnTableCatalog;
+        private ToolStripMenuItem addSpase;
     }
 }
 

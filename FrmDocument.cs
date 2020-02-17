@@ -46,14 +46,6 @@ namespace CatalogPdf
         /// </summary>
         public void Init()
         {
-            //tbName.TabIndex = 1;
-            //TbTome.TabIndex = 2;
-            //TbNumber.TabIndex = 3;
-            //tbPage.TabIndex = 4;
-            //tbTypeDocument.TabIndex = 5;
-            //dateTimePicker1.TabIndex = 6;
-            //btnSave.TabIndex = 7;
-
             TbFullName.Text = Fullname;
             tbName.Text = NameDocument;
             tbPage.Text = PageStart.ToString();
@@ -73,7 +65,11 @@ namespace CatalogPdf
             }
         }
 
-
+        /// <summary>
+        /// Передача параметров с формы на главную форму для сохранения в базу
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSave_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
