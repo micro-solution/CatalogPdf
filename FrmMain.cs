@@ -1440,7 +1440,8 @@ namespace CatalogPdf
 
                 try
                 {
-                features.AddSpaceDoc(path, name, frmAdd.Description);                    
+                features.AddSpaceDoc(path, name, frmAdd.Description);
+                    
                 presenter.Save();
 
                 Document spaceDocument = presenter.Catalog.GetByPath(fullname);
