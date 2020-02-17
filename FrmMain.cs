@@ -1445,11 +1445,15 @@ namespace CatalogPdf
                 presenter.Save();
 
                 Document spaceDocument = presenter.Catalog.GetByPath(fullname);
+                     if (presenter.CurrentDoc != null)
+                    {
                 spaceDocument.Tome = presenter.CurrentDoc.Tome ;               
                 spaceDocument.Number = presenter.CurrentDoc.Number + 1;
                 spaceDocument.AmountPage = frmAdd.AmountPages;
-                spaceDocument.StartPage = presenter.CurrentDoc.StartPage + presenter.CurrentDoc.AmountPage;
+                spaceDocument.StartPage = presenter.CurrentDoc.StartPage + presenter.CurrentDoc.AmountPage ;
                     spaceDocument.EndPage = spaceDocument.StartPage + spaceDocument.AmountPage - 1;
+
+                    }
                 presenter.Save();
                 ShowData();
                 }
