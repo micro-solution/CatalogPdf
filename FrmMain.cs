@@ -1434,19 +1434,28 @@ namespace CatalogPdf
             frmAdd.ShowDialog();
                if (DialogResult.OK == frmAdd.DialogResult)
             {
-                string filename =frmAdd.Name ;
-                string fullname = path + @"\" + filename + ".pdf";
+                string name = frmAdd.Name.Replace("\\","") ;
+                string fullname = path + @"\" + name + ".pdf";
                 PdfFeatures features = new PdfFeatures();
-                features.AddSpaceDoc(fullname, frmAdd.Description);
+
+                try
+                {
+                features.AddSpaceDoc(path, name, frmAdd.Description);                    
                 presenter.Save();
 
                 Document spaceDocument = presenter.Catalog.GetByPath(fullname);
-                spaceDocument.Tome = presenter.CurrentTomeNumber;               
+                spaceDocument.Tome = presenter.CurrentDoc.Tome ;               
                 spaceDocument.Number = presenter.CurrentDoc.Number + 1;
                 spaceDocument.AmountPage = frmAdd.AmountPages;
+                spaceDocument.StartPage = presenter.CurrentDoc.StartPage + presenter.CurrentDoc.AmountPage;
+                    spaceDocument.EndPage = spaceDocument.StartPage + spaceDocument.AmountPage - 1;
                 presenter.Save();
                 ShowData();
-
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);    
+                } 
             }
             frmAdd.Dispose();
         }

@@ -34,7 +34,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btn_Create = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.tbDescription = new System.Windows.Forms.TextBox();
+            this.tbDescription = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // tbName
@@ -55,6 +55,7 @@
             this.tbAmount.Name = "tbAmount";
             this.tbAmount.Size = new System.Drawing.Size(107, 22);
             this.tbAmount.TabIndex = 0;
+            this.tbAmount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbAmount_KeyPress);
             // 
             // label1
             // 
@@ -78,9 +79,9 @@
             // btn_Create
             // 
             this.btn_Create.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Create.Location = new System.Drawing.Point(394, 108);
+            this.btn_Create.Location = new System.Drawing.Point(370, 131);
             this.btn_Create.Name = "btn_Create";
-            this.btn_Create.Size = new System.Drawing.Size(107, 23);
+            this.btn_Create.Size = new System.Drawing.Size(131, 23);
             this.btn_Create.TabIndex = 2;
             this.btn_Create.Text = "Создать";
             this.btn_Create.UseVisualStyleBackColor = true;
@@ -89,7 +90,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 46);
+            this.label3.Location = new System.Drawing.Point(13, 49);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(57, 13);
             this.label3.TabIndex = 4;
@@ -101,25 +102,24 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbDescription.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbDescription.Location = new System.Drawing.Point(12, 64);
-            this.tbDescription.Multiline = true;
+            this.tbDescription.Location = new System.Drawing.Point(4, 66);
             this.tbDescription.Name = "tbDescription";
-            this.tbDescription.Size = new System.Drawing.Size(489, 39);
-            this.tbDescription.TabIndex = 3;
+            this.tbDescription.Size = new System.Drawing.Size(507, 62);
+            this.tbDescription.TabIndex = 5;
+            this.tbDescription.Text = "";
             // 
             // FrmAddSpaceDocument
             // 
-            this.AcceptButton = this.btn_Create;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(513, 133);
-            this.Controls.Add(this.label3);
+            this.ClientSize = new System.Drawing.Size(513, 156);
             this.Controls.Add(this.tbDescription);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.btn_Create);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tbAmount);
             this.Controls.Add(this.tbName);
-            this.MaximumSize = new System.Drawing.Size(700, 200);
+            this.MaximumSize = new System.Drawing.Size(700, 300);
             this.Name = "FrmAddSpaceDocument";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -137,6 +137,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btn_Create;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox tbDescription;
+        private System.Windows.Forms.RichTextBox tbDescription;
     }
 }

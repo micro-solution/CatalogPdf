@@ -1,12 +1,13 @@
 ﻿using PdfSharp;
 using PdfSharp.Drawing;
+using PdfSharp.Drawing.Layout;
 using PdfSharp.Pdf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows;
 
 namespace CatalogPdf
 {
@@ -15,37 +16,29 @@ namespace CatalogPdf
 
 
 
-        public void AddSpaceDoc(string fullname, string description)
-        {
+        public void AddSpaceDoc(string path,  string name, string description)
+        {                  
 
+            string fullname = path + @"\" + name + ".pdf";
             PdfDocument document = new PdfDocument();
             PdfPage page = document.AddPage();
             XGraphics gfx = XGraphics.FromPdfPage(page);
 
-            XFont font = new XFont("Verdana", 20, XFontStyle.Bold);
+            XFont fontTitle = new XFont("Verdana", 16, XFontStyle.Bold);
+            XFont font = new XFont("Verdana", 14, XFontStyle.Regular);
 
             // Draw the text
-            gfx.DrawString(description, font, XBrushes.Black,
-              new XRect(0, 0, page.Width, page.Height),
-              XStringFormats.TopCenter);
+            gfx.DrawString(name, fontTitle, XBrushes.Black,
+              new XRect(40, 20, page.Width-40, 100),
+              XStringFormats.Center);
 
-            document.Save(fullname); 
+            XRect rect = new XRect(40, 120, page.Width-20, page.Height ); 
+            XTextFormatter tf = new XTextFormatter(gfx);
+            tf.DrawString(description, font, XBrushes.Black, rect, XStringFormats.TopLeft);
+
+                document.Save(fullname);
+          
         }
     }
-    public static class PdfHelper
-    {
-        public static string EncodingHack(string str)
-        {
-            var encoding = Encoding.BigEndianUnicode;
-            var bytes = encoding.GetBytes(str);
-            var sb = new StringBuilder();
-            sb.Append((char)254);
-            sb.Append((char)255);
-            for (int i = 0; i < bytes.Length; ++i)
-            {
-                sb.Append((char)bytes[i]);
-            }
-            return sb.ToString();
-        }
-    }
+   
 }

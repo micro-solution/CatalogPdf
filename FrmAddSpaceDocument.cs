@@ -31,5 +31,10 @@ namespace CatalogPdf
             DialogResult = DialogResult.OK;
             Hide();
         }
+
+        private void tbAmount_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsDigit(e.KeyChar) || e.KeyChar == (char)Keys.Back)) e.Handled = true;
+        }
     }
 }
