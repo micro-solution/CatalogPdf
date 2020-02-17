@@ -37,7 +37,8 @@ namespace CatalogPdf
             tf.DrawString(description, font, XBrushes.Black, rect, XStringFormats.TopLeft);
 
                 document.Save(fullname);
-          
+            document.Dispose();  
+
         }
     }
    
