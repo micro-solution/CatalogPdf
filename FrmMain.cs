@@ -526,7 +526,14 @@ namespace CatalogPdf
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void открытьРасположениеToolStripMenuItem_Click(object sender, EventArgs e)
-        { Process.Start(Settings.Default.CurrentCatalogPath); }
+        {
+            string path = Settings.Default.CurrentCatalogPath;
+            
+            if (Directory.Exists(path))
+            {
+                Process.Start(path);    
+            }
+        }
 
         /// <summary>
         ///  Обновить базу и визуализацию 
@@ -857,9 +864,6 @@ namespace CatalogPdf
                 }
             }
         }
-
-
-
 
         /// <summary>
         /// Добавить закладку
@@ -1417,6 +1421,34 @@ namespace CatalogPdf
             {
                 InitPresenter();                
             }
+        }
+
+        private void addSpase_Click(object sender, EventArgs e)
+        {
+            string path = Settings.Default.CurrentCatalogPath + '\\' + "spaceDoc";
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            } 
+            FrmAddSpaceDocument frmAdd = new FrmAddSpaceDocument();
+            frmAdd.ShowDialog();
+               if (DialogResult.OK == frmAdd.DialogResult)
+            {
+                string filename =frmAdd.Name ;
+                string fullname = path + @"\" + filename + ".pdf";
+                PdfFeatures features = new PdfFeatures();
+                features.AddSpaceDoc(fullname, frmAdd.Description);
+                presenter.Save();
+
+                Document spaceDocument = presenter.Catalog.GetByPath(fullname);
+                spaceDocument.Tome = presenter.CurrentTomeNumber;               
+                spaceDocument.Number = presenter.CurrentDoc.Number + 1;
+                spaceDocument.AmountPage = frmAdd.AmountPages;
+                presenter.Save();
+                ShowData();
+
+            }
+            frmAdd.Dispose();
         }
     }
 

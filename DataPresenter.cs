@@ -358,7 +358,14 @@ namespace CatalogPdf
         public void GetAmountPages ()
         {
             List<Document> docs = Catalog.Documents;
-            docs.ForEach(x => x.AmountPage = GetCountPages(x));
+            foreach (Document doc in docs)
+            {
+                if (doc.AmountPage == 0)
+                {
+                    doc.AmountPage = GetCountPages(doc);
+                }
+            }
+            
         }
 
         public void SetNumbers()
