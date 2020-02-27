@@ -12,7 +12,7 @@ namespace CatalogPdf
 {
     public partial class TomMarck : LineCatalog
     {
-        public int Tome { get; set; }
+       // public int Tome { get; set; }
       
         public TomMarck()
         {

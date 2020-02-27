@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,7 +14,7 @@ namespace CatalogPdf
     public partial class FrmAddSpaceDocument : Form
     {
         public string Description{ get; set; }
-        public string Name { get; set; }
+        public string NameNewDoc { get; set; }
         public int AmountPages { get; set; }
         public FrmAddSpaceDocument()
         {
@@ -27,7 +28,7 @@ namespace CatalogPdf
             int.TryParse(tbAmount.Text, out int amount);
             AmountPages = amount > 0 ? amount : 1;
             Description = tbDescription.Text;
-            Name = tbName.Text != "" ? tbName.Text : "spaceDoc";
+            NameNewDoc = tbName.Text != "" ? tbName.Text : "spaceDoc";
             DialogResult = DialogResult.OK;
             Hide();
         }

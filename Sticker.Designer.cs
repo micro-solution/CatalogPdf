@@ -143,8 +143,7 @@
         private System.Windows.Forms.ToolStripMenuItem удалитьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem изменитьToolStripMenuItem;
         private System.Windows.Forms.Button BtnDel;
-        private System.Windows.Forms.Button BtnEdit;
-        private System.Windows.Forms.RichTextBox rrtbContent;
+        private System.Windows.Forms.Button BtnEdit;        
         private System.Windows.Forms.RichTextBox rtbContent;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
     }

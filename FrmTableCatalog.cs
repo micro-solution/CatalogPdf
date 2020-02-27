@@ -15,6 +15,18 @@ namespace CatalogPdf
     public partial class FrmTableCatalog : Form
     {
         internal DataPresenter presenter;
+        private CatalogDocuments CatalogDocs
+        { 
+            get
+            {
+                if (_catalog == null)
+                {
+                    _catalog = new CatalogDocuments();
+                }
+                return _catalog;
+            } 
+        }
+        private CatalogDocuments _catalog;
         public FrmTableCatalog()
         {
             InitializeComponent();
@@ -50,8 +62,8 @@ namespace CatalogPdf
         }
         private void GetData()
         {
-            List<XMLDBLib.Document> docs = presenter.Catalog.Documents.OrderBy(a => a.Tome).ThenBy(b => b.StartPage).ToList();
-            dataGridView1.DataSource = docs;
+            //  List<XMLDBLib.Document> docs = presenter.Catalog.Documents.OrderBy(a => a.Tome).ThenBy(b => b.StartPage).ToList();          
+            dataGridView1.DataSource = CatalogDocs.Catalog.OrderBy(a => a.Tome).ThenBy(b => b.StartPage).ToList();
         }
 
         private void DataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -195,5 +207,7 @@ namespace CatalogPdf
             presenter.Save();
             GetData();
         }
+
+    
     }
 }
