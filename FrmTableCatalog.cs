@@ -152,8 +152,9 @@ namespace CatalogPdf
             dataGridView1.Columns[8].HeaderText = "Конец";
             dataGridView1.Columns[8].Width = 45;
 
+            dataGridView1.Columns[9].Visible = false;
             dataGridView1.Columns[9].HeaderText = "Страниц";
-            dataGridView1.Columns[9].Width = 55;
+            dataGridView1.Columns[9].Width = 0;
 
 
             DataGridViewCellStyle linkStyle = new DataGridViewCellStyle();

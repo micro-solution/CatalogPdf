@@ -70,6 +70,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CatalogDocuments.cs" />
+    <Compile Include="DocumentView.cs" />
     <Compile Include="FrmAddSpaceDocument.cs">
       <SubType>Form</SubType>
     </Compile>
