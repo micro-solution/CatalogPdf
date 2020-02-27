@@ -120,7 +120,7 @@
             this.Controls.Add(this.tbAmount);
             this.Controls.Add(this.tbName);
             this.MaximumSize = new System.Drawing.Size(700, 300);
-            this.Name = "FrmAddSpaceDocument";
+            this.NameNewDoc = "FrmAddSpaceDocument";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Добавление пустого документа";

@@ -1434,7 +1434,7 @@ namespace CatalogPdf
             frmAdd.ShowDialog();
                if (DialogResult.OK == frmAdd.DialogResult)
             {
-                string name = frmAdd.Name.Replace("\\","") ;
+                string name = frmAdd.NameNewDoc.Replace("\\","") ;
                 string fullname = path + @"\" + name + ".pdf";
                 PdfFeatures features = new PdfFeatures();
 
