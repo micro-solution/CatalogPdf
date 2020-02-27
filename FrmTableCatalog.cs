@@ -191,17 +191,7 @@ namespace CatalogPdf
             MessageBox.Show($"Столбец {title} не найден");
             return 0;
         }
-        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //if (e.ColumnIndex == 6 && e.RowIndex > 0)
-            //{
-            //    string path = dataGridView1.Rows[e.RowIndex].Cells[GetNumberColumn("Путь")].Value.ToString();
-            //    if (File.Exists(path))
-            //    {
-            //        Process.Start(path);
-            //    }
-            //}
-        }
+
 
         private void btnNumerDocumentByPage_Click(object sender, EventArgs e)
         {
@@ -245,6 +235,17 @@ namespace CatalogPdf
                     Process.Start(path);
                 }
             }
+        }
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //if (e.ColumnIndex == 6 && e.RowIndex > 0)
+            //{
+            //    string path = dataGridView1.Rows[e.RowIndex].Cells[GetNumberColumn("Путь")].Value.ToString();
+            //    if (File.Exists(path))
+            //    {
+            //        Process.Start(path);
+            //    }
+            //}
         }
     }
 }

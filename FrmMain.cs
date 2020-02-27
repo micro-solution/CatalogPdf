@@ -279,6 +279,7 @@ namespace CatalogPdf
                 ToolStripTextBox textBox = (ToolStripTextBox)sender;
 
                 int page = PageFromTextBox();
+
                 NavigateCatalog(page);
                 textBox.Select();
                 textBox.SelectionStart = textBox.Text.Length;
@@ -969,6 +970,7 @@ namespace CatalogPdf
             LineBookmark lineBookMark = new LineBookmark();
             lineBookMark.Title = bookmark.Title;
             lineBookMark.Tome = bookmark.Document.Tome;
+            lineBookMark.DocName = bookmark.Document.Name;
             lineBookMark.DocNumber = bookmark.Document.Number;
             lineBookMark.PageStart = bookmark.Reference;
             lineBookMark.NumBookmark = bookmark.Number;
@@ -982,8 +984,15 @@ namespace CatalogPdf
             lineBookMark.UserDel_Bookmark += LineBookMark_UserDelBookmark;
             lineBookMark.UserEdit_Bookmark += LineBookMark_UserEdit_Bookmark;
             lineBookMark.Click += LineBookMark_Click;
-            //  lineBookMark.Goto_BookmarkPage
+            lineBookMark.Enter += LineBookMark_Enter;
+            lineBookMark.Goto_BookmarkPage += LineBookMark_Goto_BookmarkPage; 
         }
+
+  
+
+
+
+
 
         /// <summary>
         /// заполнить строку Пояснений
@@ -994,6 +1003,7 @@ namespace CatalogPdf
             LineBookmark lineExplanation = new LineBookmark();
             lineExplanation.Title = Explanation.Title;
             lineExplanation.Tome = Explanation.Document.Tome;
+            lineExplanation.DocName = Explanation.Document.Name;
             lineExplanation.DocNumber = Explanation.Document.Number;
             lineExplanation.PageStart = Explanation.Reference;
             lineExplanation.NumBookmark = Explanation.Number;
@@ -1004,9 +1014,9 @@ namespace CatalogPdf
             lineExplanation.Width = PanelExplanation.Width - 10;
 
             lineExplanation.UserDel_Bookmark += LineBookMark_UserDelBookmark;
-            lineExplanation.UserEdit_Bookmark += LineBookMark_UserEdit_Bookmark;
+            lineExplanation.UserEdit_Bookmark += LineBookMark_UserEdit_Bookmark;            
             lineExplanation.Click += LineExplanetion_Click;
-
+            lineExplanation.Goto_BookmarkPage += LineBookMark_Goto_BookmarkPage;
         }
 
         /// <summary>
@@ -1017,15 +1027,60 @@ namespace CatalogPdf
         private void LineBookMark_Click(object sender, EventArgs e)
         {
             LineBookmark bm = (LineBookmark)sender;
-
-            Bookmark bookmark = presenter?.Bookmarks.Bookmarks?.Where(b => b.ID == bm.Id)?.First();
-            if (bookmark != null)
+            Bookmark mark;
+            if (bm.TypeSticker == typeSticker.Bookmark)
             {
-                Debug.WriteLine("go to bookmark " + bookmark.ID);
-                ViewerShowDocument(bookmark?.Document);              
-                NavigateCatalog(bookmark.Reference);
+           mark = presenter?.Bookmarks.Bookmarks?.Where(b => b.ID == bm.Id)?.First();
+            }
+            else
+            {
+                mark = presenter?.Explanations.Bookmarks?.Where(b => b.ID == bm.Id)?.First();
+            }
+            GotoBookmark(mark);
+        }
+        private void LineBookMark_Enter(object sender, EventArgs e)
+        {
+            LineBookMark_Click(sender, e);
+        }
+
+        private void LineBookMark_Goto_BookmarkPage(int id, typeSticker typeSticker)
+        {
+            Bookmark mark = null;
+            if (typeSticker == typeSticker.Bookmark)
+            {
+             mark = presenter?.Bookmarks.Bookmarks?.Where(b => b.ID == id)?.First();
+            }
+            else
+            {
+                mark = presenter?.Explanations.Bookmarks?.Where(b => b.ID == id)?.First();
+            }
+
+            GotoBookmark(mark);
+            //if (mark != null)
+            //{
+            //    Debug.WriteLine("go to bookmark " + mark.ID);
+            //    ViewerShowDocument(mark?.Document);
+            //    NavigateCatalog(mark.Reference);
+            //}
+        }
+
+        private void GotoBookmark(Bookmark mark)
+        {
+            if (mark != null)
+            {
+                Debug.WriteLine("go to bookmark " + mark.ID);
+                if (presenter.CurrentDoc.Tome != mark?.Document.Tome)
+                {
+                ViewerShowDocument(mark?.Document);
+                }
+                tbPage.Text = mark.Reference.ToString();
+                //NavigateCatalog(mark.Reference);
             }
         }
+
+
+
+
 
         /// <summary>
         /// Отобразить документ по клику 
@@ -1034,16 +1089,29 @@ namespace CatalogPdf
         /// <param name="e"></param>
         private void LineExplanetion_Click(object sender, EventArgs e)
         {
-            LineBookmark bm = (LineBookmark)sender;
-
-            Bookmark bookmark = presenter?.Explanations.Bookmarks?.Where(b => b.ID == bm.Id)?.First();
-            if (bookmark != null)
+            
+             LineBookmark bm = (LineBookmark)sender;
+            Bookmark mark;
+            if (bm.TypeSticker == typeSticker.Bookmark)
             {
-                Debug.WriteLine("go to bookmark " + bookmark.ID);
-                ViewerShowDocument(bookmark?.Document);
-                NavigateCatalog(bookmark.Reference);
+           mark = presenter?.Bookmarks.Bookmarks?.Where(b => b.ID == bm.Id)?.First();
             }
+            else
+            {
+                mark = presenter?.Explanations.Bookmarks?.Where(b => b.ID == bm.Id)?.First();
+            }
+            GotoBookmark(mark);
         }
+            //LineBookmark bm = (LineBookmark)sender;
+
+            //Bookmark bookmark = presenter?.Explanations.Bookmarks?.Where(b => b.ID == bm.Id)?.First();
+            //if (bookmark != null)
+            //{
+            //    Debug.WriteLine("go to bookmark " + bookmark.ID);
+            //    ViewerShowDocument(bookmark?.Document);
+            //    NavigateCatalog(bookmark.Reference);
+            //}
+        
 
         /// <summary>
         /// удалить закладку
