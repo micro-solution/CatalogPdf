@@ -51,6 +51,7 @@
             this.LbStartPage.TabIndex = 7;
             this.LbStartPage.Text = "стр 1";
             this.toolTip1.SetToolTip(this.LbStartPage, "Страница");
+            this.LbStartPage.Click += new System.EventHandler(this.LbStartPage_Click);
             // 
             // LbTitle
             // 
@@ -96,6 +97,7 @@
             this.lbTome.TabIndex = 8;
             this.lbTome.Text = "1";
             this.toolTip1.SetToolTip(this.lbTome, "Том");
+            this.lbTome.Click += new System.EventHandler(this.lbTome_Click);
             // 
             // lbDocNumber
             // 
@@ -107,6 +109,7 @@
             this.lbDocNumber.TabIndex = 8;
             this.lbDocNumber.Text = "1";
             this.toolTip1.SetToolTip(this.lbDocNumber, "Документ");
+            this.lbDocNumber.Click += new System.EventHandler(this.lbDocNumber_Click);
             // 
             // LineBookmark
             // 
@@ -120,7 +123,8 @@
             this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Name = "LineBookmark";
             this.Size = new System.Drawing.Size(259, 23);
-            this.Enter += new System.EventHandler(this.LineBookmark_Enter);
+            this.Load += new System.EventHandler(this.LineBookmark_Load);
+          
             this.contextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
