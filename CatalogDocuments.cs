@@ -71,10 +71,12 @@ namespace CatalogPdf
             {
                 Number = doc.Number,
                 Name = doc.Name,
-                DocType = doc.DocType,
+                Tome = doc.Tome,
                 StartPage = doc.StartPage,
                 EndPage = doc.EndPage,
                 AmountPage = doc.AmountPage,
+                DocType = doc.DocType,
+                DateCreate = doc.Date.ToString("dd/MM/yyyy"),
                 FullName = doc.File.FullName,
                 Id = doc.ID
             };
