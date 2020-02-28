@@ -50,18 +50,30 @@ namespace CatalogPdf
                 BackColor = Color.FromArgb(219, 244, 255);
                 rtbContent.BackColor = Color.FromArgb(235, 250, 252);
             }
-
-
-            int deltaHh = Height - rtbContent.Height;
-            int tbAdaptiveHeight = 
-             TextRenderer. MeasureText(
-                rtbContent.Text, rtbContent.Font).Height + 2;  
-           
-            Height = deltaHh + tbAdaptiveHeight;
-
-
+            ChangeHeight();
         }
 
+        private void ChangeHeight()
+        {
+            if (string.IsNullOrWhiteSpace(rtbContent.Text))
+            {
+                rtbContent.Height = 0;
+                Height = rtbContent.Top + 10;
+                return;
+            }
+            if (LbTitle.Width < 20) return;
+            changeHand = false;
+
+            int textWidth = TextRenderer.MeasureText(rtbContent.Text, rtbContent.Font).Width;
+            int textHeight = TextRenderer.MeasureText(rtbContent.Text, rtbContent.Font).Height;
+            int lines = textWidth / rtbContent.Width;
+            if (textWidth % rtbContent.Width != 0)
+                lines++;
+            int deltaHh = Height - rtbContent.Height;
+            Height = textHeight * lines + deltaHh;
+
+            changeHand = true;
+        }
         private void BtnDel_Click(object sender, EventArgs e)
         {
             ClickStickerDelete.Invoke(Id, TypeSticker);
@@ -82,6 +94,15 @@ namespace CatalogPdf
         {
             BtnDel.Visible = true;
             BtnEdit.Visible = true;
+        }
+        bool changeHand = true;
+        private void Sticker_SizeChanged(object sender, EventArgs e)
+        {
+            if (changeHand)
+            {
+                ChangeHeight();
+            }
+            else { changeHand = true; }
         }
     }
 }
