@@ -22,6 +22,7 @@ namespace CatalogPdf
         public string Content { get; set; }
         public string DocumentName { get; set; }
         public int Tome { get; set; } = 1;
+        public int Id { get; internal set; }
 
         public FrmBookmark()
         {
@@ -78,6 +79,11 @@ namespace CatalogPdf
         private void tbPage_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!(char.IsDigit(e.KeyChar) || e.KeyChar == (char)Keys.Back)) e.Handled = true;
+        }
+
+        private void FrmBookmark_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

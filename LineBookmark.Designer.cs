@@ -61,7 +61,7 @@
             this.LbTitle.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.LbTitle.Location = new System.Drawing.Point(44, 4);
             this.LbTitle.Name = "LbTitle";
-            this.LbTitle.Size = new System.Drawing.Size(207, 48);
+            this.LbTitle.Size = new System.Drawing.Size(207, 40);
             this.LbTitle.TabIndex = 6;
             this.LbTitle.Text = "Название закладкиfyjsyjy азвание закладки";
             this.LbTitle.Click += new System.EventHandler(this.LbTitleDocument_Click);
@@ -124,7 +124,7 @@
             this.Controls.Add(this.LbTitle);
             this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Name = "LineBookmark";
-            this.Size = new System.Drawing.Size(307, 55);
+            this.Size = new System.Drawing.Size(307, 47);
             this.Load += new System.EventHandler(this.LineBookmark_Load);
             this.SizeChanged += new System.EventHandler(this.LineBookmark_SizeChanged);
             this.contextMenu.ResumeLayout(false);

@@ -19,10 +19,11 @@ namespace CatalogPdf
         private CatalogDocuments CatalogDocs
         {
             get
-            { 
-                _catalog = new CatalogDocuments();                
+            {
+                _catalog = new CatalogDocuments();
                 return _catalog;
             }
+            set { _catalog=value; }
         }
         private CatalogDocuments _catalog;
         public FrmTableCatalog()
@@ -60,7 +61,8 @@ namespace CatalogPdf
         }
         private void GetData()
         {
-            //List<XMLDBLib.Document> docs = presenter.Catalog.Documents.OrderBy(a => a.Tome).ThenBy(b => b.StartPage).ToList();           
+            //List<XMLDBLib.Document> docs = presenter.Catalog.Documents.OrderBy(a => a.Tome).ThenBy(b => b.StartPage).ToList(); 
+            CatalogDocs = null;
             dataGridView1.DataSource = CatalogDocs.Catalog.OrderBy(a => a.Tome).ThenBy(b => b.StartPage).ToList(); ;
         }
 
@@ -123,6 +125,7 @@ namespace CatalogPdf
                     default:
                         break;
                 }
+                presenter.Save();
                 GetData();
                 // dataGridView1.Update();
             }
@@ -240,17 +243,7 @@ namespace CatalogPdf
                 }
             }
         }
-        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //if (e.ColumnIndex == 6 && e.RowIndex > 0)
-            //{
-            //    string path = dataGridView1.Rows[e.RowIndex].Cells[GetNumberColumn("Путь")].Value.ToString();
-            //    if (File.Exists(path))
-            //    {
-            //        Process.Start(path);
-            //    }
-            //}
-        }
+        
 
         /// <summary>
         /// Сортировка при нажатии на заголовок

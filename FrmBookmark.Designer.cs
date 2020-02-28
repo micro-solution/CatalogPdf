@@ -250,6 +250,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmBookmark";
             this.Text = "Добавить закладку";
+            this.Load += new System.EventHandler(this.FrmBookmark_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
