@@ -15,6 +15,7 @@ namespace CatalogPdf
     public partial class FrmTableCatalog : Form
     {
         internal DataPresenter presenter;
+
         private CatalogDocuments CatalogDocs
         {
             get
@@ -62,8 +63,8 @@ namespace CatalogPdf
         }
         private void GetData()
         {
-            //  List<XMLDBLib.Document> docs = presenter.Catalog.Documents.OrderBy(a => a.Tome).ThenBy(b => b.StartPage).ToList();          
-            dataGridView1.DataSource = CatalogDocs.Catalog.OrderBy(a => a.Tome).ThenBy(b => b.StartPage).ToList();
+            //List<XMLDBLib.Document> docs = presenter.Catalog.Documents.OrderBy(a => a.Tome).ThenBy(b => b.StartPage).ToList();           
+            dataGridView1.DataSource = CatalogDocs.Catalog.OrderBy(a => a.Tome).ThenBy(b => b.StartPage).ToList(); ;
         }
 
         private void DataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -144,9 +145,12 @@ namespace CatalogPdf
 
             dataGridView1.Columns[++i].HeaderText = "Том";//№2
             dataGridView1.Columns[i].Width = 36;
+            //dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.Automatic;
+
 
             dataGridView1.Columns[++i].HeaderText = "Начало";//№3
             dataGridView1.Columns[i].Width = 45;
+            // dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.Automatic;
 
             dataGridView1.Columns[++i].HeaderText = "Конец";//№4
             dataGridView1.Columns[i].Width = 45;
@@ -157,12 +161,15 @@ namespace CatalogPdf
 
             dataGridView1.Columns[++i].HeaderText = "Название";//№6
             dataGridView1.Columns[i].Width = 200;
+            //dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.Automatic;
 
             dataGridView1.Columns[++i].HeaderText = "Тип";//№7
             dataGridView1.Columns[i].Width = 120;
+            //  dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.Automatic;
 
             dataGridView1.Columns[++i].HeaderText = "Дата";//№8
             dataGridView1.Columns[i].Width = 85;
+            //  dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.Automatic;
 
             dataGridView1.Columns[++i].HeaderText = "Путь";//№9
             dataGridView1.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -171,6 +178,8 @@ namespace CatalogPdf
             linkStyle.Font = new Font(FontFamily.GenericSansSerif, 8, FontStyle.Underline);
             linkStyle.ForeColor = Color.DarkBlue;
             dataGridView1.Columns[GetNumberColumn("Путь")].DefaultCellStyle = linkStyle;
+
+
 
         }
 
@@ -247,5 +256,39 @@ namespace CatalogPdf
             //    }
             //}
         }
+
+        /// <summary>
+        /// Сортировка при нажатии на заголовок
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            
+            string title = dataGridView1.Columns[e.ColumnIndex].HeaderText;
+            switch (title)
+            {
+                case "Номер"://1:
+                    dataGridView1.DataSource  = CatalogDocs.Catalog.OrderBy(a => a.Number).ThenBy(b => b.StartPage).ToList();
+                    break;
+                case "Тип"://1:
+                    dataGridView1.DataSource  = CatalogDocs.Catalog.OrderBy(a => a.DocType).ThenBy(b => b.StartPage).ToList();
+                    break;
+                case "Путь"://1:
+                    dataGridView1.DataSource = CatalogDocs.Catalog.OrderBy(a => a.FullName).ThenBy(b => b.StartPage).ToList();
+                    break;
+                case "Название"://1:
+                    dataGridView1.DataSource = CatalogDocs.Catalog.OrderBy(a => a.Name).ThenBy(b => b.StartPage).ToList();
+                    break;
+                case "Дата"://1:
+                    dataGridView1.DataSource = CatalogDocs.Catalog.OrderBy(a => a.DateCreate).ThenBy(b => b.StartPage).ToList();
+                    break;
+                default ://1:
+                    dataGridView1.DataSource = CatalogDocs.Catalog.OrderBy(a => a.Tome).ThenBy(b => b.StartPage).ToList();
+                    break;
+            }
+            
+        }
+
     }
 }
