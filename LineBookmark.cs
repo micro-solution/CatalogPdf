@@ -1,7 +1,7 @@
 ﻿using System;
 
 using System.Windows.Forms;
-
+using System.Windows.Media;
 
 namespace CatalogPdf
 {
@@ -18,7 +18,7 @@ namespace CatalogPdf
         public string Content { get; set; }
         public string DocName { get; set; }
 
-        public delegate void UserEditBookmark(int id, int page, string title, string content);
+        public delegate void UserEditBookmark(int id, int page, string title, string content, typeSticker TypeSticker);
         public delegate void UserDeleteBookmark(int id, typeSticker typeSticker);
         public delegate void UserGotoBookmark(int id, typeSticker typeSticker);
 
@@ -39,6 +39,7 @@ namespace CatalogPdf
         public LineBookmark()
         {
             InitializeComponent();
+           
         }
 
         /// <summary>
@@ -47,9 +48,11 @@ namespace CatalogPdf
         public void Init()
         {
             LbTitle.Text = Title;
+            toolTip1.SetToolTip(LbTitle, Title);
             lbDocNumber.Text = DocNumber.ToString();
             lbTome.Text = Tome.ToString();
             LbStartPage.Text = PageStart.ToString();
+            ChangeHeight();
         }
 
 
@@ -87,9 +90,32 @@ namespace CatalogPdf
                 Title = EditDialogBookmark.Title;
                 PageStart = EditDialogBookmark.Page;
                 Content = EditDialogBookmark.Content;
-                UserEdit_Bookmark?.Invoke(Id, PageStart,Title,Content);
+                UserEdit_Bookmark?.Invoke(Id, PageStart,Title,Content, TypeSticker);
             }
         }
+        private void ChangeHeight()
+        {
+           if (LbTitle.Width<20) return;
+            changeHand = false;
+            int textWidth = TextRenderer.MeasureText(LbTitle.Text, LbTitle.Font).Width;
+            int textHeight = TextRenderer.MeasureText(LbTitle.Text, LbTitle.Font).Height;
+          //  LbTitle.Width = textWidth;
+            int lines = textWidth / LbTitle.Width;
+            if (textWidth % LbTitle.Width != 0)
+                lines++;
+
+           // LbTitle.Height = textHeight * lines + 7;
+
+            //  int deltaHh = Height - LbTitle.Height;
+            //int tbAdaptiveHeight =
+            //TextRenderer.MeasureText(
+            // LbTitle.Text, LbTitle.Font).Height + 2;
+
+            Height = LbTitle.Top + textHeight * lines + 7 ;  
+            changeHand = true;
+            
+        }
+
 
         private void LbStartPage_Click(object sender, EventArgs e)
         {
@@ -114,6 +140,16 @@ namespace CatalogPdf
         private void LineBookmark_Load(object sender, EventArgs e)
         {
 
+        }
+
+        bool changeHand = true;
+        private void LineBookmark_SizeChanged(object sender, EventArgs e)
+        {
+          if (changeHand)
+            {
+            ChangeHeight();
+            }
+            else { changeHand = true; }
         }
     }
 }

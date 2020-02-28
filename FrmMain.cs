@@ -968,6 +968,7 @@ namespace CatalogPdf
         private void AddLineBookmarck(Bookmark bookmark)
         {
             LineBookmark lineBookMark = new LineBookmark();
+            
             lineBookMark.Title = bookmark.Title;
             lineBookMark.Tome = bookmark.Document.Tome;
             lineBookMark.DocName = bookmark.Document.Name;
@@ -976,10 +977,9 @@ namespace CatalogPdf
             lineBookMark.NumBookmark = bookmark.Number;
             lineBookMark.Id = bookmark.ID;
             lineBookMark.TypeSticker = typeSticker.Bookmark;
-
             lineBookMark.Init();
-            PanelBookmarks.Controls.Add(lineBookMark);
             lineBookMark.Width = PanelBookmarks.Width - 10;
+            PanelBookmarks.Controls.Add(lineBookMark);
 
             lineBookMark.UserDel_Bookmark += LineBookMark_UserDelBookmark;
             lineBookMark.UserEdit_Bookmark += LineBookMark_UserEdit_Bookmark;
@@ -1001,6 +1001,7 @@ namespace CatalogPdf
         private void AddLineExplanation(Bookmark Explanation)
         {
             LineBookmark lineExplanation = new LineBookmark();
+            lineExplanation.Width = PanelExplanation.Width - 10;
             lineExplanation.Title = Explanation.Title;
             lineExplanation.Tome = Explanation.Document.Tome;
             lineExplanation.DocName = Explanation.Document.Name;
@@ -1011,7 +1012,6 @@ namespace CatalogPdf
             lineExplanation.TypeSticker = typeSticker.Explanetion;
             lineExplanation.Init();
             PanelExplanation.Controls.Add(lineExplanation);
-            lineExplanation.Width = PanelExplanation.Width - 10;
 
             lineExplanation.UserDel_Bookmark += LineBookMark_UserDelBookmark;
             lineExplanation.UserEdit_Bookmark += LineBookMark_UserEdit_Bookmark;            
@@ -1140,9 +1140,9 @@ namespace CatalogPdf
         /// <param name="page"></param>
         /// <param name="title"></param>
         /// <param name="content"></param>
-        private void LineBookMark_UserEdit_Bookmark(int id, int page, string title, string content)
+        private void LineBookMark_UserEdit_Bookmark(int id, int page, string title, string content , typeSticker typeSticker)
         {
-            presenter.EditBookmark(id, title, page, content);
+            presenter.EditBookmark(id, title, page, content, typeSticker);
             ShowBookmarkItems();
             ShowContentPage(page);
         }
@@ -1153,8 +1153,7 @@ namespace CatalogPdf
         /// <param name="docNumber"></param>
         /// <param name="Path"></param>
         private void CatalogLine_ChangeDocNumber(int docNumber, string Path)
-        {
-            //TODO/ !!Number Doc!!
+        {            
             Document doc = presenter.Catalog.GetByPath(Path);
             presenter.ChangeDocNumber(doc, docNumber);
         }
@@ -1508,19 +1507,16 @@ namespace CatalogPdf
 
                 try
                 {
-                features.AddSpaceDoc(path, name, frmAdd.Description);
-                    
-                presenter.Save();
-
-                Document spaceDocument = presenter.Catalog.GetByPath(fullname);
-                spaceDocument.AmountPage = frmAdd.AmountPages;
-                     if (presenter.CurrentDoc != null)
+                features.AddSpaceDoc(path, name, frmAdd.Description);                    
+              //  presenter.Save();
+                    Document spaceDocument = presenter.Catalog.GetByPath(fullname);
+                    spaceDocument.AmountPage = frmAdd.AmountPages;
+                    if (presenter.CurrentDoc != null)
                     {
-                spaceDocument.Tome = presenter.CurrentDoc.Tome ;               
-                spaceDocument.Number = presenter.CurrentDoc.Number + 1;
-                spaceDocument.StartPage = presenter.CurrentDoc.StartPage + presenter.CurrentDoc.AmountPage ;
-                    spaceDocument.EndPage = spaceDocument.StartPage + spaceDocument.AmountPage - 1;
-
+                        spaceDocument.Tome = presenter.CurrentDoc.Tome;
+                        spaceDocument.Number = presenter.CurrentDoc.Number + 1;
+                        spaceDocument.StartPage = presenter.CurrentDoc.StartPage + presenter.CurrentDoc.AmountPage;
+                        spaceDocument.EndPage = spaceDocument.StartPage + spaceDocument.AmountPage - 1;
                     }
                 presenter.Save();
                 ShowData();

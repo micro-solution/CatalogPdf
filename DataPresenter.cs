@@ -627,7 +627,9 @@ namespace CatalogPdf
                                     int Id,
                                     string title,
                                     int page,
-                                    string content)
+                                    string content,
+                                    typeSticker type
+            )
         {
             try
             {
@@ -635,11 +637,19 @@ namespace CatalogPdf
                 //{
                 // if (bookmark.ID == Id)
                 //{
-                Bookmark bookmark = Bookmarks.Bookmarks.Where(b => b.ID == Id).First();
-                bookmark.Title = title;
-                bookmark.Reference = page;
-                bookmark.Page = page - bookmark.Document.StartPage + 1;
-                bookmark.Content = content;
+                Bookmark mark;
+                if (type == typeSticker.Bookmark)
+                {
+                    mark = Bookmarks.Bookmarks.Where(b => b.ID == Id).First();
+                }
+                else
+                {
+                mark = Explanations.Bookmarks.Where(b => b.ID == Id).First();
+                }
+                mark.Title = title;
+                mark.Reference = page;
+                mark.Page = page - mark.Document.StartPage + 1;
+                mark.Content = content;
                 Save();
                 //            return;
                 //  }

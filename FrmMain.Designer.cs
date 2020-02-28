@@ -39,6 +39,7 @@ namespace CatalogPdf
             this.открытьРасположениеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.очиститьВсеИСоздатьНовыйКаталогToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuFile = new System.Windows.Forms.ToolStripDropDownButton();
+            this.addSpase = new System.Windows.Forms.ToolStripMenuItem();
             this.открытьАктивныйФайлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.добавитьФайлВКаталогToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.удалитьФайлИзКаталогаИПапкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,7 +88,6 @@ namespace CatalogPdf
             this.pdfRenderer = new PdfiumViewer.PdfRenderer();
             this.flowPanelComments = new System.Windows.Forms.FlowLayoutPanel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.addSpase = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitConteiner)).BeginInit();
             this.splitConteiner.Panel1.SuspendLayout();
@@ -194,6 +194,13 @@ namespace CatalogPdf
             this.MenuFile.Name = "MenuFile";
             this.MenuFile.Size = new System.Drawing.Size(65, 38);
             this.MenuFile.Text = "Файл";
+            // 
+            // addSpase
+            // 
+            this.addSpase.Name = "addSpase";
+            this.addSpase.Size = new System.Drawing.Size(239, 22);
+            this.addSpase.Text = "Добавить пустой документ";
+            this.addSpase.Click += new System.EventHandler(this.addSpase_Click);
             // 
             // открытьАктивныйФайлToolStripMenuItem
             // 
@@ -662,7 +669,7 @@ namespace CatalogPdf
             // 
             this.splitContainerInner.Panel2.Controls.Add(this.flowPanelComments);
             this.splitContainerInner.Size = new System.Drawing.Size(755, 494);
-            this.splitContainerInner.SplitterDistance = 527;
+            this.splitContainerInner.SplitterDistance = 518;
             this.splitContainerInner.TabIndex = 0;
             // 
             // pdfRenderer
@@ -673,7 +680,7 @@ namespace CatalogPdf
             this.pdfRenderer.Name = "pdfRenderer";
             this.pdfRenderer.Page = 0;
             this.pdfRenderer.Rotation = PdfiumViewer.PdfRotation.Rotate0;
-            this.pdfRenderer.Size = new System.Drawing.Size(527, 494);
+            this.pdfRenderer.Size = new System.Drawing.Size(518, 494);
             this.pdfRenderer.TabIndex = 0;
             this.pdfRenderer.Text = "pdfRenderer";
             this.pdfRenderer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitBest;
@@ -687,20 +694,13 @@ namespace CatalogPdf
             this.flowPanelComments.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowPanelComments.Location = new System.Drawing.Point(0, 0);
             this.flowPanelComments.Name = "flowPanelComments";
-            this.flowPanelComments.Size = new System.Drawing.Size(224, 494);
+            this.flowPanelComments.Size = new System.Drawing.Size(233, 494);
             this.flowPanelComments.TabIndex = 0;
             this.flowPanelComments.SizeChanged += new System.EventHandler(this.flowPanelComments_SizeChanged);
             // 
             // toolTip1
             // 
             this.toolTip1.IsBalloon = true;
-            // 
-            // addSpase
-            // 
-            this.addSpase.Name = "addSpase";
-            this.addSpase.Size = new System.Drawing.Size(239, 22);
-            this.addSpase.Text = "Добавить пустой документ";
-            this.addSpase.Click += new System.EventHandler(this.addSpase_Click);
             // 
             // frmMain
             // 

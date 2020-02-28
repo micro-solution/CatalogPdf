@@ -19,11 +19,8 @@ namespace CatalogPdf
         private CatalogDocuments CatalogDocs
         {
             get
-            {
-                if (_catalog == null)
-                {
-                    _catalog = new CatalogDocuments();
-                }
+            { 
+                _catalog = new CatalogDocuments();                
                 return _catalog;
             }
         }
@@ -69,6 +66,7 @@ namespace CatalogPdf
 
         private void DataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
+           
             int row = e.RowIndex;
             string path = dataGridView1.Rows[row].Cells[GetNumberColumn("Путь")].Value.ToString();
 
@@ -145,12 +143,12 @@ namespace CatalogPdf
 
             dataGridView1.Columns[++i].HeaderText = "Том";//№2
             dataGridView1.Columns[i].Width = 36;
-            //dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.Automatic;
+          
 
 
             dataGridView1.Columns[++i].HeaderText = "Начало";//№3
             dataGridView1.Columns[i].Width = 45;
-            // dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.Automatic;
+           
 
             dataGridView1.Columns[++i].HeaderText = "Конец";//№4
             dataGridView1.Columns[i].Width = 45;
@@ -161,15 +159,15 @@ namespace CatalogPdf
 
             dataGridView1.Columns[++i].HeaderText = "Название";//№6
             dataGridView1.Columns[i].Width = 200;
-            //dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.Automatic;
+           
 
             dataGridView1.Columns[++i].HeaderText = "Тип";//№7
             dataGridView1.Columns[i].Width = 120;
-            //  dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.Automatic;
+           
 
             dataGridView1.Columns[++i].HeaderText = "Дата";//№8
             dataGridView1.Columns[i].Width = 85;
-            //  dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.Automatic;
+          
 
             dataGridView1.Columns[++i].HeaderText = "Путь";//№9
             dataGridView1.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -178,9 +176,6 @@ namespace CatalogPdf
             linkStyle.Font = new Font(FontFamily.GenericSansSerif, 8, FontStyle.Underline);
             linkStyle.ForeColor = Color.DarkBlue;
             dataGridView1.Columns[GetNumberColumn("Путь")].DefaultCellStyle = linkStyle;
-
-
-
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -268,22 +263,22 @@ namespace CatalogPdf
             string title = dataGridView1.Columns[e.ColumnIndex].HeaderText;
             switch (title)
             {
-                case "Номер"://1:
+                case "Номер":
                     dataGridView1.DataSource  = CatalogDocs.Catalog.OrderBy(a => a.Number).ThenBy(b => b.StartPage).ToList();
                     break;
-                case "Тип"://1:
+                case "Тип":
                     dataGridView1.DataSource  = CatalogDocs.Catalog.OrderBy(a => a.DocType).ThenBy(b => b.StartPage).ToList();
                     break;
-                case "Путь"://1:
+                case "Путь":
                     dataGridView1.DataSource = CatalogDocs.Catalog.OrderBy(a => a.FullName).ThenBy(b => b.StartPage).ToList();
                     break;
-                case "Название"://1:
+                case "Название":
                     dataGridView1.DataSource = CatalogDocs.Catalog.OrderBy(a => a.Name).ThenBy(b => b.StartPage).ToList();
                     break;
-                case "Дата"://1:
+                case "Дата":
                     dataGridView1.DataSource = CatalogDocs.Catalog.OrderBy(a => a.DateCreate).ThenBy(b => b.StartPage).ToList();
                     break;
-                default ://1:
+                default :
                     dataGridView1.DataSource = CatalogDocs.Catalog.OrderBy(a => a.Tome).ThenBy(b => b.StartPage).ToList();
                     break;
             }
