@@ -76,7 +76,7 @@
             this.BtnDel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnDel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnDel.BackgroundImage")));
             this.BtnDel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BtnDel.Location = new System.Drawing.Point(433, 1);
+            this.BtnDel.Location = new System.Drawing.Point(368, 1);
             this.BtnDel.Name = "BtnDel";
             this.BtnDel.Size = new System.Drawing.Size(23, 23);
             this.BtnDel.TabIndex = 8;
@@ -89,7 +89,7 @@
             this.BtnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnEdit.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnEdit.BackgroundImage")));
             this.BtnEdit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BtnEdit.Location = new System.Drawing.Point(406, 1);
+            this.BtnEdit.Location = new System.Drawing.Point(341, 1);
             this.BtnEdit.Name = "BtnEdit";
             this.BtnEdit.Size = new System.Drawing.Size(23, 23);
             this.BtnEdit.TabIndex = 9;
@@ -107,7 +107,7 @@
             this.rtbContent.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.rtbContent.Location = new System.Drawing.Point(8, 33);
             this.rtbContent.Name = "rtbContent";
-            this.rtbContent.Size = new System.Drawing.Size(444, 113);
+            this.rtbContent.Size = new System.Drawing.Size(379, 29);
             this.rtbContent.TabIndex = 10;
             this.rtbContent.Text = "Текст закладки контент";
             // 
@@ -128,7 +128,7 @@
             this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.DoubleBuffered = true;
             this.Name = "Sticker";
-            this.Size = new System.Drawing.Size(461, 159);
+            this.Size = new System.Drawing.Size(396, 75);
             this.SizeChanged += new System.EventHandler(this.Sticker_SizeChanged);
             this.Enter += new System.EventHandler(this.Sticker_Enter);
             this.Leave += new System.EventHandler(this.Sticker_Leave);

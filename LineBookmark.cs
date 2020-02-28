@@ -87,6 +87,7 @@ namespace CatalogPdf
             EditDialogBookmark.ShowDialog ();
                if  (EditDialogBookmark.DialogResult == DialogResult.OK)
             {
+                
                 Title = EditDialogBookmark.Title;
                 PageStart = EditDialogBookmark.Page;
                 Content = EditDialogBookmark.Content;

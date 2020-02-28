@@ -377,13 +377,14 @@ namespace CatalogPdf
         {
             FrmBookmark frm = new FrmBookmark();
             frm.TypeContent = typeSticker;
-
+            frm.Text = "Редактирование";
             Bookmark bm;
             if (typeSticker == typeSticker.Bookmark)
             {
                 bm = presenter.Bookmarks.Bookmarks.Where(b => b.ID == id).First();
                 if (bm != null)
                 {
+                    frm.Id = bm.ID;
                     frm.Tome = bm.Document != null ? bm.Document.Tome : 0;
                     frm.Title = bm.Title;
                     frm.Page = bm.Reference;
@@ -401,6 +402,7 @@ namespace CatalogPdf
                 bm = presenter.Explanations.Bookmarks.Where(b => b.ID == id).First();
                 if (bm != null)
                 {
+                    frm.Id = bm.ID;
                     frm.Tome = bm.Document != null ? bm.Document.Tome : 0;
                     frm.Title = bm.Title;
                     frm.Page = bm.Reference;
@@ -416,10 +418,9 @@ namespace CatalogPdf
             frm.Init();
             frm.ShowDialog();
             if (frm.DialogResult == DialogResult.OK)
-            {
-                bm.Title = frm.Title;
-                bm.Reference = frm.Page;
-                bm.Content = frm.Content;
+            {                             
+                presenter.EditBookmark(frm.Id, frm.Title, frm.Page, frm.Content,frm.TypeContent);
+                ShowData();
                 ShowContentPage(PageFromTextBox());
             }
         }
@@ -1002,13 +1003,13 @@ namespace CatalogPdf
         {
             LineBookmark lineExplanation = new LineBookmark();
             lineExplanation.Width = PanelExplanation.Width - 10;
+            lineExplanation.Id = Explanation.ID;
             lineExplanation.Title = Explanation.Title;
             lineExplanation.Tome = Explanation.Document.Tome;
             lineExplanation.DocName = Explanation.Document.Name;
             lineExplanation.DocNumber = Explanation.Document.Number;
             lineExplanation.PageStart = Explanation.Reference;
-            lineExplanation.NumBookmark = Explanation.Number;
-            lineExplanation.Id = Explanation.ID;
+            lineExplanation.NumBookmark = Explanation.Number;           
             lineExplanation.TypeSticker = typeSticker.Explanetion;
             lineExplanation.Init();
             PanelExplanation.Controls.Add(lineExplanation);
@@ -1102,15 +1103,7 @@ namespace CatalogPdf
             }
             GotoBookmark(mark);
         }
-            //LineBookmark bm = (LineBookmark)sender;
-
-            //Bookmark bookmark = presenter?.Explanations.Bookmarks?.Where(b => b.ID == bm.Id)?.First();
-            //if (bookmark != null)
-            //{
-            //    Debug.WriteLine("go to bookmark " + bookmark.ID);
-            //    ViewerShowDocument(bookmark?.Document);
-            //    NavigateCatalog(bookmark.Reference);
-            //}
+            
         
 
         /// <summary>
@@ -1129,7 +1122,7 @@ namespace CatalogPdf
                 presenter.DeleteExplanationId(id);
                 ShowExplanationItems();
             }
-
+            ShowData();
             ShowContentPage(PageFromTextBox());
         }
 
@@ -1143,7 +1136,7 @@ namespace CatalogPdf
         private void LineBookMark_UserEdit_Bookmark(int id, int page, string title, string content , typeSticker typeSticker)
         {
             presenter.EditBookmark(id, title, page, content, typeSticker);
-            ShowBookmarkItems();
+            ShowData();
             ShowContentPage(page);
         }
 
