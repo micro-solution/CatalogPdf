@@ -10,7 +10,7 @@ using XMLDBLib;
 
 namespace CatalogPdf
 {
-    internal class DataPresenter : XMLDB
+    public class DataPresenter : XMLDB
     {
 
         public Document CurrentDoc { set; get; }

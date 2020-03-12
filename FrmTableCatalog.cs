@@ -17,7 +17,7 @@ namespace CatalogPdf
         {
             get
             {
-                _catalog = new CatalogDocuments();
+                _catalog = new CatalogDocuments(presenter);
                 return _catalog;
             }
             set => _catalog = value;
@@ -81,10 +81,8 @@ namespace CatalogPdf
                         doc.Tome = tome;
                         break;
                   case "Название тома":
-                        string tomeName = dataGridView1.Rows[row].Cells[GetNumberColumn("Название тома")].Value.ToString();
-                        if (!string.IsNullOrWhiteSpace(tomeName))
-                            doc.TomeName = tomeName; 
-                        
+                        string tomeName = dataGridView1.Rows[row].Cells[GetNumberColumn("Название тома")].Value.ToString();                       
+                        doc.TomeName = tomeName;                         
                 break;
                     case "Номер":
                         int.TryParse(dataGridView1.Rows[row].Cells[GetNumberColumn("Номер")].Value.ToString(), out int number);

@@ -29,31 +29,36 @@ namespace CatalogPdf
 
         private List<DocumentView> _catalog;
 
-        private DataPresenter Presenter
+        public CatalogDocuments(DataPresenter presenter)
         {
-            get
-            {
-                if (_presenter == null)
-                {
-
-                    string path = Settings.Default.CurrentCatalogPath;
-                    if (Directory.Exists(path))
-                    {
-                        try
-                        {
-                            _presenter = new DataPresenter(path);
-                        }
-                        catch (Exception e)
-                        {
-                            MessageBox.Show(e.Message);
-                        }
-                    }
-                }
-                return _presenter;
-            }
+            Presenter = presenter;
         }
 
-        private DataPresenter _presenter;
+        private DataPresenter Presenter;
+        //{
+        //    get
+        //    {
+        //        if (_presenter == null)
+        //        {
+
+        //            string path = Settings.Default.CurrentCatalogPath;
+        //            if (Directory.Exists(path))
+        //            {
+        //                try
+        //                {
+        //                    _presenter = new DataPresenter(path);
+        //                }
+        //                catch (Exception e)
+        //                {
+        //                    MessageBox.Show(e.Message);
+        //                }
+        //            }
+        //        }
+        //        return _presenter;
+        //    }
+        //}
+
+        //private DataPresenter _presenter;
 
 
         /// <summary>
