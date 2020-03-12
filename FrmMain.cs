@@ -684,12 +684,18 @@ namespace CatalogPdf
 
                 PanelCatalog.Controls.Add(tomeLine);             
                 tomeLine.MouseClick += TomeLine_MouseClick; ;
+                tomeLine.ClickTomeSelect += TomeLine_ClickTomeSelect;
                 tomeLine.Width = PanelCatalog.Width - 10;
                 if (tome == currentTome)
                 {
                     ShowDocumentItems(tome);
                 }
             }
+        }
+
+        private void TomeLine_ClickTomeSelect(int tome)
+        {
+            SelectTome(tome);
         }
 
         private void TomeLine_MouseClick(object sender, MouseEventArgs e)
@@ -1316,57 +1322,7 @@ namespace CatalogPdf
 
         #endregion DragDrop File
 
-        /// <summary>
-        /// Навигация клавишами не работает! не видит событие
-        /// TODO исправить прелистывание с клавиатуры
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void frmMain_KeyDown(object sender, KeyEventArgs e)
-        {
-
-
-
-            if (e.KeyCode == Keys.Up)
-            {
-                PagePreviousTextBox(PageFromTextBox());
-            }
-            else if (e.KeyCode == Keys.Down)
-            {
-                PageNextTextBox(PageFromTextBox());
-            }
-            else if (e.KeyCode == Keys.B && e.Control)
-            {
-                NewBookmark(typeSticker.Bookmark);
-            }
-            else if (e.KeyCode == Keys.G && e.Control)
-            {
-                NewBookmark(typeSticker.Explanetion);
-            }
-            else if (e.KeyCode == Keys.D && e.Control)
-            {
-                ShowHideComments(isHideCatalog);
-                ShowHideCatalog();
-            }
-            else if (e.KeyCode == Keys.E && e.Control)
-            {
-                pdfRenderer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitHeight;
-            }
-            else if (e.KeyCode == Keys.W && e.Control)
-            {
-                pdfRenderer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitWidth;
-            }
-            else if (e.KeyCode == Keys.Q && e.Control)
-            {
-                pdfRenderer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitBest;
-            }
-            else if (e.KeyCode == Keys.F && e.Control)
-            {
-                tbPage.Select();
-            }
-
-
-        }
+     
 
 
 
@@ -1521,6 +1477,118 @@ namespace CatalogPdf
             }
             frmAdd.Dispose();
         }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripButton6_Click_1(object sender, EventArgs e)
+        {
+            pdfRenderer.ZoomIn();
+        }
+
+        private void toolStripButton7_Click(object sender, EventArgs e)
+        {
+            pdfRenderer.ZoomOut();
+        }
+
+        private void rotateLeft_Click(object sender, EventArgs e)
+        {
+            pdfRenderer.RotateLeft();
+        }
+
+        private void rotateRight_Click(object sender, EventArgs e)
+        {
+            pdfRenderer.RotateRight();
+        }
+
+        private void fitHeight_Click(object sender, EventArgs e)
+        {
+            pdfRenderer.Select();
+            pdfRenderer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitHeight;
+        }
+
+        private void fitWidth_Click(object sender, EventArgs e)
+        {
+            pdfRenderer.Select();
+            pdfRenderer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitWidth;
+        }
+
+
+
+
+
+
+
+
+
+
+        /// <summary>
+        /// Навигация клавишами не работает! не видит событие
+        /// TODO исправить прелистывание с клавиатуры
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void frmMain_KeyDown(object sender, KeyEventArgs e)
+        {
+
+
+
+            if (e.KeyCode == Keys.Up)
+            {
+                PagePreviousTextBox(PageFromTextBox());
+            }
+            else if (e.KeyCode == Keys.Down)
+            {
+                PageNextTextBox(PageFromTextBox());
+            }
+            else if (e.KeyCode == Keys.B && e.Control)
+            {
+                NewBookmark(typeSticker.Bookmark);
+            }
+            else if (e.KeyCode == Keys.G && e.Control)
+            {
+                NewBookmark(typeSticker.Explanetion);
+            }
+            else if (e.KeyCode == Keys.D && e.Control)
+            {
+                ShowHideComments(isHideCatalog);
+                ShowHideCatalog();
+            }
+            else if (e.KeyCode == Keys.E && e.Control)
+            {
+                pdfRenderer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitHeight;
+            }
+            else if (e.KeyCode == Keys.W && e.Control)
+            {
+                pdfRenderer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitWidth;
+            }
+            else if (e.KeyCode == Keys.Q && e.Control)
+            {
+                pdfRenderer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitBest;
+            }
+            else if (e.KeyCode == Keys.F && e.Control)
+            {
+                tbPage.Select();
+            }
+            else if (e.KeyCode == Keys.Add && e.Control)
+            {
+                pdfRenderer.ZoomIn();
+            }
+            else if (e.KeyCode == Keys.Subtract && e.Control)
+            {
+                pdfRenderer.ZoomOut();
+            }
+
+
+        }
+
+
+
+
+
+
     }
 
 

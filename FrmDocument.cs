@@ -48,9 +48,9 @@ namespace CatalogPdf
         {
             TbFullName.Text = Fullname;
             tbName.Text = NameDocument;
-            tbPage.Text = PageStart.ToString();
             TbTome.Text = Tome.ToString();
             TbNumber.Text = Number.ToString();
+            tbPage.Text = PageStart.ToString();
             TbAmountPages.Text = AmountPage.ToString();
             tbTypeDocument.Text = TypeDocument;
 
@@ -137,7 +137,7 @@ namespace CatalogPdf
            int countPage = 0;         
                 currentTomeDocs.ForEach(d => countPage += d.AmountPage);
         
-                tbPage.Text =  $"{countPage + 2}";
+                tbPage.Text =  $"{countPage+1}";
           
         }
         private int lastPage=-1;

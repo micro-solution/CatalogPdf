@@ -63,6 +63,12 @@ namespace CatalogPdf
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
+            this.rotateLeft = new System.Windows.Forms.ToolStripButton();
+            this.rotateRight = new System.Windows.Forms.ToolStripButton();
+            this.fitHeight = new System.Windows.Forms.ToolStripButton();
+            this.fitWidth = new System.Windows.Forms.ToolStripButton();
             this.splitConteiner = new System.Windows.Forms.SplitContainer();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabCommon = new System.Windows.Forms.TabPage();
@@ -88,6 +94,7 @@ namespace CatalogPdf
             this.pdfRenderer = new PdfiumViewer.PdfRenderer();
             this.flowPanelComments = new System.Windows.Forms.FlowLayoutPanel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitConteiner)).BeginInit();
             this.splitConteiner.Panel1.SuspendLayout();
@@ -132,10 +139,16 @@ namespace CatalogPdf
             this.AddBookmark,
             this.toolStripButton1,
             this.toolStripSeparator6,
-            this.toolStripSeparator7});
+            this.toolStripSeparator7,
+            this.toolStripButton6,
+            this.toolStripButton7,
+            this.rotateLeft,
+            this.rotateRight,
+            this.fitHeight,
+            this.fitWidth});
             this.toolStripMain.Location = new System.Drawing.Point(0, 0);
             this.toolStripMain.Name = "toolStripMain";
-            this.toolStripMain.Size = new System.Drawing.Size(1188, 41);
+            this.toolStripMain.Size = new System.Drawing.Size(1276, 41);
             this.toolStripMain.TabIndex = 0;
             this.toolStripMain.Text = "toolStripMain";
             this.toolStripMain.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStripMain_ItemClicked);
@@ -283,7 +296,6 @@ namespace CatalogPdf
             // 
             // tbPage
             // 
-            this.tbPage.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tbPage.Name = "tbPage";
             this.tbPage.Size = new System.Drawing.Size(50, 41);
             this.tbPage.Text = "1";
@@ -407,6 +419,72 @@ namespace CatalogPdf
             this.toolStripSeparator7.Name = "toolStripSeparator7";
             this.toolStripSeparator7.Size = new System.Drawing.Size(6, 41);
             // 
+            // toolStripButton6
+            // 
+            this.toolStripButton6.AutoSize = false;
+            this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
+            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton6.Name = "toolStripButton6";
+            this.toolStripButton6.Size = new System.Drawing.Size(28, 28);
+            this.toolStripButton6.Text = "Увеличить";
+            this.toolStripButton6.Click += new System.EventHandler(this.toolStripButton6_Click_1);
+            // 
+            // toolStripButton7
+            // 
+            this.toolStripButton7.AutoSize = false;
+            this.toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton7.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton7.Image")));
+            this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton7.Name = "toolStripButton7";
+            this.toolStripButton7.Size = new System.Drawing.Size(28, 28);
+            this.toolStripButton7.Text = "Уменьшить";
+            this.toolStripButton7.Click += new System.EventHandler(this.toolStripButton7_Click);
+            // 
+            // rotateLeft
+            // 
+            this.rotateLeft.AutoSize = false;
+            this.rotateLeft.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rotateLeft.Image = ((System.Drawing.Image)(resources.GetObject("rotateLeft.Image")));
+            this.rotateLeft.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rotateLeft.Name = "rotateLeft";
+            this.rotateLeft.Size = new System.Drawing.Size(28, 38);
+            this.rotateLeft.Text = "Повернуть против часовой";
+            this.rotateLeft.Click += new System.EventHandler(this.rotateLeft_Click);
+            // 
+            // rotateRight
+            // 
+            this.rotateRight.AutoSize = false;
+            this.rotateRight.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rotateRight.Image = ((System.Drawing.Image)(resources.GetObject("rotateRight.Image")));
+            this.rotateRight.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rotateRight.Name = "rotateRight";
+            this.rotateRight.Size = new System.Drawing.Size(28, 38);
+            this.rotateRight.Text = "Повернуть по часовой";
+            this.rotateRight.Click += new System.EventHandler(this.rotateRight_Click);
+            // 
+            // fitHeight
+            // 
+            this.fitHeight.AutoSize = false;
+            this.fitHeight.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.fitHeight.Image = ((System.Drawing.Image)(resources.GetObject("fitHeight.Image")));
+            this.fitHeight.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.fitHeight.Name = "fitHeight";
+            this.fitHeight.Size = new System.Drawing.Size(28, 38);
+            this.fitHeight.Text = "Вписать по высоте";
+            this.fitHeight.Click += new System.EventHandler(this.fitHeight_Click);
+            // 
+            // fitWidth
+            // 
+            this.fitWidth.AutoSize = false;
+            this.fitWidth.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.fitWidth.Image = ((System.Drawing.Image)(resources.GetObject("fitWidth.Image")));
+            this.fitWidth.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.fitWidth.Name = "fitWidth";
+            this.fitWidth.Size = new System.Drawing.Size(28, 38);
+            this.fitWidth.Text = "Вписать по ширине";
+            this.fitWidth.Click += new System.EventHandler(this.fitWidth_Click);
+            // 
             // splitConteiner
             // 
             this.splitConteiner.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -423,8 +501,8 @@ namespace CatalogPdf
             // 
             this.splitConteiner.Panel2.Controls.Add(this.splitContainerInner);
             this.splitConteiner.Panel2MinSize = 300;
-            this.splitConteiner.Size = new System.Drawing.Size(1188, 494);
-            this.splitConteiner.SplitterDistance = 429;
+            this.splitConteiner.Size = new System.Drawing.Size(1276, 540);
+            this.splitConteiner.SplitterDistance = 459;
             this.splitConteiner.TabIndex = 1;
             this.splitConteiner.TabStop = false;
             // 
@@ -442,7 +520,7 @@ namespace CatalogPdf
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(417, 494);
+            this.tabControl1.Size = new System.Drawing.Size(447, 540);
             this.tabControl1.TabIndex = 0;
             this.toolTip1.SetToolTip(this.tabControl1, "Поиск");
             // 
@@ -453,7 +531,7 @@ namespace CatalogPdf
             this.tabCommon.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tabCommon.Location = new System.Drawing.Point(4, 4);
             this.tabCommon.Name = "tabCommon";
-            this.tabCommon.Size = new System.Drawing.Size(409, 465);
+            this.tabCommon.Size = new System.Drawing.Size(439, 511);
             this.tabCommon.TabIndex = 2;
             this.tabCommon.Text = "Оглавление";
             this.tabCommon.UseVisualStyleBackColor = true;
@@ -466,7 +544,7 @@ namespace CatalogPdf
             this.toolStripButton2});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(409, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(439, 25);
             this.toolStrip2.TabIndex = 12;
             this.toolStrip2.Text = "Комментарии";
             // 
@@ -481,7 +559,6 @@ namespace CatalogPdf
             // 
             this.tbSearchCatalog.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.tbSearchCatalog.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbSearchCatalog.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tbSearchCatalog.Name = "tbSearchCatalog";
             this.tbSearchCatalog.Size = new System.Drawing.Size(150, 25);
             this.tbSearchCatalog.ToolTipText = "Поиск";
@@ -510,7 +587,7 @@ namespace CatalogPdf
             this.PanelCatalog.Location = new System.Drawing.Point(0, 28);
             this.PanelCatalog.Name = "PanelCatalog";
             this.PanelCatalog.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.PanelCatalog.Size = new System.Drawing.Size(409, 437);
+            this.PanelCatalog.Size = new System.Drawing.Size(439, 483);
             this.PanelCatalog.TabIndex = 11;
             this.PanelCatalog.SizeChanged += new System.EventHandler(this.PanelCatalog_SizeChanged_1);
             // 
@@ -522,7 +599,7 @@ namespace CatalogPdf
             this.PageBookmarks.Location = new System.Drawing.Point(4, 4);
             this.PageBookmarks.Name = "PageBookmarks";
             this.PageBookmarks.Padding = new System.Windows.Forms.Padding(3);
-            this.PageBookmarks.Size = new System.Drawing.Size(409, 465);
+            this.PageBookmarks.Size = new System.Drawing.Size(464, 511);
             this.PageBookmarks.TabIndex = 0;
             this.PageBookmarks.Text = "Закладки";
             this.PageBookmarks.UseVisualStyleBackColor = true;
@@ -535,7 +612,7 @@ namespace CatalogPdf
             this.toolStripButton3});
             this.tbtoolstripBookmark.Location = new System.Drawing.Point(3, 3);
             this.tbtoolstripBookmark.Name = "tbtoolstripBookmark";
-            this.tbtoolstripBookmark.Size = new System.Drawing.Size(403, 25);
+            this.tbtoolstripBookmark.Size = new System.Drawing.Size(458, 25);
             this.tbtoolstripBookmark.TabIndex = 13;
             this.tbtoolstripBookmark.Text = "Комментарии";
             // 
@@ -550,7 +627,6 @@ namespace CatalogPdf
             // 
             this.tbSearchBookmarks.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.tbSearchBookmarks.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbSearchBookmarks.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tbSearchBookmarks.Name = "tbSearchBookmarks";
             this.tbSearchBookmarks.Size = new System.Drawing.Size(150, 25);
             this.tbSearchBookmarks.ToolTipText = "Поиск";
@@ -574,7 +650,7 @@ namespace CatalogPdf
             this.PanelBookmarks.AutoScroll = true;
             this.PanelBookmarks.Location = new System.Drawing.Point(2, 31);
             this.PanelBookmarks.Name = "PanelBookmarks";
-            this.PanelBookmarks.Size = new System.Drawing.Size(406, 431);
+            this.PanelBookmarks.Size = new System.Drawing.Size(461, 477);
             this.PanelBookmarks.TabIndex = 4;
             this.PanelBookmarks.SizeChanged += new System.EventHandler(this.PanelBookmarks_SizeChanged);
             // 
@@ -586,7 +662,7 @@ namespace CatalogPdf
             this.PageComments.Location = new System.Drawing.Point(4, 4);
             this.PageComments.Name = "PageComments";
             this.PageComments.Padding = new System.Windows.Forms.Padding(3);
-            this.PageComments.Size = new System.Drawing.Size(409, 465);
+            this.PageComments.Size = new System.Drawing.Size(464, 511);
             this.PageComments.TabIndex = 1;
             this.PageComments.Text = "Пояснения";
             this.PageComments.UseVisualStyleBackColor = true;
@@ -599,7 +675,7 @@ namespace CatalogPdf
             this.toolStripButton5});
             this.toolExp.Location = new System.Drawing.Point(3, 3);
             this.toolExp.Name = "toolExp";
-            this.toolExp.Size = new System.Drawing.Size(403, 25);
+            this.toolExp.Size = new System.Drawing.Size(458, 25);
             this.toolExp.TabIndex = 13;
             this.toolExp.Text = "Комментарии";
             // 
@@ -614,7 +690,6 @@ namespace CatalogPdf
             // 
             this.tbSearchExplanation.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.tbSearchExplanation.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbSearchExplanation.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tbSearchExplanation.Name = "tbSearchExplanation";
             this.tbSearchExplanation.Size = new System.Drawing.Size(150, 25);
             this.tbSearchExplanation.ToolTipText = "Поиск";
@@ -638,7 +713,7 @@ namespace CatalogPdf
             this.PanelExplanation.AutoScroll = true;
             this.PanelExplanation.Location = new System.Drawing.Point(2, 31);
             this.PanelExplanation.Name = "PanelExplanation";
-            this.PanelExplanation.Size = new System.Drawing.Size(403, 431);
+            this.PanelExplanation.Size = new System.Drawing.Size(458, 477);
             this.PanelExplanation.TabIndex = 0;
             this.PanelExplanation.SizeChanged += new System.EventHandler(this.PanelExplanation_SizeChanged);
             // 
@@ -647,9 +722,9 @@ namespace CatalogPdf
             this.btnShowHideCatalog.AllowDrop = true;
             this.btnShowHideCatalog.AutoEllipsis = true;
             this.btnShowHideCatalog.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnShowHideCatalog.Location = new System.Drawing.Point(419, 0);
+            this.btnShowHideCatalog.Location = new System.Drawing.Point(449, 0);
             this.btnShowHideCatalog.Name = "btnShowHideCatalog";
-            this.btnShowHideCatalog.Size = new System.Drawing.Size(10, 494);
+            this.btnShowHideCatalog.Size = new System.Drawing.Size(10, 540);
             this.btnShowHideCatalog.TabIndex = 1;
             this.btnShowHideCatalog.UseVisualStyleBackColor = true;
             this.btnShowHideCatalog.Click += new System.EventHandler(this.btnShowHideCatalog_Click);
@@ -668,8 +743,8 @@ namespace CatalogPdf
             // splitContainerInner.Panel2
             // 
             this.splitContainerInner.Panel2.Controls.Add(this.flowPanelComments);
-            this.splitContainerInner.Size = new System.Drawing.Size(755, 494);
-            this.splitContainerInner.SplitterDistance = 518;
+            this.splitContainerInner.Size = new System.Drawing.Size(813, 540);
+            this.splitContainerInner.SplitterDistance = 557;
             this.splitContainerInner.TabIndex = 0;
             // 
             // pdfRenderer
@@ -680,7 +755,7 @@ namespace CatalogPdf
             this.pdfRenderer.Name = "pdfRenderer";
             this.pdfRenderer.Page = 0;
             this.pdfRenderer.Rotation = PdfiumViewer.PdfRotation.Rotate0;
-            this.pdfRenderer.Size = new System.Drawing.Size(518, 494);
+            this.pdfRenderer.Size = new System.Drawing.Size(557, 540);
             this.pdfRenderer.TabIndex = 0;
             this.pdfRenderer.Text = "pdfRenderer";
             this.pdfRenderer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitBest;
@@ -694,7 +769,7 @@ namespace CatalogPdf
             this.flowPanelComments.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowPanelComments.Location = new System.Drawing.Point(0, 0);
             this.flowPanelComments.Name = "flowPanelComments";
-            this.flowPanelComments.Size = new System.Drawing.Size(233, 494);
+            this.flowPanelComments.Size = new System.Drawing.Size(252, 540);
             this.flowPanelComments.TabIndex = 0;
             this.flowPanelComments.SizeChanged += new System.EventHandler(this.flowPanelComments_SizeChanged);
             // 
@@ -702,11 +777,16 @@ namespace CatalogPdf
             // 
             this.toolTip1.IsBalloon = true;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1188, 535);
+            this.ClientSize = new System.Drawing.Size(1276, 581);
             this.Controls.Add(this.splitConteiner);
             this.Controls.Add(this.toolStripMain);
             this.DoubleBuffered = true;
@@ -714,6 +794,7 @@ namespace CatalogPdf
             this.MinimumSize = new System.Drawing.Size(600, 400);
             this.Name = "frmMain";
             this.Text = "CatalogPdf - [Текущая рабочая папка]";
+            this.Load += new System.EventHandler(this.frmMain_Load);
             this.SizeChanged += new System.EventHandler(this.frmMain_SizeChanged);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmMain_KeyDown);
             this.toolStripMain.ResumeLayout(false);
@@ -801,6 +882,13 @@ namespace CatalogPdf
         private ToolStripSeparator toolStripSeparator8;
         private ToolStripButton btnTableCatalog;
         private ToolStripMenuItem addSpase;
+        private ContextMenuStrip contextMenuStrip1;
+        private ToolStripButton toolStripButton6;
+        private ToolStripButton toolStripButton7;
+        private ToolStripButton rotateLeft;
+        private ToolStripButton rotateRight;
+        private ToolStripButton fitHeight;
+        private ToolStripButton fitWidth;
     }
 }
 
