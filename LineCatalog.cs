@@ -7,8 +7,8 @@ namespace CatalogPdf
     public class LineCatalog : UserControl
 
     {
-            
-      
+
+
         /// <summary>
         ///Том дела 
         /// </summary>
@@ -37,11 +37,11 @@ namespace CatalogPdf
 
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            
-            this.Name = "LineCatalog";
-            this.Size = new System.Drawing.Size(264, 34);
-            this.ResumeLayout(false);
+            SuspendLayout();
+
+            Name = "LineCatalog";
+            Size = new System.Drawing.Size(264, 34);
+            ResumeLayout(false);
 
         }
 

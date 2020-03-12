@@ -1,26 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using XMLDBLib;
 
 namespace CatalogPdf
 {
     public partial class LineCatalogDocument : LineCatalog
     {
 
-       // internal Document document;
-      
+        // internal Document document;
+
         public delegate void UserChanges(string newName, string path);
         public delegate void UserChangeDocFile(string path);
         public delegate void UserChangeDocNum(int docNumber, string path);
 
 
 
-        public event UserChanges ChangeDocName;   
+        public event UserChanges ChangeDocName;
         public event UserChangeDocNum ChangeDoc;
         public event UserChangeDocFile ShowDoc;
         public event UserChangeDocFile DeleteDoc;
@@ -28,7 +26,7 @@ namespace CatalogPdf
         public LineCatalogDocument()
         {
             InitializeComponent();
-            this.AllowDrop = true;
+            AllowDrop = true;
             Size = new Size(262, 22);
             BackColor = Color.FromArgb(247, 250, 250);
             UpgateView();
@@ -39,7 +37,7 @@ namespace CatalogPdf
         {
             if (!string.IsNullOrWhiteSpace(NameDoc))
             {
-                lbTome.Text =Tome.ToString();
+                lbTome.Text = Tome.ToString();
                 lbNumber.Text = DocNumber.ToString();
 
                 LbTitleDocument.Text = NameDoc;
@@ -51,7 +49,7 @@ namespace CatalogPdf
 
 
         private bool clicked;
-        
+
 
         /// <summary>
         /// Переход к редактированию поля или открытие документа
@@ -80,7 +78,7 @@ namespace CatalogPdf
         private void CatalogItem_Enter(object sender, EventArgs e)
         {
             BackColor = UserSettings.catalogDocItem_ActiveColor;//    Color.FromArgb(240, 246, 255);
-            ShowDoc.Invoke(FullName);           
+            ShowDoc.Invoke(FullName);
         }
 
         #region Изменить текст в лейблах
@@ -146,7 +144,9 @@ namespace CatalogPdf
         private void открытьФайлToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (File.Exists(FullName))
+            {
                 Process.Start(FullName);
+            }
         }
 
         private void LbTitleDocument_TextChanged(object sender, EventArgs e)
@@ -168,7 +168,7 @@ namespace CatalogPdf
         private void ToolStripMenuEditDocument_Click(object sender, System.EventArgs e)
         {
             ChangeDoc?.Invoke(DocNumber, FullName);
-        }     
+        }
         private void удалитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DeleteDoc.Invoke(FullName);
@@ -181,6 +181,6 @@ namespace CatalogPdf
             BackColor = Color.FromArgb(247, 250, 250);
         }
 
-     
+
     }
 }

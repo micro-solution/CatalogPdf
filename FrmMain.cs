@@ -26,7 +26,7 @@ namespace CatalogPdf
         public frmMain()
         {
             InitializeComponent();
-            this.KeyPreview = true;
+            KeyPreview = true;
             InitPresenter();
         }
 
@@ -151,7 +151,9 @@ namespace CatalogPdf
         private void PagePreviousTextBox(int page)
         {
             if (--page > 0)
+            {
                 tbPage.Text = page.ToString();
+            }
             else
             {
                 tbPage.Text = "1";
@@ -289,14 +291,18 @@ namespace CatalogPdf
 
         private void NavigateCatalog(int page)
         {
-            if (!presenter.State) return;            
+            if (!presenter.State)
+            {
+                return;
+            }
+
             Document doc = presenter.Catalog.GetByPage(page);
             if (doc != null)
             {
                 int pageDoc = page - doc.StartPage;
                 if (doc.ID != presenter.CurrentDoc.ID)
                 {
-                    ViewerShowDocument(doc);                  
+                    ViewerShowDocument(doc);
                 }
 
                 pdfRenderer.Page = pageDoc;
@@ -304,7 +310,7 @@ namespace CatalogPdf
             }
             else
             {
-              
+
             }
         }
         /// <summary>
@@ -323,7 +329,10 @@ namespace CatalogPdf
         /// <param name="e"></param>
         private void tbPage_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!(char.IsDigit(e.KeyChar) || e.KeyChar == (char)Keys.Back)) e.Handled = true;
+            if (!(char.IsDigit(e.KeyChar) || e.KeyChar == (char)Keys.Back))
+            {
+                e.Handled = true;
+            }
         }
 
         #endregion Навигация по страницам
@@ -418,8 +427,8 @@ namespace CatalogPdf
             frm.Init();
             frm.ShowDialog();
             if (frm.DialogResult == DialogResult.OK)
-            {                             
-                presenter.EditBookmark(frm.Id, frm.Title, frm.Page, frm.Content,frm.TypeContent);
+            {
+                presenter.EditBookmark(frm.Id, frm.Title, frm.Page, frm.Content, frm.TypeContent);
                 ShowData();
                 ShowContentPage(PageFromTextBox());
             }
@@ -530,10 +539,10 @@ namespace CatalogPdf
         private void открытьРасположениеToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string path = Settings.Default.CurrentCatalogPath;
-            
+
             if (Directory.Exists(path))
             {
-                Process.Start(path);    
+                Process.Start(path);
             }
         }
 
@@ -682,7 +691,7 @@ namespace CatalogPdf
                 tomeLine.Tome = tome;
                 tomeLine.Init();
 
-                PanelCatalog.Controls.Add(tomeLine);             
+                PanelCatalog.Controls.Add(tomeLine);
                 tomeLine.MouseClick += TomeLine_MouseClick; ;
                 tomeLine.ClickTomeSelect += TomeLine_ClickTomeSelect;
                 tomeLine.Width = PanelCatalog.Width - 10;
@@ -701,8 +710,8 @@ namespace CatalogPdf
         private void TomeLine_MouseClick(object sender, MouseEventArgs e)
         {
             TomMarck tomeLine = (TomMarck)sender;
-            
-                SelectTome(tomeLine.Tome);
+
+            SelectTome(tomeLine.Tome);
         }
 
         /// <summary>
@@ -787,7 +796,11 @@ namespace CatalogPdf
             if (e.Button == MouseButtons.Left && mousePressed)
             {
                 await Task.Delay(400);
-                if (!mousePressed) return;
+                if (!mousePressed)
+                {
+                    return;
+                }
+
                 LineCatalogDocument line = (LineCatalogDocument)sender;
                 line.DoDragDrop(line.FullName, DragDropEffects.Move);
                 line.BackColor = UserSettings.catalogDocItem_ActiveColor;
@@ -864,7 +877,7 @@ namespace CatalogPdf
                     doc.AmountPage = frmDocument.AmountPage;
                     doc.DocType = frmDocument.TypeDocument;
                     doc.Date = frmDocument.Date;
-                    doc.EndPage = frmDocument.PageStart +  frmDocument.AmountPage - 1;
+                    doc.EndPage = frmDocument.PageStart + frmDocument.AmountPage - 1;
                     presenter.Save();
                     presenter.ChangeDocNumber(doc, frmDocument.Number);
                     InitPresenter();
@@ -975,7 +988,7 @@ namespace CatalogPdf
         private void AddLineBookmarck(Bookmark bookmark)
         {
             LineBookmark lineBookMark = new LineBookmark();
-            
+
             lineBookMark.Title = bookmark.Title;
             lineBookMark.Tome = bookmark.Document.Tome;
             lineBookMark.DocName = bookmark.Document.Name;
@@ -992,10 +1005,10 @@ namespace CatalogPdf
             lineBookMark.UserEdit_Bookmark += LineBookMark_UserEdit_Bookmark;
             lineBookMark.Click += LineBookMark_Click;
             lineBookMark.Enter += LineBookMark_Enter;
-            lineBookMark.Goto_BookmarkPage += LineBookMark_Goto_BookmarkPage; 
+            lineBookMark.Goto_BookmarkPage += LineBookMark_Goto_BookmarkPage;
         }
 
-  
+
 
 
 
@@ -1015,13 +1028,13 @@ namespace CatalogPdf
             lineExplanation.DocName = Explanation.Document.Name;
             lineExplanation.DocNumber = Explanation.Document.Number;
             lineExplanation.PageStart = Explanation.Reference;
-            lineExplanation.NumBookmark = Explanation.Number;           
+            lineExplanation.NumBookmark = Explanation.Number;
             lineExplanation.TypeSticker = typeSticker.Explanetion;
             lineExplanation.Init();
             PanelExplanation.Controls.Add(lineExplanation);
 
             lineExplanation.UserDel_Bookmark += LineBookMark_UserDelBookmark;
-            lineExplanation.UserEdit_Bookmark += LineBookMark_UserEdit_Bookmark;            
+            lineExplanation.UserEdit_Bookmark += LineBookMark_UserEdit_Bookmark;
             lineExplanation.Click += LineExplanetion_Click;
             lineExplanation.Goto_BookmarkPage += LineBookMark_Goto_BookmarkPage;
         }
@@ -1037,7 +1050,7 @@ namespace CatalogPdf
             Bookmark mark;
             if (bm.TypeSticker == typeSticker.Bookmark)
             {
-           mark = presenter?.Bookmarks.Bookmarks?.Where(b => b.ID == bm.Id)?.First();
+                mark = presenter?.Bookmarks.Bookmarks?.Where(b => b.ID == bm.Id)?.First();
             }
             else
             {
@@ -1055,7 +1068,7 @@ namespace CatalogPdf
             Bookmark mark = null;
             if (typeSticker == typeSticker.Bookmark)
             {
-             mark = presenter?.Bookmarks.Bookmarks?.Where(b => b.ID == id)?.First();
+                mark = presenter?.Bookmarks.Bookmarks?.Where(b => b.ID == id)?.First();
             }
             else
             {
@@ -1078,7 +1091,7 @@ namespace CatalogPdf
                 Debug.WriteLine("go to bookmark " + mark.ID);
                 if (presenter.CurrentDoc.Tome != mark?.Document.Tome)
                 {
-                ViewerShowDocument(mark?.Document);
+                    ViewerShowDocument(mark?.Document);
                 }
                 tbPage.Text = mark.Reference.ToString();
                 //NavigateCatalog(mark.Reference);
@@ -1096,12 +1109,12 @@ namespace CatalogPdf
         /// <param name="e"></param>
         private void LineExplanetion_Click(object sender, EventArgs e)
         {
-            
-             LineBookmark bm = (LineBookmark)sender;
+
+            LineBookmark bm = (LineBookmark)sender;
             Bookmark mark;
             if (bm.TypeSticker == typeSticker.Bookmark)
             {
-           mark = presenter?.Bookmarks.Bookmarks?.Where(b => b.ID == bm.Id)?.First();
+                mark = presenter?.Bookmarks.Bookmarks?.Where(b => b.ID == bm.Id)?.First();
             }
             else
             {
@@ -1109,8 +1122,8 @@ namespace CatalogPdf
             }
             GotoBookmark(mark);
         }
-            
-        
+
+
 
         /// <summary>
         /// удалить закладку
@@ -1139,7 +1152,7 @@ namespace CatalogPdf
         /// <param name="page"></param>
         /// <param name="title"></param>
         /// <param name="content"></param>
-        private void LineBookMark_UserEdit_Bookmark(int id, int page, string title, string content , typeSticker typeSticker)
+        private void LineBookMark_UserEdit_Bookmark(int id, int page, string title, string content, typeSticker typeSticker)
         {
             presenter.EditBookmark(id, title, page, content, typeSticker);
             ShowData();
@@ -1152,7 +1165,7 @@ namespace CatalogPdf
         /// <param name="docNumber"></param>
         /// <param name="Path"></param>
         private void CatalogLine_ChangeDocNumber(int docNumber, string Path)
-        {            
+        {
             Document doc = presenter.Catalog.GetByPath(Path);
             presenter.ChangeDocNumber(doc, docNumber);
         }
@@ -1198,7 +1211,7 @@ namespace CatalogPdf
         #endregion CatalogItems (UserControl)
 
         #region  Viewer axAcroPdf
-        PdfiumViewer.PdfDocument documentV;
+        private PdfiumViewer.PdfDocument documentV;
         /// <summary>
         /// Отобразить текущий документ в контейнере pdf
         /// </summary>
@@ -1208,7 +1221,7 @@ namespace CatalogPdf
             if (presenter.State)
             {
                 string fileName = currentDocument.File.FullName;
-                lbCurrentTome.Text = currentDocument !=null? $"Том {currentDocument.Tome}":" ";
+                lbCurrentTome.Text = currentDocument != null ? $"Том {currentDocument.Tome}" : " ";
                 //if (fileName != presenter.CurrentDoc)
                 presenter.SetCurrentDocument(fileName);
                 lbDocName.Text = presenter.CurrentDoc.Name;
@@ -1224,10 +1237,13 @@ namespace CatalogPdf
         #endregion  Viewer pdf
 
         #region DragDrop File
-        Label dropZone;
+        private Label dropZone;
         private void pdfRenderer_DragEnter(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(DataFormats.Text)) return;
+            if (e.Data.GetDataPresent(DataFormats.Text))
+            {
+                return;
+            }
 
             pdfRenderer.Visible = false;
             dropZone = new Label();
@@ -1242,7 +1258,7 @@ namespace CatalogPdf
             dropZone.DragLeave += DropZone_DragLeave;
             dropZone.Dock = DockStyle.Fill;
             dropZone.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dropZone.Font = new System.Drawing.Font("Arial", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dropZone.Font = new System.Drawing.Font("Arial", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
             dropZone.Location = new System.Drawing.Point(0, 0);
             dropZone.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 
@@ -1266,7 +1282,10 @@ namespace CatalogPdf
 
         private void DropZone_DragDrop(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(DataFormats.Text)) return;
+            if (e.Data.GetDataPresent(DataFormats.Text))
+            {
+                return;
+            }
 
             string[] files = (string[])e.Data.GetData("FileDrop", false);
             try
@@ -1322,7 +1341,7 @@ namespace CatalogPdf
 
         #endregion DragDrop File
 
-     
+
 
 
 
@@ -1341,7 +1360,11 @@ namespace CatalogPdf
                 SetCatalogItems(presenter.CurrentTomeNumber);
                 return;
             }
-            if (!presenter.State) return;
+            if (!presenter.State)
+            {
+                return;
+            }
+
             PanelCatalog.Controls.Clear();
             List<Document> documents = presenter.FindDocument(strFind);
             if (documents != null)
@@ -1367,7 +1390,11 @@ namespace CatalogPdf
                 return;
             }
 
-            if (!presenter.State) return;
+            if (!presenter.State)
+            {
+                return;
+            }
+
             PanelBookmarks.Controls.Clear();
             List<Bookmark> bookmark = presenter.FindBookmark(strFind);
             foreach (Bookmark bm in bookmark)
@@ -1385,7 +1412,11 @@ namespace CatalogPdf
                 return;
             }
 
-            if (!presenter.State) return;
+            if (!presenter.State)
+            {
+                return;
+            }
+
             PanelExplanation.Controls.Clear();
             List<Bookmark> explanations = presenter.FindExplanations(strFind);
             foreach (Bookmark expl in explanations)
@@ -1429,13 +1460,17 @@ namespace CatalogPdf
         private void toolStripButton6_Click(object sender, EventArgs e)
         {
             FrmTableCatalog notebook = new FrmTableCatalog();
-            if (!presenter.State) return;
+            if (!presenter.State)
+            {
+                return;
+            }
+
             notebook.presenter = presenter;
             notebook.SetDataGreed();
             notebook.ShowDialog();
             if (notebook.DialogResult == DialogResult.OK)
             {
-                InitPresenter();                
+                InitPresenter();
             }
         }
 
@@ -1445,19 +1480,19 @@ namespace CatalogPdf
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
-            } 
+            }
             FrmAddSpaceDocument frmAdd = new FrmAddSpaceDocument();
             frmAdd.ShowDialog();
-               if (DialogResult.OK == frmAdd.DialogResult)
+            if (DialogResult.OK == frmAdd.DialogResult)
             {
-                string name = frmAdd.NameNewDoc.Replace("\\","") ;
+                string name = frmAdd.NameNewDoc.Replace("\\", "");
                 string fullname = path + @"\" + name + ".pdf";
                 PdfFeatures features = new PdfFeatures();
 
                 try
                 {
-                features.AddSpaceDoc(path, name, frmAdd.Description);                    
-              //  presenter.Save();
+                    features.AddSpaceDoc(path, name, frmAdd.Description);
+                    //  presenter.Save();
                     Document spaceDocument = presenter.Catalog.GetByPath(fullname);
                     spaceDocument.AmountPage = frmAdd.AmountPages;
                     if (presenter.CurrentDoc != null)
@@ -1467,13 +1502,13 @@ namespace CatalogPdf
                         spaceDocument.StartPage = presenter.CurrentDoc.StartPage + presenter.CurrentDoc.AmountPage;
                         spaceDocument.EndPage = spaceDocument.StartPage + spaceDocument.AmountPage - 1;
                     }
-                presenter.Save();
-                ShowData();
+                    presenter.Save();
+                    ShowData();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);    
-                } 
+                    MessageBox.Show(ex.Message);
+                }
             }
             frmAdd.Dispose();
         }

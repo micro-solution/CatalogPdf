@@ -2,9 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using XMLDBLib;
 
@@ -26,12 +23,10 @@ namespace CatalogPdf
                 }
                 return _catalog;
             }
-            set
-            {
-                _catalog = value;
-            }
+            set => _catalog = value;
         }
-        List<DocumentView> _catalog;
+
+        private List<DocumentView> _catalog;
 
         private DataPresenter Presenter
         {
@@ -57,9 +52,9 @@ namespace CatalogPdf
             }
         }
 
-        DataPresenter _presenter;
+        private DataPresenter _presenter;
 
-       
+
         /// <summary>
         /// Переупаковка документа в класс для визуализации
         /// </summary>

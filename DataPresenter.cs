@@ -21,7 +21,7 @@ namespace CatalogPdf
 
 
 
-        private string db_directory;
+        private readonly string db_directory;
 
 
 
@@ -58,7 +58,10 @@ namespace CatalogPdf
         private void UpdatePresenter()
         {
             Load(db_directory);
-            if (!State) return;
+            if (!State)
+            {
+                return;
+            }
 
             SetCatalog();
         }
@@ -90,8 +93,8 @@ namespace CatalogPdf
                 Load(db_directory);
             }
             else if (loadResult == LoadResult.DBError)
-            {              
-                    ResetDB();  
+            {
+                ResetDB();
             }
         }
 
@@ -137,20 +140,22 @@ namespace CatalogPdf
         private void Presenter_ChangeFS(List<FileInfo> files)
         {
             // обновить базу
-           // DialogResult dialogResult = MessageBox.Show(
+            // DialogResult dialogResult = MessageBox.Show(
             //   $"Обнаруженны новые файлы документов ({files.Count} шт.)  /n" +
             //   " Добавить файлы в каталог и сохранить?",
-             //                            "Новые документы",
-             //                            MessageBoxButtons.YesNo);
-           // if (dialogResult == DialogResult.Yes)
-           // {
-                foreach (FileInfo fi in files)
+            //                            "Новые документы",
+            //                            MessageBoxButtons.YesNo);
+            // if (dialogResult == DialogResult.Yes)
+            // {
+            foreach (FileInfo fi in files)
+            {
+                if (Catalog.GetByPath(fi.FullName) == null)
                 {
-                    if (Catalog.GetByPath(fi.FullName) == null)
-                        NewDocument(fi);
+                    NewDocument(fi);
                 }
-                
-                UpdatePresenter();
+            }
+
+            UpdatePresenter();
             //}
         }
 
@@ -173,8 +178,8 @@ namespace CatalogPdf
                 $"Некоторые файлы были удалены ({documents.Count}шт.)  /n" + listDocs +
                 " Удалить документы из каталога?",
                                           "Удалены файлы документов", MessageBoxButtons.YesNo);
-           
-                return dialogResult == DialogResult.Yes;   
+
+            return dialogResult == DialogResult.Yes;
         }
 
         /// <summary>
@@ -266,9 +271,9 @@ namespace CatalogPdf
             }
             return explanetionsList;
         }
-       
-        
-        
+
+
+
         /// <summary>
         /// Имя документа по умолчанию имя файла
         /// </summary>
@@ -355,7 +360,7 @@ namespace CatalogPdf
             Save();
         }
 
-        public void GetAmountPages ()
+        public void GetAmountPages()
         {
             List<Document> docs = Catalog.Documents;
             foreach (Document doc in docs)
@@ -365,7 +370,7 @@ namespace CatalogPdf
                     doc.AmountPage = GetCountPages(doc);
                 }
             }
-            
+
         }
 
         public void SetNumbers()
@@ -376,8 +381,8 @@ namespace CatalogPdf
                 List<Document> docs = Catalog.Documents.Where(d => d.Tome == tome).OrderBy(o => o.StartPage).ToList();
                 for (int i = 0; i < docs.Count; i++)
                 {
-                   // Document doc = docs[i];
-                   // doc.Number = i + 1;
+                    // Document doc = docs[i];
+                    // doc.Number = i + 1;
                 }
             }
             Save();
@@ -429,7 +434,7 @@ namespace CatalogPdf
                 pageCount = documentV.PageCount;
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
 #if DEBUG
                 Debug.WriteLine(doc.Name + "  " + e.Message);
@@ -447,19 +452,19 @@ namespace CatalogPdf
         /// <param name="tome"></param>
         /// <param name="path"></param>
         /// <returns></returns>
-        public bool isFreeRangePage(int startPage , int endPage , int tome , string path)
+        public bool isFreeRangePage(int startPage, int endPage, int tome, string path)
         {
-           
+
             List<Document> docs = Catalog.Documents.Where(x => x.Tome == tome && x.File.FullName != path).ToList();
             if (docs.Count > 0)
             {
-                foreach(Document doc in docs)
+                foreach (Document doc in docs)
                 {
-                    if (( startPage>=doc.StartPage && startPage <= doc.EndPage)     || 
-                         (endPage >= doc.StartPage && endPage <= doc.EndPage)   || 
-                         (doc.StartPage>startPage && doc.EndPage < endPage))
+                    if ((startPage >= doc.StartPage && startPage <= doc.EndPage) ||
+                         (endPage >= doc.StartPage && endPage <= doc.EndPage) ||
+                         (doc.StartPage > startPage && doc.EndPage < endPage))
                     {
-                        return false; 
+                        return false;
                     }
                 }
             }
@@ -541,7 +546,7 @@ namespace CatalogPdf
             Save();
             //ResetCatalogPages();
             SetBookmarksPages();
-            
+
 
 
             //int indexPrevious = docs.FindLastIndex(x => x.Number < newNumber);
@@ -644,7 +649,7 @@ namespace CatalogPdf
                 }
                 else
                 {
-                mark = Explanations.Bookmarks.Where(b => b.ID == Id).First();
+                    mark = Explanations.Bookmarks.Where(b => b.ID == Id).First();
                 }
                 mark.Title = title;
                 mark.Reference = page;

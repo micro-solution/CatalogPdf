@@ -1,11 +1,10 @@
 ﻿using System;
 
 using System.Windows.Forms;
-using System.Windows.Media;
 
 namespace CatalogPdf
 {
-    
+
     /// <summary>
     /// Элемент управления закладкой
     /// </summary>
@@ -39,7 +38,7 @@ namespace CatalogPdf
         public LineBookmark()
         {
             InitializeComponent();
-           
+
         }
 
         /// <summary>
@@ -64,57 +63,63 @@ namespace CatalogPdf
         /// <param name="e"></param>
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            UserDel_Bookmark.Invoke(Id, TypeSticker );
+            UserDel_Bookmark.Invoke(Id, TypeSticker);
             Dispose();
         }
-        
+
         /// <summary>
         ///  Переход по закладке
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-      
+
 
         private void переименоватьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
             FrmBookmark EditDialogBookmark = new FrmBookmark();
             EditDialogBookmark.Title = Title;
             EditDialogBookmark.Page = PageStart;
             EditDialogBookmark.DocumentName = DocName;
             EditDialogBookmark.Content = Content;
             EditDialogBookmark.Init();
-            EditDialogBookmark.ShowDialog ();
-               if  (EditDialogBookmark.DialogResult == DialogResult.OK)
+            EditDialogBookmark.ShowDialog();
+            if (EditDialogBookmark.DialogResult == DialogResult.OK)
             {
-                
+
                 Title = EditDialogBookmark.Title;
                 PageStart = EditDialogBookmark.Page;
                 Content = EditDialogBookmark.Content;
-                UserEdit_Bookmark?.Invoke(Id, PageStart,Title,Content, TypeSticker);
+                UserEdit_Bookmark?.Invoke(Id, PageStart, Title, Content, TypeSticker);
             }
         }
         private void ChangeHeight()
         {
-           if (LbTitle.Width<20) return;
+            if (LbTitle.Width < 20)
+            {
+                return;
+            }
+
             changeHand = false;
             int textWidth = TextRenderer.MeasureText(LbTitle.Text, LbTitle.Font).Width;
             int textHeight = TextRenderer.MeasureText(LbTitle.Text, LbTitle.Font).Height;
-          //  LbTitle.Width = textWidth;
+            //  LbTitle.Width = textWidth;
             int lines = textWidth / LbTitle.Width;
             if (textWidth % LbTitle.Width != 0)
+            {
                 lines++;
+            }
 
-           // LbTitle.Height = textHeight * lines + 7;
+            // LbTitle.Height = textHeight * lines + 7;
 
             //  int deltaHh = Height - LbTitle.Height;
             //int tbAdaptiveHeight =
             //TextRenderer.MeasureText(
             // LbTitle.Text, LbTitle.Font).Height + 2;
 
-            Height = LbTitle.Top + textHeight * lines + 7 ;  
+            Height = LbTitle.Top + textHeight * lines + 7;
             changeHand = true;
-            
+
         }
 
 
@@ -122,7 +127,7 @@ namespace CatalogPdf
         {
             Goto_BookmarkPage?.Invoke(Id, TypeSticker);
         }
-     
+
         private void LbTitleDocument_Click(object sender, EventArgs e)
         {
             Goto_BookmarkPage?.Invoke(Id, TypeSticker);
@@ -143,12 +148,12 @@ namespace CatalogPdf
 
         }
 
-        bool changeHand = true;
+        private bool changeHand = true;
         private void LineBookmark_SizeChanged(object sender, EventArgs e)
         {
-          if (changeHand)
+            if (changeHand)
             {
-            ChangeHeight();
+                ChangeHeight();
             }
             else { changeHand = true; }
         }

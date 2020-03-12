@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CatalogPdf
@@ -15,10 +8,10 @@ namespace CatalogPdf
     /// </summary>
     public partial class FrmBookmark : Form
     {
-        
+
         public typeSticker TypeContent { get; set; } = typeSticker.Bookmark;
-        public int Page { get; set; }       
-        public string Title { get; set; } 
+        public int Page { get; set; }
+        public string Title { get; set; }
         public string Content { get; set; }
         public string DocumentName { get; set; }
         public int Tome { get; set; } = 1;
@@ -28,7 +21,7 @@ namespace CatalogPdf
         {
             InitializeComponent();
 
-           
+
             DialogResult = DialogResult.None;
         }
         /// <summary>
@@ -43,7 +36,7 @@ namespace CatalogPdf
             if (TypeContent == typeSticker.Bookmark)
             {
                 Text = "Новая закладка";
-                tbName.Text = "Закладка 1";                
+                tbName.Text = "Закладка 1";
             }
             else if (TypeContent == typeSticker.Explanetion)
             {
@@ -53,7 +46,7 @@ namespace CatalogPdf
             if (!string.IsNullOrWhiteSpace(Title))
             {
                 tbName.Text = Title;
-            }       
+            }
             tbContent.Text = Content;
             tbName.Select();
             tbName.SelectAll();
@@ -68,17 +61,20 @@ namespace CatalogPdf
 
             DialogResult = DialogResult.OK;
             Title = tbName.Text;
-            Page = int.Parse( tbPage.Text);
+            Page = int.Parse(tbPage.Text);
             Content = tbContent.Text;
 
-            Hide();            
+            Hide();
         }
 
 
 
         private void tbPage_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!(char.IsDigit(e.KeyChar) || e.KeyChar == (char)Keys.Back)) e.Handled = true;
+            if (!(char.IsDigit(e.KeyChar) || e.KeyChar == (char)Keys.Back))
+            {
+                e.Handled = true;
+            }
         }
 
         private void FrmBookmark_Load(object sender, EventArgs e)

@@ -1,23 +1,16 @@
-﻿using PdfSharp;
-using PdfSharp.Drawing;
+﻿using PdfSharp.Drawing;
 using PdfSharp.Drawing.Layout;
 using PdfSharp.Pdf;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace CatalogPdf
 {
-    class PdfFeatures
+    internal class PdfFeatures
     {
 
 
 
-        public void AddSpaceDoc(string path,  string name, string description)
-        {                  
+        public void AddSpaceDoc(string path, string name, string description)
+        {
 
             string fullname = path + @"\" + name + ".pdf";
             PdfDocument document = new PdfDocument();
@@ -29,17 +22,17 @@ namespace CatalogPdf
 
             // Draw the text
             gfx.DrawString(name, fontTitle, XBrushes.Black,
-              new XRect(40, 20, page.Width-40, 100),
+              new XRect(40, 20, page.Width - 40, 100),
               XStringFormats.Center);
 
-            XRect rect = new XRect(40, 120, page.Width-20, page.Height ); 
+            XRect rect = new XRect(40, 120, page.Width - 20, page.Height);
             XTextFormatter tf = new XTextFormatter(gfx);
             tf.DrawString(description, font, XBrushes.Black, rect, XStringFormats.TopLeft);
 
-                document.Save(fullname);
-            document.Dispose();  
+            document.Save(fullname);
+            document.Dispose();
 
         }
     }
-   
+
 }

@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
 namespace CatalogPdf
 {
-  public static  class UserSettings
+    public static class UserSettings
     {
 
         public static Color catalogDocItem_ActiveColor { get; set; }
-                                =Color.FromArgb(240, 246, 255);
+                                = Color.FromArgb(240, 246, 255);
 
         public static Color catalogDocItem_PassiveColor { get; set; }
                                 = Color.FromArgb(0, 0, 0);

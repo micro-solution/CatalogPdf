@@ -1,26 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using XMLDBLib;
-
-namespace CatalogPdf
+﻿namespace CatalogPdf
 {
-    class Controller
+    internal class Controller
     {
 
-        
-         //   FileEventHandler
-         //+= changeFs ;
 
-         
+        //   FileEventHandler
+        //+= changeFs ;
+
+
         private static void changeFs(string path)
         {
 
-           
+
         }
-        
+
 
     }
 }
