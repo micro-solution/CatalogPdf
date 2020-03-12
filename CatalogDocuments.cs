@@ -16,6 +16,7 @@ namespace CatalogPdf
                 if (_catalog == null)
                 {
                     _catalog = new List<DocumentView>();
+                   //Presenter.
                     foreach (Document document in Presenter.Catalog.Documents)
                     {
                         _catalog.Add(GetViewDocument(document));
@@ -67,6 +68,7 @@ namespace CatalogPdf
                 Number = doc.Number,
                 Name = doc.Name,
                 Tome = doc.Tome,
+                TomeName = doc.TomeName,
                 StartPage = doc.StartPage,
                 EndPage = doc.EndPage,
                 AmountPage = doc.AmountPage,

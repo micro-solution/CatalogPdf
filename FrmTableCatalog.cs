@@ -26,8 +26,8 @@ namespace CatalogPdf
         public FrmTableCatalog()
         {
             InitializeComponent();
-            Width = 900;
-            Height = 400;
+            Width = 1000;
+            Height = 500;
             DialogResult = DialogResult.None;
 
             info = new Label();
@@ -77,12 +77,18 @@ namespace CatalogPdf
                 int.TryParse(dataGridView1.Rows[row].Cells[GetNumberColumn("Том")].Value.ToString(), out int tome);
                 switch (dataGridView1.Columns[e.ColumnIndex].HeaderText)
                 {
-                    case "Номер"://1:
+                    case "Том":                   
+                        doc.Tome = tome;
+                        break;
+                  case "Название тома":
+                        string tomeName = dataGridView1.Rows[row].Cells[GetNumberColumn("Название тома")].Value.ToString();
+                        if (!string.IsNullOrWhiteSpace(tomeName))
+                            doc.TomeName = tomeName; 
+                        
+                break;
+                    case "Номер":
                         int.TryParse(dataGridView1.Rows[row].Cells[GetNumberColumn("Номер")].Value.ToString(), out int number);
                         doc.Number = number;
-                        break;
-                    case "Том"://2:                       
-                        doc.Tome = tome;
                         break;
                     case "Название"://6:
                         string name = dataGridView1.Rows[row].Cells[GetNumberColumn("Название")].Value.ToString();
@@ -131,7 +137,7 @@ namespace CatalogPdf
                     default:
                         break;
                 }
-                presenter.Save();
+                presenter.Save();                
                 GetData();
                 // dataGridView1.Update();
             }
@@ -147,38 +153,40 @@ namespace CatalogPdf
             dataGridView1.Columns[i].Visible = false;  //HeaderText = "Код"; //№0
             dataGridView1.Columns[i].Width = 0;
 
-            dataGridView1.Columns[++i].HeaderText = "Номер";//№1
+
+            dataGridView1.Columns[++i].HeaderText = "Номер";//№3
             dataGridView1.Columns[i].Width = 45;
 
-            dataGridView1.Columns[++i].HeaderText = "Том";//№2
-            dataGridView1.Columns[i].Width = 36;
-
-
-
-            dataGridView1.Columns[++i].HeaderText = "Начало";//№3
+            dataGridView1.Columns[++i].HeaderText = "Начало";//№4
             dataGridView1.Columns[i].Width = 45;
 
 
-            dataGridView1.Columns[++i].HeaderText = "Конец";//№4
+            dataGridView1.Columns[++i].HeaderText = "Конец";//№5
             dataGridView1.Columns[i].Width = 45;
 
             dataGridView1.Columns[++i].Visible = false;
-            dataGridView1.Columns[i].HeaderText = "Страниц";//№5
+            dataGridView1.Columns[i].HeaderText = "Страниц";//№6
             dataGridView1.Columns[i].Width = 0;
+            
+            dataGridView1.Columns[++i].HeaderText = "Том";//№1
+            dataGridView1.Columns[i].Width = 36;
 
-            dataGridView1.Columns[++i].HeaderText = "Название";//№6
+            dataGridView1.Columns[++i].HeaderText = "Название тома";//№2
+            dataGridView1.Columns[i].Width = 160;
+
+            dataGridView1.Columns[++i].HeaderText = "Название";//№7
             dataGridView1.Columns[i].Width = 200;
 
 
-            dataGridView1.Columns[++i].HeaderText = "Тип";//№7
+            dataGridView1.Columns[++i].HeaderText = "Тип";//№8
             dataGridView1.Columns[i].Width = 120;
 
 
-            dataGridView1.Columns[++i].HeaderText = "Дата";//№8
+            dataGridView1.Columns[++i].HeaderText = "Дата";//№9
             dataGridView1.Columns[i].Width = 85;
 
 
-            dataGridView1.Columns[++i].HeaderText = "Путь";//№9
+            dataGridView1.Columns[++i].HeaderText = "Путь";//№10
             dataGridView1.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             DataGridViewCellStyle linkStyle = new DataGridViewCellStyle();
@@ -268,6 +276,14 @@ namespace CatalogPdf
                 case "Номер":
                     dataGridView1.DataSource = CatalogDocs.Catalog.OrderBy(a => a.Number).ThenBy(b => b.StartPage).ToList();
                     break;
+                case "Том":
+                    dataGridView1.DataSource = CatalogDocs.Catalog.OrderBy(a => a.Tome).ThenBy(b => b.Number).ToList();
+                    break;
+
+                case "Название тома":
+                    dataGridView1.DataSource = CatalogDocs.Catalog.OrderBy(a => a.TomeName).ThenBy(b => b.StartPage).ToList(); 
+                    break;
+                    
                 case "Тип":
                     dataGridView1.DataSource = CatalogDocs.Catalog.OrderBy(a => a.DocType).ThenBy(b => b.StartPage).ToList();
                     break;

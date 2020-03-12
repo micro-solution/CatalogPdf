@@ -434,7 +434,7 @@ namespace CatalogPdf
                 pageCount = documentV.PageCount;
 
             }
-            catch (Exception)
+            catch (Exception e)
             {
 #if DEBUG
                 Debug.WriteLine(doc.Name + "  " + e.Message);
