@@ -1541,24 +1541,21 @@ namespace CatalogPdf
         private void fitHeight_Click(object sender, EventArgs e)
         {
             pdfRenderer.Select();
+            pdfRenderer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitBest;
             pdfRenderer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitHeight;
+            pdfRenderer.Refresh();
         }
 
         private void fitWidth_Click(object sender, EventArgs e)
-        {
+        {       
             pdfRenderer.Select();
+            //pdfRenderer.s
+            pdfRenderer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitBest;
             pdfRenderer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitWidth;
+            pdfRenderer.Refresh();
         }
 
-
-
-
-
-
-
-
-
-
+                                    
         /// <summary>
         /// Навигация клавишами не работает! не видит событие
         /// TODO исправить прелистывание с клавиатуры
@@ -1618,11 +1615,6 @@ namespace CatalogPdf
 
 
         }
-
-
-
-
-
 
     }
 

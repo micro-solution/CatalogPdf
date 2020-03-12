@@ -154,7 +154,7 @@ namespace CatalogPdf
         {
             int.TryParse(TbTome.Text, out int newTome);
             int.TryParse(tbPage.Text, out int pageTb);
-            /// if(presenter.Catalog.IsFreePage(pageTb) && presenter.Catalog.IsFreePage(pageTb+ AmountPage -1)) 
+            
             if (presenter.isFreeRangePage(pageTb, pageTb + AmountPage - 1, newTome, Fullname))
             {
 
@@ -165,26 +165,7 @@ namespace CatalogPdf
 
                 tbPage.ForeColor = Color.Red;
             }
-        }
-
-        private void GetLastPage()
-        {
-
-            int.TryParse(TbTome.Text, out int newTome);
-            List<Document> currentTomeDocs = documents?.Where(x => x.Tome == newTome && x.File.FullName != Fullname).ToList();
-
-            Document lastDocument = currentTomeDocs.Count > 0 ? currentTomeDocs?.OrderBy(x => x.StartPage).Last() : null;
-            if (lastDocument != null)
-            {
-                int amoumtPageLastDoc = lastDocument.AmountPage != 0 ? lastDocument.AmountPage : presenter.GetCountPages(lastDocument);
-                lastPage = lastDocument.StartPage + amoumtPageLastDoc - 1;
-            }
-            else
-            {
-                lastPage = 0;
-            }
-
-        }
+        }      
 
         private void TbTome_TextChanged(object sender, EventArgs e)
         {
@@ -213,6 +194,11 @@ namespace CatalogPdf
                 TbNumber.Text = $"{Number}";
             }
 
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
