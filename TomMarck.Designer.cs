@@ -43,6 +43,7 @@
             this.LbTitle.Size = new System.Drawing.Size(135, 16);
             this.LbTitle.TabIndex = 3;
             this.LbTitle.Text = "Метка тома [ Том I ]";
+            this.LbTitle.Click += new System.EventHandler(this.LbTitle_Click);
             // 
             // TomMarck
             // 

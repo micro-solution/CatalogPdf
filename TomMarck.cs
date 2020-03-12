@@ -36,10 +36,11 @@ namespace CatalogPdf
             }
         }
 
-        private void btnSelectTome_Click(object sender, EventArgs e)
+ 
+        private void LbTitle_Click(object sender, EventArgs e)
         {
-            ClickTomeSelect?.Invoke(Tome);
-        }
+               ClickTomeSelect?.Invoke(Tome);
 
+        }
     }
 }
