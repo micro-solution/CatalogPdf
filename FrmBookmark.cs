@@ -81,5 +81,10 @@ namespace CatalogPdf
         {
 
         }
+
+        private void FrmBookmark_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
