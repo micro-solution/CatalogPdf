@@ -40,9 +40,9 @@
             this.LbTitle.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.LbTitle.Location = new System.Drawing.Point(6, 4);
             this.LbTitle.Name = "LbTitle";
-            this.LbTitle.Size = new System.Drawing.Size(135, 16);
+            this.LbTitle.Size = new System.Drawing.Size(139, 16);
             this.LbTitle.TabIndex = 3;
-            this.LbTitle.Text = "Метка тома [ Том I ]";
+            this.LbTitle.Text = " [  I ] Название тома";
             this.LbTitle.Click += new System.EventHandler(this.LbTitle_Click);
             // 
             // TomMarck

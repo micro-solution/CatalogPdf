@@ -683,12 +683,19 @@ namespace CatalogPdf
         {
             PanelCatalog.Controls.Clear();
             SortedSet<int> tomes = new SortedSet<int>();  //= presenter.GetAllTomsNumbers();
-            presenter.Catalog.Documents.ForEach(d => tomes.Add(d.Tome));
+            List<Document> docs = presenter.Catalog.Documents;
+            docs.ForEach(d => tomes.Add(d.Tome));
+
+            /* tomes = (from d in docs
+                     select d.Tome
+                    ).Distinct().ToHashSet(); ToList();  */
+
             foreach (int tome in tomes)
             {
 
                 TomMarck tomeLine = new TomMarck();
                 tomeLine.Tome = tome;
+                tomeLine.TomeName = presenter.Catalog.TomeCollection[tome].Name;
                 tomeLine.Init();
 
                 PanelCatalog.Controls.Add(tomeLine);
@@ -856,6 +863,7 @@ namespace CatalogPdf
                 FrmDocument frmDocument = new FrmDocument();
 
                 frmDocument.Tome = doc.Tome;
+                frmDocument.TomeName = doc.TomeName;
                 frmDocument.Fullname = path;
 
                 //TODO изменить страницы                
@@ -872,6 +880,7 @@ namespace CatalogPdf
                 if (frmDocument.DialogResult == DialogResult.OK)
                 {
                     doc.Tome = frmDocument.Tome;
+                    doc.TomeName = frmDocument.TomeName;
                     doc.Name = frmDocument.NameDocument;
                     doc.StartPage = frmDocument.PageStart;
                     doc.AmountPage = frmDocument.AmountPage;
@@ -1221,7 +1230,13 @@ namespace CatalogPdf
             if (presenter.State)
             {
                 string fileName = currentDocument.File.FullName;
-                lbCurrentTome.Text = currentDocument != null ? $"Том {currentDocument.Tome}" : " ";
+                if (currentDocument != null)
+                {
+                lbCurrentTome.Text = string.IsNullOrWhiteSpace(currentDocument.TomeName) ? 
+                        $"Том {currentDocument.Tome}" :
+                       $"{currentDocument.Tome}. {currentDocument.TomeName}" ;
+
+                }
                 //if (fileName != presenter.CurrentDoc)
                 presenter.SetCurrentDocument(fileName);
                 lbDocName.Text = presenter.CurrentDoc.Name;

@@ -19,6 +19,8 @@ namespace CatalogPdf
         public Operation OperationDialog { get; set; }
         public string Fullname { get; set; }
         public string NameDocument { get; set; }
+        public string TomeName { get; set; }
+
         public int Number { get; set; }
         public int PageStart { get; set; }
         public int AmountPage { get; set; }
@@ -93,7 +95,7 @@ namespace CatalogPdf
 
             Date = dateTimePicker1.Value;
             TypeDocument = tbTypeDocument.Text;
-
+            TomeName = tbTomeName.Text;
 
             Hide();
         }
@@ -149,7 +151,7 @@ namespace CatalogPdf
             tbPage.Text = $"{countPage + 1}";
 
         }
-        private int lastPage = -1;
+        
         private void tbPage_TextChanged(object sender, EventArgs e)
         {
             int.TryParse(TbTome.Text, out int newTome);
@@ -170,6 +172,7 @@ namespace CatalogPdf
         private void TbTome_TextChanged(object sender, EventArgs e)
         {
             int.TryParse(TbTome.Text, out int newTome);
+                tbTomeName.Text = presenter.Catalog.TomeCollection[newTome]?.Name ?? "" ;
             if (newTome != Tome)
             {
                 List<Document> currentTomeDocs = documents?.Where(x => x.Tome == newTome && x.File.FullName != Fullname).ToList();

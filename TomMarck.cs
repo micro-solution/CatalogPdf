@@ -4,7 +4,7 @@ namespace CatalogPdf
 {
     public partial class TomMarck : LineCatalog
     {
-        // public int Tome { get; set; }
+         public string TomeName { get; set; }
 
         public TomMarck()
         {
@@ -17,15 +17,18 @@ namespace CatalogPdf
 
         public void Init()
         {
+            string title;
             if (Tome == 0)
             {
-                LbTitle.Text = "Неотсортированные документы";
+                title= "Неотсортированные документы";
+                
             }
             else
             {
-                LbTitle.Text = $"Том {Tome} ";
-
+                title = string.IsNullOrWhiteSpace(TomeName) ? $"Том {Tome}" : $"{Tome}. {TomeName}";
             }
+
+                LbTitle.Text = title;
         }
 
 
