@@ -151,9 +151,12 @@ namespace CatalogPdf
             dataGridView1.Columns[i].Visible = false;  //HeaderText = "Код"; //№0
             dataGridView1.Columns[i].Width = 0;
 
-
+            dataGridView1.Columns[++i].HeaderText = "Том";//№1
+            dataGridView1.Columns[i].Width = 36;
+      
             dataGridView1.Columns[++i].HeaderText = "Номер";//№3
             dataGridView1.Columns[i].Width = 45;
+
 
             dataGridView1.Columns[++i].HeaderText = "Начало";//№4
             dataGridView1.Columns[i].Width = 45;
@@ -166,8 +169,6 @@ namespace CatalogPdf
             dataGridView1.Columns[i].HeaderText = "Страниц";//№6
             dataGridView1.Columns[i].Width = 0;
             
-            dataGridView1.Columns[++i].HeaderText = "Том";//№1
-            dataGridView1.Columns[i].Width = 36;
 
             dataGridView1.Columns[++i].HeaderText = "Название тома";//№2
             dataGridView1.Columns[i].Width = 160;

@@ -1232,9 +1232,11 @@ namespace CatalogPdf
                 string fileName = currentDocument.File.FullName;
                 if (currentDocument != null)
                 {
-                lbCurrentTome.Text = string.IsNullOrWhiteSpace(currentDocument.TomeName) ? 
+                    string tomeName =$"{ currentDocument.TomeName }";
+
+                lbCurrentTome.Text = string.IsNullOrWhiteSpace(tomeName) ? 
                         $"Том {currentDocument.Tome}" :
-                       $"{currentDocument.Tome}. {currentDocument.TomeName}" ;
+                       $"{currentDocument.Tome}. {tomeName}" ;
 
                 }
                 //if (fileName != presenter.CurrentDoc)
@@ -1445,10 +1447,7 @@ namespace CatalogPdf
 
         #endregion Поиск
 
-        private void frmMain_SizeChanged(object sender, EventArgs e)
-        {
-            spacePanel.Width = toolStripMain.Width / 3 - 50;
-        }
+     
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
