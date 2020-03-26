@@ -1237,7 +1237,7 @@ namespace CatalogPdf
                 lbCurrentTome.Text = string.IsNullOrWhiteSpace(tomeName) ? 
                         $"Том {currentDocument.Tome}" :
                        $"{currentDocument.Tome}. {tomeName}" ;
-
+                    pdfRenderer.Rotation = PdfiumViewer.PdfRotation.Rotate0;
                 }
                 //if (fileName != presenter.CurrentDoc)
                 presenter.SetCurrentDocument(fileName);
@@ -1448,7 +1448,6 @@ namespace CatalogPdf
         #endregion Поиск
 
      
-
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             if (presenter.State)
@@ -1527,10 +1526,6 @@ namespace CatalogPdf
             frmAdd.Dispose();
         }
 
-        private void frmMain_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private void toolStripButton6_Click_1(object sender, EventArgs e)
         {
@@ -1630,6 +1625,57 @@ namespace CatalogPdf
 
         }
 
+        private void toolStripMain_SizeChanged(object sender, EventArgs e)
+        {
+            ChangeSizePanelControls();
+        }
+        private void ChangeSizePanelControls()
+        {
+         double widthDocumentName = lbDocName.Text.Length * lbDocName.Font.Size;
+            //Свободное место
+            double spaseWidth = toolStripMain.Width - WhidthControls;
+                string title = lbDocName.Text;
+                int len =(int)Math.Round(spaseWidth / lbDocName.Font.Size) + 3;
+            
+            
+                //int index = title.Length - len;
+            if (spaseWidth - widthDocumentName < 10 && len>5  && len< lbDocName.Text.Length)
+            {                      
+                lbDocName.Text = title.Remove(len) + "...";
+            }
+            else if (presenter?.CurrentDoc !=null &&  lbDocName.Text != presenter.CurrentDoc.Name)
+            {
+                lbDocName.Text = presenter.CurrentDoc.Name;
+            }            
+            
+                toolStripSpace.Width = (int)Math.Round((spaseWidth-lbDocName.Width) / 2);
+            
+        }
+
+
+        private void lbDocName_TextChanged(object sender, EventArgs e)
+        {
+            ChangeSizePanelControls();
+        }
+
+        private double WhidthControls { 
+            get 
+            {
+                double width =0;
+                toolStripSpace.Width = 0;
+                foreach (ToolStripItem item in toolStripMain.Items)
+                {
+                    if (item.Name != "lbDocName")
+                    {
+                        width += item.Width;
+
+                    }
+                }
+                return width;
+            }
+        }
+
+       
     }
 
 

@@ -126,13 +126,14 @@
             // 
             // LbTitleDocument
             // 
+            this.LbTitleDocument.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.LbTitleDocument.AutoEllipsis = true;
-            this.LbTitleDocument.AutoSize = true;
             this.LbTitleDocument.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LbTitleDocument.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.LbTitleDocument.Location = new System.Drawing.Point(37, 6);
             this.LbTitleDocument.Name = "LbTitleDocument";
-            this.LbTitleDocument.Size = new System.Drawing.Size(134, 15);
+            this.LbTitleDocument.Size = new System.Drawing.Size(218, 15);
             this.LbTitleDocument.TabIndex = 2;
             this.LbTitleDocument.Text = "Название Документа1";
             this.LbTitleDocument.TextChanged += new System.EventHandler(this.LbTitleDocument_TextChanged);
@@ -153,7 +154,6 @@
             this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Name = "LineCatalogDocument";
             this.Size = new System.Drawing.Size(323, 32);
-           
             this.Enter += new System.EventHandler(this.CatalogItem_Enter);
             this.Leave += new System.EventHandler(this.CatalogItem_Leave);
             this.contextMenuCatalogItem.ResumeLayout(false);

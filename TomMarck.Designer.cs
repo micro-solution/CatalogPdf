@@ -36,11 +36,10 @@
             this.LbTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.LbTitle.AutoEllipsis = true;
-            this.LbTitle.AutoSize = true;
             this.LbTitle.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.LbTitle.Location = new System.Drawing.Point(6, 4);
             this.LbTitle.Name = "LbTitle";
-            this.LbTitle.Size = new System.Drawing.Size(139, 16);
+            this.LbTitle.Size = new System.Drawing.Size(207, 24);
             this.LbTitle.TabIndex = 3;
             this.LbTitle.Text = " [  I ] Название тома";
             this.LbTitle.Click += new System.EventHandler(this.LbTitle_Click);
@@ -54,7 +53,6 @@
             this.Name = "TomMarck";
             this.Size = new System.Drawing.Size(216, 28);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
