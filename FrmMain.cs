@@ -1683,7 +1683,15 @@ namespace CatalogPdf
             }
         }
 
+        private void btnFullScreen_Click(object sender, EventArgs e)
+        {
+            FullScreen fullScreen = new FullScreen();
+            fullScreen.Doc = presenter.CurrentDoc;
+            fullScreen.Catalog = presenter.Catalog;
+            fullScreen.Show();
+            fullScreen.SetLocationPanel();
 
+        }
     }
 
 

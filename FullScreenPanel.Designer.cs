@@ -42,7 +42,6 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.AddExplanation = new System.Windows.Forms.ToolStripButton();
             this.AddBookmark = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
@@ -51,16 +50,18 @@
             this.rotateRight = new System.Windows.Forms.ToolStripButton();
             this.fitHeight = new System.Windows.Forms.ToolStripButton();
             this.fitWidth = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.btnCloseFullScreen = new System.Windows.Forms.ToolStripButton();
             this.toolStripMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStripMain
             // 
             this.toolStripMain.AllowItemReorder = true;
+            this.toolStripMain.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.toolStripMain.AutoSize = false;
             this.toolStripMain.BackColor = System.Drawing.SystemColors.ControlLight;
             this.toolStripMain.CanOverflow = false;
+            this.toolStripMain.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnPreviousPage,
             this.tbPage,
@@ -71,22 +72,21 @@
             this.toolStripSeparator8,
             this.lbDocName,
             this.toolStripSeparator2,
-            this.toolStripButton2,
+            this.btnCloseFullScreen,
             this.toolStripSeparator5,
             this.AddExplanation,
             this.AddBookmark,
-            this.toolStripButton1,
-            this.toolStripSeparator6,
             this.toolStripSeparator7,
             this.toolStripButton6,
             this.toolStripButton7,
             this.rotateLeft,
             this.rotateRight,
+            this.toolStripSeparator6,
             this.fitHeight,
             this.fitWidth});
-            this.toolStripMain.Location = new System.Drawing.Point(0, 0);
+            this.toolStripMain.Location = new System.Drawing.Point(2, 1);
             this.toolStripMain.Name = "toolStripMain";
-            this.toolStripMain.Size = new System.Drawing.Size(894, 41);
+            this.toolStripMain.Size = new System.Drawing.Size(707, 42);
             this.toolStripMain.TabIndex = 1;
             this.toolStripMain.Text = "toolStripMain";
             // 
@@ -188,18 +188,6 @@
             this.AddBookmark.Text = "toolStripButton1";
             this.AddBookmark.ToolTipText = "Новая закладка";
             // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.AutoSize = false;
-            this.toolStripButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(28, 28);
-            this.toolStripButton1.Text = "toolStripButton1";
-            this.toolStripButton1.ToolTipText = "Открыть в стандартном приложении";
-            // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
@@ -271,24 +259,28 @@
             this.fitWidth.Size = new System.Drawing.Size(28, 38);
             this.fitWidth.Text = "Вписать по ширине";
             // 
-            // toolStripButton2
+            // btnCloseFullScreen
             // 
-            this.toolStripButton2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripButton2.AutoSize = false;
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(43, 38);
-            this.toolStripButton2.Text = "toolStripButton2";
+            this.btnCloseFullScreen.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnCloseFullScreen.AutoSize = false;
+            this.btnCloseFullScreen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnCloseFullScreen.Image = ((System.Drawing.Image)(resources.GetObject("btnCloseFullScreen.Image")));
+            this.btnCloseFullScreen.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnCloseFullScreen.Name = "btnCloseFullScreen";
+            this.btnCloseFullScreen.Size = new System.Drawing.Size(43, 38);
+            this.btnCloseFullScreen.Text = "Закрыть";
+            this.btnCloseFullScreen.Click += new System.EventHandler(this.btnCloseFullScreen_Click);
             // 
             // FullScreenPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.Controls.Add(this.toolStripMain);
             this.Name = "FullScreenPanel";
-            this.Size = new System.Drawing.Size(894, 42);
+            this.Size = new System.Drawing.Size(711, 45);
+            this.Leave += new System.EventHandler(this.FullScreenPanel_Leave);
+            this.MouseLeave += new System.EventHandler(this.FullScreenPanel_MouseLeave);
             this.toolStripMain.ResumeLayout(false);
             this.toolStripMain.PerformLayout();
             this.ResumeLayout(false);
@@ -310,7 +302,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripButton AddExplanation;
         private System.Windows.Forms.ToolStripButton AddBookmark;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripButton toolStripButton6;
@@ -319,6 +310,6 @@
         private System.Windows.Forms.ToolStripButton rotateRight;
         private System.Windows.Forms.ToolStripButton fitHeight;
         private System.Windows.Forms.ToolStripButton fitWidth;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.ToolStripButton btnCloseFullScreen;
     }
 }

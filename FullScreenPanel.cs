@@ -16,5 +16,21 @@ namespace CatalogPdf
         {
             InitializeComponent();
         }
+
+
+        private void btnCloseFullScreen_Click(object sender, EventArgs e)
+        {
+            ParentForm.Close();
+        }
+
+        private void FullScreenPanel_Leave(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void FullScreenPanel_MouseLeave(object sender, EventArgs e)
+        {
+            Visible = false;
+        }
     }
 }

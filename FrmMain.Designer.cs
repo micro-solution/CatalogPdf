@@ -71,6 +71,7 @@ namespace CatalogPdf
             this.rotateRight = new System.Windows.Forms.ToolStripButton();
             this.fitHeight = new System.Windows.Forms.ToolStripButton();
             this.fitWidth = new System.Windows.Forms.ToolStripButton();
+            this.btnFullScreen = new System.Windows.Forms.ToolStripButton();
             this.splitConteiner = new System.Windows.Forms.SplitContainer();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabCommon = new System.Windows.Forms.TabPage();
@@ -96,7 +97,6 @@ namespace CatalogPdf
             this.pdfRenderer = new PdfiumViewer.PdfRenderer();
             this.flowPanelComments = new System.Windows.Forms.FlowLayoutPanel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
             this.toolStripMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitConteiner)).BeginInit();
             this.splitConteiner.Panel1.SuspendLayout();
@@ -152,7 +152,7 @@ namespace CatalogPdf
             this.rotateRight,
             this.fitHeight,
             this.fitWidth,
-            this.toolStripButton8});
+            this.btnFullScreen});
             this.toolStripMain.Location = new System.Drawing.Point(0, 0);
             this.toolStripMain.Name = "toolStripMain";
             this.toolStripMain.Size = new System.Drawing.Size(1276, 41);
@@ -418,7 +418,7 @@ namespace CatalogPdf
             this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(28, 28);
+            this.toolStripButton1.Size = new System.Drawing.Size(38, 38);
             this.toolStripButton1.Text = "toolStripButton1";
             this.toolStripButton1.ToolTipText = "Открыть в стандартном приложении";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
@@ -441,7 +441,7 @@ namespace CatalogPdf
             this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
             this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Size = new System.Drawing.Size(28, 28);
+            this.toolStripButton6.Size = new System.Drawing.Size(38, 38);
             this.toolStripButton6.Text = "Увеличить";
             this.toolStripButton6.Click += new System.EventHandler(this.toolStripButton6_Click_1);
             // 
@@ -452,7 +452,7 @@ namespace CatalogPdf
             this.toolStripButton7.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton7.Image")));
             this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton7.Name = "toolStripButton7";
-            this.toolStripButton7.Size = new System.Drawing.Size(28, 28);
+            this.toolStripButton7.Size = new System.Drawing.Size(38, 38);
             this.toolStripButton7.Text = "Уменьшить";
             this.toolStripButton7.Click += new System.EventHandler(this.toolStripButton7_Click);
             // 
@@ -463,7 +463,7 @@ namespace CatalogPdf
             this.rotateLeft.Image = ((System.Drawing.Image)(resources.GetObject("rotateLeft.Image")));
             this.rotateLeft.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.rotateLeft.Name = "rotateLeft";
-            this.rotateLeft.Size = new System.Drawing.Size(28, 38);
+            this.rotateLeft.Size = new System.Drawing.Size(38, 38);
             this.rotateLeft.Text = "Повернуть против часовой";
             this.rotateLeft.Click += new System.EventHandler(this.rotateLeft_Click);
             // 
@@ -474,7 +474,7 @@ namespace CatalogPdf
             this.rotateRight.Image = ((System.Drawing.Image)(resources.GetObject("rotateRight.Image")));
             this.rotateRight.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.rotateRight.Name = "rotateRight";
-            this.rotateRight.Size = new System.Drawing.Size(28, 38);
+            this.rotateRight.Size = new System.Drawing.Size(38, 38);
             this.rotateRight.Text = "Повернуть по часовой";
             this.rotateRight.Click += new System.EventHandler(this.rotateRight_Click);
             // 
@@ -485,7 +485,7 @@ namespace CatalogPdf
             this.fitHeight.Image = ((System.Drawing.Image)(resources.GetObject("fitHeight.Image")));
             this.fitHeight.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.fitHeight.Name = "fitHeight";
-            this.fitHeight.Size = new System.Drawing.Size(28, 38);
+            this.fitHeight.Size = new System.Drawing.Size(38, 38);
             this.fitHeight.Text = "Вписать по высоте";
             this.fitHeight.Click += new System.EventHandler(this.fitHeight_Click);
             // 
@@ -496,9 +496,20 @@ namespace CatalogPdf
             this.fitWidth.Image = ((System.Drawing.Image)(resources.GetObject("fitWidth.Image")));
             this.fitWidth.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.fitWidth.Name = "fitWidth";
-            this.fitWidth.Size = new System.Drawing.Size(28, 38);
+            this.fitWidth.Size = new System.Drawing.Size(38, 38);
             this.fitWidth.Text = "Вписать по ширине";
             this.fitWidth.Click += new System.EventHandler(this.fitWidth_Click);
+            // 
+            // btnFullScreen
+            // 
+            this.btnFullScreen.AutoSize = false;
+            this.btnFullScreen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnFullScreen.Image = ((System.Drawing.Image)(resources.GetObject("btnFullScreen.Image")));
+            this.btnFullScreen.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnFullScreen.Name = "btnFullScreen";
+            this.btnFullScreen.Size = new System.Drawing.Size(38, 38);
+            this.btnFullScreen.Text = "Полноэкранный режим";
+            this.btnFullScreen.Click += new System.EventHandler(this.btnFullScreen_Click);
             // 
             // splitConteiner
             // 
@@ -792,16 +803,6 @@ namespace CatalogPdf
             // 
             this.toolTip1.IsBalloon = true;
             // 
-            // toolStripButton8
-            // 
-            this.toolStripButton8.AutoSize = false;
-            this.toolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton8.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton8.Image")));
-            this.toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton8.Name = "toolStripButton8";
-            this.toolStripButton8.Size = new System.Drawing.Size(30, 38);
-            this.toolStripButton8.Text = "toolStripButton8";
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -908,7 +909,7 @@ namespace CatalogPdf
         private ToolStripSeparator toolStripSeparator9;
         private ToolStripLabel toolStripLabel2;
         private ToolStripLabel toolStripSpace;
-        private ToolStripButton toolStripButton8;
+        private ToolStripButton btnFullScreen;
     }
 }
 

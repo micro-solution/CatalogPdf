@@ -43,11 +43,13 @@
             // 
             // LbTitle
             // 
+            this.LbTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.LbTitle.AutoEllipsis = true;
             this.LbTitle.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.LbTitle.Location = new System.Drawing.Point(13, 6);
             this.LbTitle.Name = "LbTitle";
-            this.LbTitle.Size = new System.Drawing.Size(91, 19);
+            this.LbTitle.Size = new System.Drawing.Size(322, 19);
             this.LbTitle.TabIndex = 6;
             this.LbTitle.Text = "заголовок";
             // 
