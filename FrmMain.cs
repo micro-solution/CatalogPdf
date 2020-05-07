@@ -751,6 +751,7 @@ namespace CatalogPdf
                     Document doc = SortedDocs[i];
                     AddLineCatalog(doc);
                 }
+                ViewerShowDocument(SortedDocs[0]);
             }
         }
         /// <summary>
@@ -1227,18 +1228,18 @@ namespace CatalogPdf
         /// <param name="fileName"></param>
         private void ViewerShowDocument(Document currentDocument)
         {
-            if (presenter.State)
+            if (!presenter.State) { return; }
+
+            if (currentDocument != null)
             {
                 string fileName = currentDocument.File.FullName;
-                if (currentDocument != null)
-                {
-                    string tomeName = $"{ currentDocument.TomeName }";
+                string tomeName = $"{ currentDocument.TomeName }";
 
-                    lbCurrentTome.Text = string.IsNullOrWhiteSpace(tomeName) ?
-                            $"Том {currentDocument.Tome}" :
-                           $"{currentDocument.Tome}. {tomeName}";
-                    pdfRenderer.Rotation = PdfiumViewer.PdfRotation.Rotate0;
-                }
+                lbCurrentTome.Text = string.IsNullOrWhiteSpace(tomeName) ?
+                        $"Том {currentDocument.Tome}" :
+                       $"{currentDocument.Tome}. {tomeName}";
+                pdfRenderer.Rotation = PdfiumViewer.PdfRotation.Rotate0;
+                SelectionCatalogRow(currentDocument);
                 //if (fileName != presenter.CurrentDoc)
                 presenter.SetCurrentDocument(fileName);
                 lbDocName.Text = presenter.CurrentDoc.Name;
@@ -1250,6 +1251,23 @@ namespace CatalogPdf
                 pdfRenderer.MouseWheel += PdfRenderer1_MouseWheel;
                 Cursor = Cursors.Default;
             }
+
+        }
+        void SelectionCatalogRow(Document doc)
+        {
+            foreach (LineCatalog line in PanelCatalog.Controls)
+            {
+                if (line.GetType() != typeof(LineCatalogDocument)) continue;
+                if (line.FullName == doc.File.FullName)
+                {
+                    line.ActiveColor();
+                }
+                else
+                {
+                    line.UnactiveColor();
+                }
+            }
+
         }
         void viewPdfFile(string file)
         {

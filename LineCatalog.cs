@@ -32,7 +32,7 @@ namespace CatalogPdf
         public int DocNumber { get; set; }
 
 
-        protected Color ActiveControlColor;
+        protected Color ActiveControlColor ;
         protected Color PassiveControlColor;
 
         private void InitializeComponent()
@@ -45,11 +45,11 @@ namespace CatalogPdf
 
         }
 
-        protected virtual void Activate()
+        public virtual void ActiveColor()
         {
             BackColor = ActiveControlColor;
         }
-        protected virtual void Unactivate()
+        public virtual void UnactiveColor()
         {
             BackColor = PassiveControlColor;
         }

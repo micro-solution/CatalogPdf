@@ -22,14 +22,18 @@ namespace CatalogPdf
         public event UserChangeDocNum ChangeDoc;
         public event UserChangeDocFile ShowDoc;
         public event UserChangeDocFile DeleteDoc;
+        
 
+       
         public LineCatalogDocument()
         {
             InitializeComponent();
-            AllowDrop = true;
-            Size = new Size(262, 22);
-            BackColor = Color.FromArgb(247, 250, 250);
+            ActiveControlColor = Color.FromArgb(114, 171, 252);
+            PassiveControlColor = Color.FromArgb(247, 250, 250);
+            Size = new Size(262, 22);                                    
+            BackColor = PassiveControlColor;
             UpgateView();
+            AllowDrop = true;
         }
 
 
@@ -178,7 +182,7 @@ namespace CatalogPdf
 
         private void CatalogItem_Leave(object sender, EventArgs e)
         {
-            BackColor = Color.FromArgb(247, 250, 250);
+           // BackColor = Color.FromArgb(247, 250, 250);
         }
 
 
