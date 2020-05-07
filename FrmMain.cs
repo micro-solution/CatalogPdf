@@ -1248,7 +1248,12 @@ namespace CatalogPdf
 
             }
         }
+        void viewPdfFile(string file)
+        {
 
+            
+
+        }
 
 
         #endregion  Viewer pdf
