@@ -428,20 +428,20 @@ namespace CatalogPdf
         public int GetCountPages(Document doc)
         {
             int pageCount = 0;
-            try
-            {
+            //try
+            //{
                 PdfiumViewer.PdfDocument documentV = PdfiumViewer.PdfDocument.Load(doc.File.FullName);
                 pageCount = documentV.PageCount;
 
-            }
-            catch (Exception e)
-            {
+           // }
+          //  catch (Exception e)
+           // {
 #if DEBUG
-                Debug.WriteLine(doc.Name + "  " + e.Message);
+                //Debug.WriteLine(doc.Name + "  " + e.Message);
                 //System.Diagnostics.Debugger.Break();
                 // Возможно отсутствует файл или он поврежден или запоролен
 #endif
-            }
+           // }
             return pageCount;
         }
         /// <summary>

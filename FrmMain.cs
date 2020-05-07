@@ -1225,36 +1225,38 @@ namespace CatalogPdf
         /// Отобразить текущий документ в контейнере pdf
         /// </summary>
         /// <param name="fileName"></param>
-        private void ViewerShowDocument(Document currentDocument)
+      async  private void ViewerShowDocument(Document currentDocument)
         {
             if (presenter.State)
             {
                 string fileName = currentDocument.File.FullName;
                 if (currentDocument != null)
                 {
-                    string tomeName =$"{ currentDocument.TomeName }";
+                    string tomeName = $"{ currentDocument.TomeName }";
 
-                lbCurrentTome.Text = string.IsNullOrWhiteSpace(tomeName) ? 
-                        $"Том {currentDocument.Tome}" :
-                       $"{currentDocument.Tome}. {tomeName}" ;
+                    lbCurrentTome.Text = string.IsNullOrWhiteSpace(tomeName) ?
+                            $"Том {currentDocument.Tome}" :
+                           $"{currentDocument.Tome}. {tomeName}";
                     pdfRenderer.Rotation = PdfiumViewer.PdfRotation.Rotate0;
                 }
                 //if (fileName != presenter.CurrentDoc)
                 presenter.SetCurrentDocument(fileName);
                 lbDocName.Text = presenter.CurrentDoc.Name;
+
+                Cursor = Cursors.WaitCursor;
+                //  await Task.Run(() => viewPdfFile(fileName));
                 documentV = PdfiumViewer.PdfDocument.Load(fileName);
                 pdfRenderer.Load(documentV);
                 pdfRenderer.MouseWheel += PdfRenderer1_MouseWheel;
-
+                Cursor = Cursors.Default;
             }
         }
         void viewPdfFile(string file)
         {
-
-            
-
+            documentV = PdfiumViewer.PdfDocument.Load(file);
+            pdfRenderer.Load(documentV);
+            pdfRenderer.MouseWheel += PdfRenderer1_MouseWheel;
         }
-
 
         #endregion  Viewer pdf
 
@@ -1452,7 +1454,7 @@ namespace CatalogPdf
 
         #endregion Поиск
 
-     
+
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             if (presenter.State)
@@ -1561,7 +1563,7 @@ namespace CatalogPdf
         }
 
         private void fitWidth_Click(object sender, EventArgs e)
-        {       
+        {
             pdfRenderer.Select();
             //pdfRenderer.s
             pdfRenderer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitBest;
@@ -1569,7 +1571,7 @@ namespace CatalogPdf
             pdfRenderer.Refresh();
         }
 
-                                    
+
         /// <summary>
         /// Навигация клавишами не работает! не видит событие
         /// TODO исправить прелистывание с клавиатуры
@@ -1636,25 +1638,25 @@ namespace CatalogPdf
         }
         private void ChangeSizePanelControls()
         {
-         double widthDocumentName = lbDocName.Text.Length * lbDocName.Font.Size;
+            double widthDocumentName = lbDocName.Text.Length * lbDocName.Font.Size;
             //Свободное место
             double spaseWidth = toolStripMain.Width - WhidthControls;
-                string title = lbDocName.Text;
-                int len =(int)Math.Round(spaseWidth / lbDocName.Font.Size) + 3;
-            
-            
-                //int index = title.Length - len;
-            if (spaseWidth - widthDocumentName < 10 && len>5  && len< lbDocName.Text.Length)
-            {                      
+            string title = lbDocName.Text;
+            int len = (int)Math.Round(spaseWidth / lbDocName.Font.Size) + 3;
+
+
+            //int index = title.Length - len;
+            if (spaseWidth - widthDocumentName < 10 && len > 5 && len < lbDocName.Text.Length)
+            {
                 lbDocName.Text = title.Remove(len) + "...";
             }
-            else if (presenter?.CurrentDoc !=null &&  lbDocName.Text != presenter.CurrentDoc.Name)
+            else if (presenter?.CurrentDoc != null && lbDocName.Text != presenter.CurrentDoc.Name)
             {
                 lbDocName.Text = presenter.CurrentDoc.Name;
-            }            
-            
-                toolStripSpace.Width = (int)Math.Round((spaseWidth-lbDocName.Width) / 2);
-            
+            }
+
+            toolStripSpace.Width = (int)Math.Round((spaseWidth - lbDocName.Width) / 2);
+
         }
 
 
@@ -1663,10 +1665,11 @@ namespace CatalogPdf
             ChangeSizePanelControls();
         }
 
-        private double WhidthControls { 
-            get 
+        private double WhidthControls
+        {
+            get
             {
-                double width =0;
+                double width = 0;
                 toolStripSpace.Width = 0;
                 foreach (ToolStripItem item in toolStripMain.Items)
                 {
@@ -1680,7 +1683,7 @@ namespace CatalogPdf
             }
         }
 
-       
+
     }
 
 

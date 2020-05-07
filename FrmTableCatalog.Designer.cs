@@ -33,6 +33,7 @@
             this.btnOK = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnNumerDocumentByPage = new System.Windows.Forms.ToolStripButton();
+            this.btnSetPageNumber = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -74,7 +75,8 @@
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnNumerDocumentByPage});
+            this.btnNumerDocumentByPage,
+            this.btnSetPageNumber});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(989, 25);
@@ -90,6 +92,17 @@
             this.btnNumerDocumentByPage.Size = new System.Drawing.Size(23, 22);
             this.btnNumerDocumentByPage.Text = "Нумеровать документы по страницам";
             this.btnNumerDocumentByPage.Click += new System.EventHandler(this.btnNumerDocumentByPage_Click);
+            // 
+            // btnSetPageNumber
+            // 
+            this.btnSetPageNumber.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSetPageNumber.Image = ((System.Drawing.Image)(resources.GetObject("btnSetPageNumber.Image")));
+            this.btnSetPageNumber.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSetPageNumber.Name = "btnSetPageNumber";
+            this.btnSetPageNumber.Size = new System.Drawing.Size(23, 22);
+            this.btnSetPageNumber.Text = "Нумерация";
+            this.btnSetPageNumber.ToolTipText = "Расставить нумерацию страниц";
+            this.btnSetPageNumber.Click += new System.EventHandler(this.btnSetPageNumber_Click);
             // 
             // FrmTableCatalog
             // 
@@ -117,5 +130,6 @@
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton btnNumerDocumentByPage;
+        private System.Windows.Forms.ToolStripButton btnSetPageNumber;
     }
 }

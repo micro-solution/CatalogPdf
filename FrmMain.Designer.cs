@@ -47,6 +47,7 @@ namespace CatalogPdf
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.btnTableCatalog = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSpace = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.btnPreviousPage = new System.Windows.Forms.ToolStripButton();
             this.tbPage = new System.Windows.Forms.ToolStripTextBox();
@@ -95,7 +96,7 @@ namespace CatalogPdf
             this.pdfRenderer = new PdfiumViewer.PdfRenderer();
             this.flowPanelComments = new System.Windows.Forms.FlowLayoutPanel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.toolStripSpace = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
             this.toolStripMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitConteiner)).BeginInit();
             this.splitConteiner.Panel1.SuspendLayout();
@@ -150,7 +151,8 @@ namespace CatalogPdf
             this.rotateLeft,
             this.rotateRight,
             this.fitHeight,
-            this.fitWidth});
+            this.fitWidth,
+            this.toolStripButton8});
             this.toolStripMain.Location = new System.Drawing.Point(0, 0);
             this.toolStripMain.Name = "toolStripMain";
             this.toolStripMain.Size = new System.Drawing.Size(1276, 41);
@@ -277,6 +279,12 @@ namespace CatalogPdf
             // 
             this.toolStripSeparator9.Name = "toolStripSeparator9";
             this.toolStripSeparator9.Size = new System.Drawing.Size(6, 41);
+            // 
+            // toolStripSpace
+            // 
+            this.toolStripSpace.AutoSize = false;
+            this.toolStripSpace.Name = "toolStripSpace";
+            this.toolStripSpace.Size = new System.Drawing.Size(200, 38);
             // 
             // toolStripSeparator3
             // 
@@ -784,11 +792,15 @@ namespace CatalogPdf
             // 
             this.toolTip1.IsBalloon = true;
             // 
-            // toolStripSpace
+            // toolStripButton8
             // 
-            this.toolStripSpace.AutoSize = false;
-            this.toolStripSpace.Name = "toolStripSpace";
-            this.toolStripSpace.Size = new System.Drawing.Size(200, 38);
+            this.toolStripButton8.AutoSize = false;
+            this.toolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton8.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton8.Image")));
+            this.toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton8.Name = "toolStripButton8";
+            this.toolStripButton8.Size = new System.Drawing.Size(30, 38);
+            this.toolStripButton8.Text = "toolStripButton8";
             // 
             // frmMain
             // 
@@ -896,6 +908,7 @@ namespace CatalogPdf
         private ToolStripSeparator toolStripSeparator9;
         private ToolStripLabel toolStripLabel2;
         private ToolStripLabel toolStripSpace;
+        private ToolStripButton toolStripButton8;
     }
 }
 

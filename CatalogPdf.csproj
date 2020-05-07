@@ -69,7 +69,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
     <Reference Include="XMLDB">
-      <HintPath>H:\YandexDisk\Разработка\Р-19-33 Пепеляев Каталог дела\Рабочая\XMLDB\XMLDB\bin\Release\XMLDB.dll</HintPath>
+      <HintPath>packages\XMLDB.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -92,6 +92,18 @@
     </Compile>
     <Compile Include="FrmTableCatalog.Designer.cs">
       <DependentUpon>FrmTableCatalog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FullScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FullScreen.Designer.cs">
+      <DependentUpon>FullScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FullScreenPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FullScreenPanel.Designer.cs">
+      <DependentUpon>FullScreenPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="LineCatalogDocument.cs">
       <SubType>UserControl</SubType>
@@ -147,6 +159,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmTableCatalog.resx">
       <DependentUpon>FrmTableCatalog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FullScreen.resx">
+      <DependentUpon>FullScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FullScreenPanel.resx">
+      <DependentUpon>FullScreenPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LineCatalogDocument.resx">
       <DependentUpon>LineCatalogDocument.cs</DependentUpon>

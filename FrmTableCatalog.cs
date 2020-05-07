@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using XMLDBLib;
 
 namespace CatalogPdf
 {
@@ -61,7 +62,7 @@ namespace CatalogPdf
         {
             //List<XMLDBLib.Document> docs = presenter.Catalog.Documents.OrderBy(a => a.Tome).ThenBy(b => b.StartPage).ToList(); 
             CatalogDocs = null;
-            dataGridView1.DataSource = CatalogDocs.Catalog.OrderBy(a => a.Tome).ThenBy(b => b.StartPage).ToList(); ;
+            dataGridView1.DataSource = CatalogDocs.Catalog.OrderBy(a => a.Tome).ThenBy(b => b.StartPage).ToList();
         }
 
         private void DataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -77,13 +78,13 @@ namespace CatalogPdf
                 int.TryParse(dataGridView1.Rows[row].Cells[GetNumberColumn("Том")].Value.ToString(), out int tome);
                 switch (dataGridView1.Columns[e.ColumnIndex].HeaderText)
                 {
-                    case "Том":                   
+                    case "Том":
                         doc.Tome = tome;
                         break;
-                  case "Название тома":
-                        string tomeName = dataGridView1.Rows[row].Cells[GetNumberColumn("Название тома")].Value.ToString();                       
-                        doc.TomeName = tomeName;                         
-                break;
+                    case "Название тома":
+                        string tomeName = dataGridView1.Rows[row].Cells[GetNumberColumn("Название тома")].Value.ToString();
+                        doc.TomeName = tomeName;
+                        break;
                     case "Номер":
                         int.TryParse(dataGridView1.Rows[row].Cells[GetNumberColumn("Номер")].Value.ToString(), out int number);
                         doc.Number = number;
@@ -135,7 +136,7 @@ namespace CatalogPdf
                     default:
                         break;
                 }
-                presenter.Save();                
+                presenter.Save();
                 GetData();
                 // dataGridView1.Update();
             }
@@ -151,14 +152,14 @@ namespace CatalogPdf
             dataGridView1.Columns[i].Visible = false;  //HeaderText = "Код"; //№0
             dataGridView1.Columns[i].Width = 0;
 
-            dataGridView1.Columns[++i].HeaderText = "Том";//№1
+            dataGridView1.Columns[++i].HeaderText = "Том";  //№1
             dataGridView1.Columns[i].Width = 36;
-      
-            dataGridView1.Columns[++i].HeaderText = "Номер";//№3
+
+            dataGridView1.Columns[++i].HeaderText = "Номер"; //№3
             dataGridView1.Columns[i].Width = 45;
 
 
-            dataGridView1.Columns[++i].HeaderText = "Начало";//№4
+            dataGridView1.Columns[++i].HeaderText = "Начало"; //№4
             dataGridView1.Columns[i].Width = 45;
 
 
@@ -168,7 +169,7 @@ namespace CatalogPdf
             dataGridView1.Columns[++i].Visible = false;
             dataGridView1.Columns[i].HeaderText = "Страниц";//№6
             dataGridView1.Columns[i].Width = 0;
-            
+
 
             dataGridView1.Columns[++i].HeaderText = "Название тома";//№2
             dataGridView1.Columns[i].Width = 160;
@@ -270,6 +271,11 @@ namespace CatalogPdf
         {
 
             string title = dataGridView1.Columns[e.ColumnIndex].HeaderText;
+            SortData(title);
+        }
+
+        void SortData(string title)
+        {
             switch (title)
             {
                 case "Номер":
@@ -280,9 +286,9 @@ namespace CatalogPdf
                     break;
 
                 case "Название тома":
-                    dataGridView1.DataSource = CatalogDocs.Catalog.OrderBy(a => a.TomeName).ThenBy(b => b.StartPage).ToList(); 
+                    dataGridView1.DataSource = CatalogDocs.Catalog.OrderBy(a => a.TomeName).ThenBy(b => b.StartPage).ToList();
                     break;
-                    
+
                 case "Тип":
                     dataGridView1.DataSource = CatalogDocs.Catalog.OrderBy(a => a.DocType).ThenBy(b => b.StartPage).ToList();
                     break;
@@ -299,8 +305,49 @@ namespace CatalogPdf
                     dataGridView1.DataSource = CatalogDocs.Catalog.OrderBy(a => a.Tome).ThenBy(b => b.StartPage).ToList();
                     break;
             }
-
         }
 
+
+        /// <summary>
+        /// Расставить номера страниц
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSetPageNumber_Click(object sender, EventArgs e)
+        {
+            int rows = dataGridView1.Rows.Count;
+            if (rows == 0) return;
+            SortData("Номер");
+            SortedSet<int> tomes = new SortedSet<int>();
+            for (int i = 0; i < rows; i++)
+            {
+                int tome = int.TryParse(dataGridView1.Rows[i].Cells[GetNumberColumn("Том")].Value.ToString(), out int t) ? t : 0;
+                tomes.Add(tome);
+            }
+            foreach (int tome in tomes)
+            {
+                int endPage = 0;
+                int num = 0;
+                for (int i = 0; i < rows; i++)
+                {
+                    int tomeRow = int.TryParse(dataGridView1.Rows[i].Cells[GetNumberColumn("Том")].Value.ToString(), out int t) ? t : 0;
+                    if (tomeRow == tome)
+                    {
+                        string path = dataGridView1.Rows[i].Cells[GetNumberColumn("Путь")].Value.ToString();
+                        XMLDBLib.Document doc = presenter.Catalog.GetByPath(path);
+                        doc.Number = ++num;
+                        doc.StartPage = ++endPage;
+                        doc.EndPage = doc.StartPage + doc.AmountPage;
+                        endPage = doc.EndPage;
+                        //dataGridView1.Rows[i].Cells[GetNumberColumn("Номер")].Value=num ;
+                        // dataGridView1.Rows[i].Cells[GetNumberColumn("Том")].Value;
+
+                    }
+                }
+
+            }
+            presenter.Save();
+            GetData();
+        }
     }
 }
