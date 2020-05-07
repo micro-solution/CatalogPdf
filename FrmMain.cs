@@ -1225,7 +1225,7 @@ namespace CatalogPdf
         /// Отобразить текущий документ в контейнере pdf
         /// </summary>
         /// <param name="fileName"></param>
-      async  private void ViewerShowDocument(Document currentDocument)
+        private void ViewerShowDocument(Document currentDocument)
         {
             if (presenter.State)
             {
