@@ -337,7 +337,7 @@ namespace CatalogPdf
                         XMLDBLib.Document doc = presenter.Catalog.GetByPath(path);
                         doc.Number = ++num;
                         doc.StartPage = ++endPage;
-                        doc.EndPage = doc.StartPage + doc.AmountPage;
+                        doc.EndPage = doc.StartPage + doc.AmountPage-1;
                         endPage = doc.EndPage;
                         //dataGridView1.Rows[i].Cells[GetNumberColumn("Номер")].Value=num ;
                         // dataGridView1.Rows[i].Cells[GetNumberColumn("Том")].Value;

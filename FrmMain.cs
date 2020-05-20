@@ -127,6 +127,8 @@ namespace CatalogPdf
             int pageI;
             if (!int.TryParse(pageS, out pageI))
             { pageI = 1; }
+            if (pageI > presenter.LastPage) pageI = 1;
+
             return pageI;
         }
 
@@ -267,6 +269,7 @@ namespace CatalogPdf
                 ToolStripTextBox textBox = (ToolStripTextBox)sender;
 
                 int page = PageFromTextBox();
+                //presenter.isFreeRangePage(page);
 
                 NavigateCatalog(page);
                 textBox.Select();

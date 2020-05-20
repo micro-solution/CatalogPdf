@@ -24,6 +24,20 @@ namespace CatalogPdf
         private readonly string db_directory;
 
 
+        /// <summary>
+        /// Последняя страница текущего тома
+        /// </summary>
+        /// <returns></returns>
+        public int LastPage
+        {
+            get
+            {
+                List<Document> docs = Catalog.Documents.Where(d => d.Tome == CurrentDoc.Tome).OrderBy(t => t.Number).ToList();
+                Document lastdoc = docs.Last();
+                int lastpage = lastdoc.EndPage;
+                return lastpage;
+            }
+        }
 
         private bool ExistTome(int tomeNumber)
         {
@@ -338,10 +352,7 @@ namespace CatalogPdf
 
         public void SetPages()
         {
-            GetAmountPages();
-            //SetNumbers();
-            //  SetCatalogPages();
-            //ResetCatalogPages();
+            GetAmountPages();            
             SetBookmarksPages();
         }
         /// <summary>
@@ -372,8 +383,9 @@ namespace CatalogPdf
             }
 
         }
+        
 
-        public void SetNumbers()
+            public void SetNumbers()
         {
             SortedSet<int> tomes = GetAllTomsNumbers();
             foreach (int tome in tomes)
@@ -388,7 +400,7 @@ namespace CatalogPdf
             Save();
         }
 
-
+    
         /// <summary>
         ///переУстановить кол-во страниц для всех документов
         /// </summary>
