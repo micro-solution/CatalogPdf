@@ -78,7 +78,7 @@
             this.tbName.Margin = new System.Windows.Forms.Padding(6);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(373, 15);
-            this.tbName.TabIndex = 2;
+            this.tbName.TabIndex = 1;
             // 
             // btnSave
             // 
@@ -86,7 +86,7 @@
             this.btnSave.Location = new System.Drawing.Point(195, 336);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(105, 23);
-            this.btnSave.TabIndex = 1;
+            this.btnSave.TabIndex = 9;
             this.btnSave.Text = "Сохранить";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -101,7 +101,7 @@
             this.groupBox2.Location = new System.Drawing.Point(6, 6);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(425, 40);
-            this.groupBox2.TabIndex = 17;
+            this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Название";
             // 
@@ -113,7 +113,7 @@
             this.groupBox4.Location = new System.Drawing.Point(229, 103);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(201, 40);
-            this.groupBox4.TabIndex = 3;
+            this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Номер документа";
             // 
@@ -140,7 +140,7 @@
             this.groupBox3.Location = new System.Drawing.Point(6, 56);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(425, 40);
-            this.groupBox3.TabIndex = 16;
+            this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Путь";
             // 
@@ -155,8 +155,7 @@
             this.TbFullName.Margin = new System.Windows.Forms.Padding(6);
             this.TbFullName.Name = "TbFullName";
             this.TbFullName.Size = new System.Drawing.Size(373, 15);
-            this.TbFullName.TabIndex = 1;
-            this.TbFullName.TabStop = false;
+            this.TbFullName.TabIndex = 2;
             // 
             // groupBox5
             // 
@@ -166,7 +165,7 @@
             this.groupBox5.Location = new System.Drawing.Point(6, 103);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(211, 40);
-            this.groupBox5.TabIndex = 2;
+            this.groupBox5.TabIndex = 3;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Номер тома";
             // 
@@ -193,7 +192,7 @@
             this.tbPage.Margin = new System.Windows.Forms.Padding(6);
             this.tbPage.Name = "tbPage";
             this.tbPage.Size = new System.Drawing.Size(159, 15);
-            this.tbPage.TabIndex = 5;
+            this.tbPage.TabIndex = 6;
             this.tbPage.TextChanged += new System.EventHandler(this.tbPage_TextChanged);
             this.tbPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPage_KeyPress);
             // 
@@ -208,7 +207,7 @@
             this.TbAmountPages.Margin = new System.Windows.Forms.Padding(6);
             this.TbAmountPages.Name = "TbAmountPages";
             this.TbAmountPages.Size = new System.Drawing.Size(159, 15);
-            this.TbAmountPages.TabIndex = 1;
+            this.TbAmountPages.TabIndex = 12;
             this.TbAmountPages.TabStop = false;
             this.TbAmountPages.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbAmountPages_KeyPress);
             // 
@@ -220,7 +219,7 @@
             this.groupBox1.Location = new System.Drawing.Point(6, 196);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(211, 40);
-            this.groupBox1.TabIndex = 15;
+            this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Начальная страница ";
             // 
@@ -230,17 +229,17 @@
             this.dateTimePicker1.Location = new System.Drawing.Point(42, 14);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(159, 20);
-            this.dateTimePicker1.TabIndex = 7;
+            this.dateTimePicker1.TabIndex = 8;
             // 
             // groupBox6
             // 
             this.groupBox6.BackColor = System.Drawing.SystemColors.ControlLight;
             this.groupBox6.Controls.Add(this.dateTimePicker1);
             this.groupBox6.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.groupBox6.Location = new System.Drawing.Point(6, 293);
+            this.groupBox6.Location = new System.Drawing.Point(6, 289);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(211, 40);
-            this.groupBox6.TabIndex = 14;
+            this.groupBox6.TabIndex = 8;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Дата";
             // 
@@ -255,7 +254,7 @@
             this.tbTypeDocument.Margin = new System.Windows.Forms.Padding(6);
             this.tbTypeDocument.Name = "tbTypeDocument";
             this.tbTypeDocument.Size = new System.Drawing.Size(373, 15);
-            this.tbTypeDocument.TabIndex = 6;
+            this.tbTypeDocument.TabIndex = 7;
             // 
             // groupBox7
             // 
@@ -267,7 +266,7 @@
             this.groupBox7.Location = new System.Drawing.Point(6, 243);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(425, 40);
-            this.groupBox7.TabIndex = 13;
+            this.groupBox7.TabIndex = 7;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Тип документа";
             // 
@@ -281,7 +280,7 @@
             this.groupBox8.Location = new System.Drawing.Point(6, 148);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(425, 40);
-            this.groupBox8.TabIndex = 17;
+            this.groupBox8.TabIndex = 5;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Название тома";
             // 
@@ -296,7 +295,7 @@
             this.tbTomeName.Margin = new System.Windows.Forms.Padding(6);
             this.tbTomeName.Name = "tbTomeName";
             this.tbTomeName.Size = new System.Drawing.Size(373, 15);
-            this.tbTomeName.TabIndex = 2;
+            this.tbTomeName.TabIndex = 5;
             // 
             // btnCancel
             // 
@@ -305,7 +304,7 @@
             this.btnCancel.Location = new System.Drawing.Point(310, 336);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(105, 23);
-            this.btnCancel.TabIndex = 1;
+            this.btnCancel.TabIndex = 10;
             this.btnCancel.Text = "Отмена";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -318,7 +317,7 @@
             this.groupBox9.Location = new System.Drawing.Point(229, 196);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Size = new System.Drawing.Size(201, 40);
-            this.groupBox9.TabIndex = 15;
+            this.groupBox9.TabIndex = 12;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Количество страниц ";
             // 
@@ -327,7 +326,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(436, 361);
+            this.ClientSize = new System.Drawing.Size(436, 364);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.groupBox5);
@@ -344,6 +343,7 @@
             this.MinimumSize = new System.Drawing.Size(450, 400);
             this.Name = "FrmDocument";
             this.Text = "Документ";
+            this.TopMost = true;
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox4.ResumeLayout(false);

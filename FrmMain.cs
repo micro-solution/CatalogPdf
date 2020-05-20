@@ -230,21 +230,7 @@ namespace CatalogPdf
             }
         }
 
-
-        //private void SinhronizePage()
-        //{
-        //    int referencePage = presenter.GetReferencePage(pdfRenderer.Page);
-
-        //    if (referencePage > PageFromTextBox())
-        //    {
-        //        TbxPageSetValue(referencePage - 1, true);
-        //    }
-        //    else if (referencePage < PageFromTextBox())
-        //    {
-        //        TbxPageSetValue(referencePage + 1, true);
-        //    }
-        //}
-
+        //Установить текстбокс по условию       
         private void TbxPageSetValue(int page, bool doevent)
         {
             if (!doevent)

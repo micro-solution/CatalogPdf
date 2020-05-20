@@ -37,7 +37,7 @@ namespace CatalogPdf
         {
             InitializeComponent();
             DialogResult = DialogResult.None;
-
+          
         }
 
         /// <summary>
@@ -62,6 +62,16 @@ namespace CatalogPdf
             {
                 Debug.WriteLine(e.Message);
             }
+            //tbName.TabIndex = 0;
+            //TbFullName.TabIndex = 1;
+            //TbTome.TabIndex = 2;
+            //TbNumber.TabIndex = 3;
+            //tbTomeName.TabIndex = 4;
+            //tbPage.TabIndex = 5;
+            //tbTypeDocument.TabIndex = 6;
+            //dateTimePicker1.TabIndex = 7;
+            //btnSave.TabIndex = 8;
+            //btnCancel.TabIndex = 9;
         }
 
         /// <summary>

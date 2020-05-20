@@ -111,7 +111,6 @@
     <Compile Include="LineCatalogDocument.Designer.cs">
       <DependentUpon>LineCatalogDocument.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controller.cs" />
     <Compile Include="FrmDocument.cs">
       <SubType>Form</SubType>
     </Compile>
