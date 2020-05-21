@@ -49,7 +49,6 @@ namespace CatalogPdf
             SortedSet<int> t = new SortedSet<int>();
             // Catalog.Documents.FindAll(x => x.Tome == 1);
             Catalog.Documents.ForEach(x => t.Add(x.Tome));
-
             return t;
         }
 
@@ -61,7 +60,6 @@ namespace CatalogPdf
          : base(path)
         {
             db_directory = path;
-
             ///Обработка событий базы
             FileDeleteFromDB += Presenter_FileDeleteFromDB;
             NoFilesDuringSave += Presenter_NoFilesDuringSave;
@@ -76,7 +74,6 @@ namespace CatalogPdf
             {
                 return;
             }
-
             SetCatalog();
         }
 
@@ -238,6 +235,11 @@ namespace CatalogPdf
                 MessageBox.Show(e.Message);
             }
         }
+
+        /// <summary>
+        /// Установить текущий документ 
+        /// </summary>
+        /// <param name="path"></param>
         public void SetCurrentDocument(string path)
         {
             try
@@ -273,6 +275,12 @@ namespace CatalogPdf
             }
             return bookmarksList;
         }
+
+        /// <summary>
+        /// Получить пояснения к странице
+        /// </summary>
+        /// <param name="page"></param>
+        /// <returns></returns>
         internal List<Bookmark> GetExplanetionsFromPage(int page)
         {
             List<Bookmark> explanetionsList = new List<Bookmark>();
@@ -329,9 +337,7 @@ namespace CatalogPdf
             {
                 Debug.WriteLine(e.Message);
             }
-
             SetCurrentDocument(0);
-
             State = CurrentDoc != null;
         }
 
@@ -350,6 +356,7 @@ namespace CatalogPdf
             Save();
         }
 
+        
         public void SetPages()
         {
             GetAmountPages();            
@@ -371,6 +378,9 @@ namespace CatalogPdf
             Save();
         }
 
+        /// <summary>
+        /// Получить колисество страниц
+        /// </summary>
         public void GetAmountPages()
         {
             List<Document> docs = Catalog.Documents;
@@ -380,57 +390,8 @@ namespace CatalogPdf
                 {
                     doc.AmountPage = GetCountPages(doc);
                 }
-            }
-
-        }
-        
-
-            public void SetNumbers()
-        {
-            SortedSet<int> tomes = GetAllTomsNumbers();
-            foreach (int tome in tomes)
-            {
-                List<Document> docs = Catalog.Documents.Where(d => d.Tome == tome).OrderBy(o => o.StartPage).ToList();
-                for (int i = 0; i < docs.Count; i++)
-                {
-                    // Document doc = docs[i];
-                    // doc.Number = i + 1;
-                }
-            }
-            Save();
-        }
-
-    
-        /// <summary>
-        ///переУстановить кол-во страниц для всех документов
-        /// </summary>
-        //public void ResetCatalogPages()
-        //{
-        //    SortedSet<int> tomes = GetAllTomsNumbers();
-
-        //    foreach (int tome in tomes)
-        //    {
-        //        List<Document> docs = Catalog.Documents.Where(d => d.Tome == tome).OrderBy(o => o.Number).ToList();
-        //        for (int i = 0; i < docs.Count; i++)
-        //        {
-        //            Document doc = docs[i];
-        //            doc.Number = i + 1;
-        //            if (i == 0)
-        //            {
-        //                doc.StartPage = 1;
-        //                doc.AmountPage = GetCountPages(doc);
-        //                doc.EndPage = doc.StartPage + doc.AmountPage - 1;
-        //            }
-        //            else
-        //            {
-        //                doc.StartPage = docs[i - 1].EndPage + 1;
-        //                doc.AmountPage = GetCountPages(doc);
-        //                doc.EndPage = doc.StartPage + doc.AmountPage - 1;
-        //            }
-        //        }
-        //    }
-        //        Save();
-        //}
+           }
+        }                       
 
         /// <summary>
         /// Определить кол-во страниц документа с помошью pdfSharp
@@ -440,24 +401,13 @@ namespace CatalogPdf
         public int GetCountPages(Document doc)
         {
             int pageCount = 0;
-            //try
-            //{
-                PdfiumViewer.PdfDocument documentV = PdfiumViewer.PdfDocument.Load(doc.File.FullName);
-                pageCount = documentV.PageCount;
+            PdfiumViewer.PdfDocument documentV = PdfiumViewer.PdfDocument.Load(doc.File.FullName);
+            pageCount = documentV.PageCount;
 
-           // }
-          //  catch (Exception e)
-           // {
-#if DEBUG
-                //Debug.WriteLine(doc.Name + "  " + e.Message);
-                //System.Diagnostics.Debugger.Break();
-                // Возможно отсутствует файл или он поврежден или запоролен
-#endif
-           // }
             return pageCount;
         }
         /// <summary>
-        /// Проверить свободный 
+        /// Проверить диапазон свободный от страниц
         /// </summary>
         /// <param name="startPage"></param>
         /// <param name="endPage"></param>
@@ -466,7 +416,6 @@ namespace CatalogPdf
         /// <returns></returns>
         public bool isFreeRangePage(int startPage, int endPage, int tome, string path)
         {
-
             List<Document> docs = Catalog.Documents.Where(x => x.Tome == tome && x.File.FullName != path).ToList();
             if (docs.Count > 0)
             {
@@ -482,7 +431,6 @@ namespace CatalogPdf
             }
             return true;
         }
-
 
         /// <summary>
         /// Найти последний номер закладки
@@ -532,11 +480,7 @@ namespace CatalogPdf
             doc.Name = GetShortDocName(doc);
             Save();
         }
-
-        internal void InsertDocNumber(Document doc, int newNumber)
-        {
-
-        }
+              
         /// <summary>
         /// Сдвинуть номера документов
         /// </summary>
@@ -555,42 +499,8 @@ namespace CatalogPdf
             docs.Skip(countPrevious).ToList().ForEach(d => d.Number = ++i);
 
             Catalog.Documents.ForEach(x => Debug.WriteLine($"{x.Number} {x.Name}"));
-            Save();
-            //ResetCatalogPages();
+            Save();                 
             SetBookmarksPages();
-
-
-
-            //int indexPrevious = docs.FindLastIndex(x => x.Number < newNumber);
-            //int i = 0;
-            //docs.Take(docs.Where(x => x.Number < newNumber).Count()).ToList().ForEach(d => d.Number = ++i);
-
-
-
-            //List<Document> docs = Catalog.Documents.Where(d => d.Tome == doc.Tome && d.Number >= newNumber).OrderBy(x => x.Number).ToList();
-            //if (docs.Count > 0)
-            //{
-
-            //    int startSwap = 0;
-            //    if (doc.Number < newNumber)
-            //    {
-            //        docs[0].Number--;
-            //        for (int i = 1; i < docs.Count; i++)
-            //        {
-            //            docs[i].Number++;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        for (int i = 0; i < docs.Count; i++)
-            //        {
-            //            docs[i].Number++;
-            //        }
-
-            //    }
-            //}
-
-            //doc.Number = newNumber;
         }
         #endregion Документ 
 

@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using XMLDBLib;
 
+
 namespace CatalogPdf
 {
-
     /// <summary>
     /// Главное окно программы
     /// </summary>
@@ -20,6 +20,7 @@ namespace CatalogPdf
     {
         /// <summary>
         /// База данных xml библиотека 
+        /// содержит методы по работе с каталогом
         /// </summary>
         private DataPresenter presenter;
 
@@ -38,7 +39,6 @@ namespace CatalogPdf
         private void InitPresenter()
         {
             //Путь хранится в настройках
-
             presenter?.Dispose();
             string path = Settings.Default.CurrentCatalogPath;
             if (!Directory.Exists(path))
@@ -50,7 +50,6 @@ namespace CatalogPdf
                 try
                 {
                     presenter = new DataPresenter(path);
-
                     Text = $"CatalogPdf - [{path}]";
                     ShowData();
                 }
@@ -58,11 +57,8 @@ namespace CatalogPdf
                 {
                     MessageBox.Show(e.Message);
                 }
-
             }
         }
-
-
 
         /// </summary>
         /// Выбрать с папку с базой (каталогом)
@@ -108,7 +104,6 @@ namespace CatalogPdf
         #region Навигация по страницам
         private void btnPreviousPage_Click(object sender, EventArgs e)
         {
-
             PagePreviousTextBox(PageFromTextBox());
         }
 
@@ -128,7 +123,6 @@ namespace CatalogPdf
             if (!int.TryParse(pageS, out pageI))
             { pageI = 1; }
             if (pageI > presenter.LastPage) pageI = 1;
-
             return pageI;
         }
 
@@ -138,7 +132,6 @@ namespace CatalogPdf
         /// <param name="page"></param>
         private void PageNextTextBox(int page)
         {
-
             if (++page > presenter.CurrentDoc.EndPage + 1)
             {
                 tbPage.Text = "1";
@@ -160,7 +153,6 @@ namespace CatalogPdf
             {
                 tbPage.Text = "1";
             }
-
         }
 
         /// <summary>
@@ -170,12 +162,9 @@ namespace CatalogPdf
         /// <param name="e"></param>
         private void PdfRenderer1_MouseWheel(object sender, MouseEventArgs e)
         {
-
-
             int referencePage = presenter.GetReferencePage(pdfRenderer.Page);
             if (e.Delta > 0)
             {
-
                 if (pdfRenderer.Page + presenter.CurrentDoc.StartPage == presenter.CurrentDoc.StartPage)
                 {
                     TbxPageSetValue(referencePage - 1, true);
@@ -232,7 +221,7 @@ namespace CatalogPdf
             }
         }
 
-        //Установить текстбокс по условию       
+        //Установить значение текстбокса с номером страницы по условию       
         private void TbxPageSetValue(int page, bool doevent)
         {
             if (!doevent)
@@ -244,7 +233,6 @@ namespace CatalogPdf
                 tbPage.Tag = null;//do event text changed
             }
             SetPageTextBox(page);
-
         }
 
         /// <summary>
@@ -278,6 +266,10 @@ namespace CatalogPdf
             }
         }
 
+        /// <summary>
+        /// Переход на страницу каталога
+        /// </summary>
+        /// <param name="page"></param>
         private void NavigateCatalog(int page)
         {
             if (!presenter.State)
@@ -296,12 +288,9 @@ namespace CatalogPdf
 
                 pdfRenderer.Page = pageDoc;
                 ShowContentPage(page);
-            }
-            else
-            {
-
-            }
+            }            
         }
+
         /// <summary>
         /// Вставить номер текущей страницы в текстбокс
         /// </summary>
@@ -671,13 +660,9 @@ namespace CatalogPdf
         private void SetCatalogItems(int currentTome)
         {
             PanelCatalog.Controls.Clear();
-            SortedSet<int> tomes = new SortedSet<int>();  //= presenter.GetAllTomsNumbers();
+            SortedSet<int> tomes = new SortedSet<int>();  
             List<Document> docs = presenter.Catalog.Documents;
             docs.ForEach(d => tomes.Add(d.Tome));
-
-            /* tomes = (from d in docs
-                     select d.Tome
-                    ).Distinct().ToHashSet(); ToList();  */
 
             foreach (int tome in tomes)
             {
@@ -697,7 +682,10 @@ namespace CatalogPdf
                 }
             }
         }
-
+        /// <summary>
+        /// Открыть том при нажатии на ссылку в каталоге
+        /// </summary>
+        /// <param name="tome"></param>
         private void TomeLine_ClickTomeSelect(int tome)
         {
             SelectTome(tome);
@@ -706,7 +694,6 @@ namespace CatalogPdf
         private void TomeLine_MouseClick(object sender, MouseEventArgs e)
         {
             TomMarck tomeLine = (TomMarck)sender;
-
             SelectTome(tomeLine.Tome);
         }
 
@@ -721,7 +708,7 @@ namespace CatalogPdf
         }
 
         /// <summary>
-        /// Заполнить каталог на форме
+        /// Заполнить каталог на форме докментами указанного тома
         /// </summary>
         private void ShowDocumentItems(int tome)
         {
@@ -734,12 +721,16 @@ namespace CatalogPdf
             {
                 List<Document> SortedDocs = docs.
                     OrderBy(o => o.Number).ToList();
-
+                ProcessBar pb =  ProcessBar.Init("Добавление документов", SortedDocs.Count, 1, "Загрузка каталога Том: "+ tome);
+                pb.Show();
                 for (int i = 0; i < SortedDocs.Count; i++)
-                {
+                {                       
+                    if (pb.Cancel) break;
                     Document doc = SortedDocs[i];
+                    pb.Action(doc.Name + "№ " +i + " из " + pb.Count);                    
                     AddLineCatalog(doc);
                 }
+                pb.Close();
                 ViewerShowDocument(SortedDocs[0]);
             }
         }
@@ -785,7 +776,7 @@ namespace CatalogPdf
             mousePressed = false;
         }
 
-        // time longPressMouseButton = false;
+        // Перетащить строку документа с каталогом.
         private async void CatalogLine_MouseMove(object sender, MouseEventArgs e)
         {
 
@@ -826,13 +817,10 @@ namespace CatalogPdf
 
         private void CatalogLine_DragEnter(object sender, DragEventArgs e)
         {
-            //  PanelCatalog.AllowDrop = true;
             LineCatalogDocument line = (LineCatalogDocument)sender;
 
             if (e.Data.GetDataPresent(DataFormats.Text))
-            {
-                // line.to ;//System.ComponentModel.Container PanelCatalog.Controls);//line, $"d {line.DocNumber}");
-
+            {  
                 e.Effect = DragDropEffects.Move;
             }
             else
@@ -845,6 +833,11 @@ namespace CatalogPdf
             mousePressed = true;
         }
 
+        /// <summary>
+        /// Изменить документ Открыть форму
+        /// </summary>
+        /// <param name="docNumber"></param>
+        /// <param name="path"></param>
         private void ChangeDocument(int docNumber, string path)
         {
             Document doc = presenter.Catalog?.GetByPath(path);
@@ -904,6 +897,10 @@ namespace CatalogPdf
             NewBookmark(typeSticker.Explanetion);
         }
 
+        /// <summary>
+        /// Новая закладка
+        /// </summary>
+        /// <param name="typeSticker"></param>
         private void NewBookmark(typeSticker typeSticker = typeSticker.Bookmark)
         {
             FrmBookmark frmBookmark = new FrmBookmark();

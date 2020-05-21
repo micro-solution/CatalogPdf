@@ -7,8 +7,6 @@ namespace CatalogPdf
     public class LineCatalog : UserControl
 
     {
-
-
         /// <summary>
         ///Том дела 
         /// </summary>
@@ -52,8 +50,6 @@ namespace CatalogPdf
         public virtual void UnactiveColor()
         {
             BackColor = PassiveControlColor;
-        }
-
-        // public float Width { get; set; } = 100;
+        }                  
     }
 }
