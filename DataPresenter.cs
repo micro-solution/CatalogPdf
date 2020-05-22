@@ -11,8 +11,7 @@ using XMLDBLib;
 namespace CatalogPdf
 {
     public class DataPresenter : XMLDB
-    {
-
+    {  
         public Document CurrentDoc { set; get; }
         public bool State { private set; get; } = false;
         public int PageCount { private set; get; } = 0;
@@ -294,8 +293,6 @@ namespace CatalogPdf
             return explanetionsList;
         }
 
-
-
         /// <summary>
         /// Имя документа по умолчанию имя файла
         /// </summary>
@@ -384,11 +381,15 @@ namespace CatalogPdf
         public void GetAmountPages()
         {
             List<Document> docs = Catalog.Documents;
+
             foreach (Document doc in docs)
             {
                 if (doc.AmountPage == 0)
                 {
+                    if    (doc.AmountPage == 0)
+                    {
                     doc.AmountPage = GetCountPages(doc);
+                    }
                 }
            }
         }                       

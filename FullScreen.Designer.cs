@@ -36,10 +36,6 @@
             this.btnNextPage = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
-            this.lbCurrentTome = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
-            this.lbDocName = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnCloseFullScreen = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.zoomIn = new System.Windows.Forms.ToolStripButton();
@@ -64,12 +60,11 @@
             this.pdfRenderer.Text = "pdfRenderer1";
             this.pdfRenderer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitHeight;
             this.pdfRenderer.Scroll += new System.Windows.Forms.ScrollEventHandler(this.pdfRenderer_Scroll);
-            this.pdfRenderer.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pdfRenderer_MouseMove);
             // 
             // fpPanel
             // 
             this.fpPanel.AllowItemReorder = true;
-            this.fpPanel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.fpPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.fpPanel.AutoSize = false;
             this.fpPanel.BackColor = System.Drawing.SystemColors.ControlLight;
             this.fpPanel.CanOverflow = false;
@@ -80,10 +75,6 @@
             this.btnNextPage,
             this.toolStripSeparator4,
             this.toolStripLabel2,
-            this.lbCurrentTome,
-            this.toolStripSeparator8,
-            this.lbDocName,
-            this.toolStripSeparator2,
             this.btnCloseFullScreen,
             this.toolStripSeparator5,
             this.zoomIn,
@@ -93,13 +84,11 @@
             this.toolStripSeparator6,
             this.fitHeight,
             this.fitWidth});
-            this.fpPanel.Location = new System.Drawing.Point(93, 444);
+            this.fpPanel.Location = new System.Drawing.Point(0, 453);
             this.fpPanel.Name = "fpPanel";
-            this.fpPanel.Size = new System.Drawing.Size(610, 42);
+            this.fpPanel.Size = new System.Drawing.Size(349, 42);
             this.fpPanel.TabIndex = 2;
             this.fpPanel.Text = "toolStripMain";
-            this.fpPanel.MouseEnter += new System.EventHandler(this.fpPanel_MouseEnter);
-            this.fpPanel.MouseLeave += new System.EventHandler(this.fpPanel_MouseLeave);
             // 
             // btnPreviousPage
             // 
@@ -142,32 +131,6 @@
             // 
             this.toolStripLabel2.Name = "toolStripLabel2";
             this.toolStripLabel2.Size = new System.Drawing.Size(0, 39);
-            // 
-            // lbCurrentTome
-            // 
-            this.lbCurrentTome.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.lbCurrentTome.Image = ((System.Drawing.Image)(resources.GetObject("lbCurrentTome.Image")));
-            this.lbCurrentTome.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.lbCurrentTome.Name = "lbCurrentTome";
-            this.lbCurrentTome.Size = new System.Drawing.Size(10, 39);
-            this.lbCurrentTome.Text = " ";
-            // 
-            // toolStripSeparator8
-            // 
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 42);
-            // 
-            // lbDocName
-            // 
-            this.lbDocName.Name = "lbDocName";
-            this.lbDocName.Size = new System.Drawing.Size(202, 39);
-            this.lbDocName.Text = "\"Краткое имя текущего документа\"";
-            this.lbDocName.ToolTipText = "Текущий документ";
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 42);
             // 
             // btnCloseFullScreen
             // 
@@ -269,7 +232,6 @@
             this.Name = "FullScreen";
             this.Text = "FullScreen";
             this.Load += new System.EventHandler(this.FullScreen_Load);
-
             this.fpPanel.ResumeLayout(false);
             this.fpPanel.PerformLayout();
             this.ResumeLayout(false);
@@ -285,10 +247,6 @@
         private System.Windows.Forms.ToolStripButton btnNextPage;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
-        private System.Windows.Forms.ToolStripLabel lbCurrentTome;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
-        private System.Windows.Forms.ToolStripLabel lbDocName;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton btnCloseFullScreen;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripButton zoomIn;

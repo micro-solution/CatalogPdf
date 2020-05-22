@@ -68,7 +68,6 @@ namespace CatalogPdf
         pb.progressbar.Step = step;
         pb.LabelName.Text = info;
         pb.progressbar.Value = 0;
-
         return pb;
     }
 

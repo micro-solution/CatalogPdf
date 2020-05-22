@@ -39,8 +39,8 @@ namespace CatalogPdf
         {
             if (Doc != null)
             {
-                lbDocName.Text = Doc.Name;
-                lbCurrentTome.Text = $"{Doc.Tome}-{Doc.TomeName}";
+                //lbDocName.Text = Doc.Name;
+                //lbCurrentTome.Text = $"{Doc.Tome}-{Doc.TomeName}";
                 View(Doc.File.FullName);
             }
         }
@@ -56,10 +56,10 @@ namespace CatalogPdf
         {
             WindowState = FormWindowState.Maximized;
             fpPanel.Visible = true;
-            double X = Width > fpPanel.Width ? (Width / 2) - (fpPanel.Width / 2) : 1;
-            double Y = Height - fpPanel.Height - 5;
-            Point pt = new Point { X = (int)X, Y = (int)Y };
-            fpPanel.Location = pt;
+           // double X = Width > fpPanel.Width ? (Width / 2) - (fpPanel.Width / 2) : 1;
+           // double Y = Height - fpPanel.Height - 5;
+            //Point pt = new Point { X = (int)X, Y = (int)Y };
+           // fpPanel.Location = pt;
             fpPanel.BringToFront();
         }
 
@@ -119,32 +119,7 @@ namespace CatalogPdf
             tbPage.Text = pdfRenderer.Page.ToString();
         }
 
-        private void fpPanel_MouseLeave(object sender, EventArgs e)
-        {
-            //fpPanel.Visible = false;
-            //panelVisible = false;
-        }
-
-
-        private void pdfRenderer_MouseMove(object sender, MouseEventArgs e)
-        {
-         //if (panelVisible)
-         //   {
-         //       fpPanel.Visible = true;
-         //       ActiveControl = fpPanel;
-         //   }
-         //   else
-         //   {
-         //       Thread.Sleep(1000);
-         //       panelVisible = true;
-         //   }
-        }
-
-        private void fpPanel_MouseEnter(object sender, EventArgs e)
-        {
-          //  fpPanel.Visible = true;
-        }
-
+      
         
     }
 }

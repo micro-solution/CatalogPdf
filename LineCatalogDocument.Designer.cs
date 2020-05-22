@@ -151,7 +151,7 @@
             this.Controls.Add(this.lbNumber);
             this.Controls.Add(this.LbStartPage);
             this.Controls.Add(this.LbTitleDocument);
-            this.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Cursor = System.Windows.Forms.Cursors.NoMoveVert;
             this.Name = "LineCatalogDocument";
             this.Size = new System.Drawing.Size(323, 32);
             this.Enter += new System.EventHandler(this.CatalogItem_Enter);

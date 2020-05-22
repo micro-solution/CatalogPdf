@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using XMLDBLib;
 
-
 namespace CatalogPdf
 {
     /// <summary>
@@ -121,8 +120,7 @@ namespace CatalogPdf
             string pageS = tbPage.Text;
             int pageI;
             if (!int.TryParse(pageS, out pageI))
-            { pageI = 1; }
-            if (pageI > presenter.LastPage) pageI = 1;
+            { pageI = 1; }           
             return pageI;
         }
 
@@ -132,12 +130,9 @@ namespace CatalogPdf
         /// <param name="page"></param>
         private void PageNextTextBox(int page)
         {
-            if (++page > presenter.CurrentDoc.EndPage + 1)
-            {
-                tbPage.Text = "1";
-            }
-            tbPage.Text = page.ToString();
-            //если не больше макс
+            ++page;
+            tbPage.Text = page.ToString();                
+            
         }
         /// <summary>
         /// Переход на предыдущую страницу
@@ -257,14 +252,19 @@ namespace CatalogPdf
                 ToolStripTextBox textBox = (ToolStripTextBox)sender;
 
                 int page = PageFromTextBox();
-                //presenter.isFreeRangePage(page);
-
-                NavigateCatalog(page);
+                     //показать последняя страница если пытаются выйти за пределы страниц тома
+                if (page >= presenter.LastPage)
+                {
+                    page=presenter.LastPage;
+                    textBox.Text = page.ToString();
+                }                
+                NavigateCatalog(page);                
                 textBox.Select();
                 textBox.SelectionStart = textBox.Text.Length;
                 onepress = false;
             }
         }
+
 
         /// <summary>
         /// Переход на страницу каталога
@@ -276,7 +276,6 @@ namespace CatalogPdf
             {
                 return;
             }
-
             Document doc = presenter.Catalog.GetByPage(page);
             if (doc != null)
             {
@@ -779,8 +778,6 @@ namespace CatalogPdf
         // Перетащить строку документа с каталогом.
         private async void CatalogLine_MouseMove(object sender, MouseEventArgs e)
         {
-
-
             if (e.Button == MouseButtons.Left && mousePressed)
             {
                 await Task.Delay(400);
@@ -788,7 +785,6 @@ namespace CatalogPdf
                 {
                     return;
                 }
-
                 LineCatalogDocument line = (LineCatalogDocument)sender;
                 line.DoDragDrop(line.FullName, DragDropEffects.Move);
                 line.BackColor = UserSettings.catalogDocItem_ActiveColor;
@@ -806,8 +802,7 @@ namespace CatalogPdf
             }
             mousePressed = false;
             LineCatalogDocument line = (LineCatalogDocument)sender;
-            //  line.BackColor = Color.Aqua;
-            Document doc = presenter.Catalog.GetByPath(e.Data.GetData(DataFormats.Text).ToString());
+           Document doc = presenter.Catalog.GetByPath(e.Data.GetData(DataFormats.Text).ToString());
             if (doc != null)
             {
                 presenter.ChangeDocNumber(doc, line.DocNumber);
@@ -817,8 +812,6 @@ namespace CatalogPdf
 
         private void CatalogLine_DragEnter(object sender, DragEventArgs e)
         {
-            LineCatalogDocument line = (LineCatalogDocument)sender;
-
             if (e.Data.GetDataPresent(DataFormats.Text))
             {  
                 e.Effect = DragDropEffects.Move;
@@ -847,9 +840,7 @@ namespace CatalogPdf
 
                 frmDocument.Tome = doc.Tome;
                 frmDocument.TomeName = doc.TomeName;
-                frmDocument.Fullname = path;
-
-                //TODO изменить страницы                
+                frmDocument.Fullname = path;                            
                 frmDocument.Number = doc.Number;
                 frmDocument.PageStart = doc.StartPage;
                 frmDocument.NameDocument = doc.Name;
@@ -1004,12 +995,6 @@ namespace CatalogPdf
             lineBookMark.Goto_BookmarkPage += LineBookMark_Goto_BookmarkPage;
         }
 
-
-
-
-
-
-
         /// <summary>
         /// заполнить строку Пояснений
         /// </summary>
@@ -1070,14 +1055,7 @@ namespace CatalogPdf
             {
                 mark = presenter?.Explanations.Bookmarks?.Where(b => b.ID == id)?.First();
             }
-
-            GotoBookmark(mark);
-            //if (mark != null)
-            //{
-            //    Debug.WriteLine("go to bookmark " + mark.ID);
-            //    ViewerShowDocument(mark?.Document);
-            //    NavigateCatalog(mark.Reference);
-            //}
+            GotoBookmark(mark);             
         }
 
         private void GotoBookmark(Bookmark mark)
@@ -1089,8 +1067,7 @@ namespace CatalogPdf
                 {
                     ViewerShowDocument(mark?.Document);
                 }
-                tbPage.Text = mark.Reference.ToString();
-                //NavigateCatalog(mark.Reference);
+                tbPage.Text = mark.Reference.ToString();                 
             }
         }
 
@@ -1178,7 +1155,6 @@ namespace CatalogPdf
             try
             {
                 Document doc = presenter.Catalog.GetByPath(path);
-
                 ViewerShowDocument(doc);
                 SetPageTextBox(doc.StartPage);
             }
@@ -1370,9 +1346,6 @@ namespace CatalogPdf
         #endregion DragDrop File
 
 
-
-
-
         #region Поиск
 
         /// <summary>
@@ -1457,7 +1430,6 @@ namespace CatalogPdf
 
 
         #endregion Поиск
-
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
@@ -1568,8 +1540,7 @@ namespace CatalogPdf
 
         private void fitWidth_Click(object sender, EventArgs e)
         {
-            pdfRenderer.Select();
-            //pdfRenderer.s
+            pdfRenderer.Select();           
             pdfRenderer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitBest;
             pdfRenderer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitWidth;
             pdfRenderer.Refresh();
@@ -1584,9 +1555,6 @@ namespace CatalogPdf
         /// <param name="e"></param>
         private void frmMain_KeyDown(object sender, KeyEventArgs e)
         {
-
-
-
             if (e.KeyCode == Keys.Up)
             {
                 PagePreviousTextBox(PageFromTextBox());
@@ -1632,8 +1600,6 @@ namespace CatalogPdf
             {
                 pdfRenderer.ZoomOut();
             }
-
-
         }
 
         private void toolStripMain_SizeChanged(object sender, EventArgs e)
@@ -1658,7 +1624,6 @@ namespace CatalogPdf
             {
                 lbDocName.Text = presenter.CurrentDoc.Name;
             }
-
             toolStripSpace.Width = (int)Math.Round((spaseWidth - lbDocName.Width) / 2);
 
         }
@@ -1686,7 +1651,6 @@ namespace CatalogPdf
                 return width;
             }
         }
-
         private void btnFullScreen_Click(object sender, EventArgs e)
         {
             FullScreen fullScreen = new FullScreen();
