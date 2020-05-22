@@ -704,6 +704,7 @@ namespace CatalogPdf
         {
             presenter.CurrentTomeNumber = tome;
             SetCatalogItems(tome);
+            tbPage.Text = "1";
         }
 
         /// <summary>
