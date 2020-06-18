@@ -69,7 +69,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
     <Reference Include="XMLDB">
-      <HintPath>packages\XMLDB.dll</HintPath>
+      <HintPath>D:\YandexDisk\YandexDisk\Разработка\Р-19-33 Пепеляев Каталог дела\Рабочая\XMLDB\XMLDB\bin\Release\XMLDB.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -19,28 +19,18 @@ namespace CatalogPdf
         public Document Doc { get; set; }
 
         private PdfiumViewer.PdfDocument documentV;
-        private bool panelVisible = false;
+      //  private bool panelVisible = false;
         public FullScreen()
         {
             InitializeComponent();
 
-            Controls.Add(fpPanel);
-
-
-
-            //fpPanel.Location = new Point(x: Height - fpPanel.Height - 10, y: Width / 2 - fpPanel.Width / 2);
-        }
-
-
-
-  
+            Controls.Add(fpPanel);           
+        } 
 
         private void FullScreen_Load(object sender, EventArgs e)
         {
             if (Doc != null)
-            {
-                //lbDocName.Text = Doc.Name;
-                //lbCurrentTome.Text = $"{Doc.Tome}-{Doc.TomeName}";
+            {               
                 View(Doc.File.FullName);
             }
         }

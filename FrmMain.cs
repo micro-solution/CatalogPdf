@@ -543,7 +543,8 @@ namespace CatalogPdf
         private void очиститьВсеИСоздатьНовыйКаталогToolStripMenuItem_Click(object sender, EventArgs e)
         {
             presenter.ResetDB();
-            ShowData();
+            presenter = null;
+            InitPresenter();
         }
         #endregion Меню Каталог
         #endregion Меню Приложения

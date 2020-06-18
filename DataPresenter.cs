@@ -479,7 +479,7 @@ namespace CatalogPdf
 
             // doc.AmountPage = GetCountPages(doc);
             doc.Name = GetShortDocName(doc);
-            Save();
+           // Save();
         }
               
         /// <summary>
