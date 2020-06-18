@@ -38,11 +38,7 @@ namespace CatalogPdf
             }
         }
 
-        private bool ExistTome(int tomeNumber)
-        {
-            SortedSet<int> allTomes = GetAllTomsNumbers();
-            return allTomes.Contains(tomeNumber);
-        }
+   
         public SortedSet<int> GetAllTomsNumbers()
         {
             SortedSet<int> t = new SortedSet<int>();
@@ -51,28 +47,48 @@ namespace CatalogPdf
             return t;
         }
 
+        public static DataPresenter GetPresenter(string path)
+        {
+            DataPresenter presenter = new DataPresenter(path);
+            LoadResult loadResult = presenter.Load();
+            //Если файл базы не существует, создадим его  
+            if (loadResult == LoadResult.NotInit)
+            {
+                presenter.InitDirectory();
+                presenter.SetCatalog();                              
+            }
+           else  if (loadResult == LoadResult.Ok)
+            {
+                presenter.State = true;
+            }            
+            else if (loadResult == LoadResult.DBError)
+            {
+                presenter.ResetDB();
+            }
+
+            presenter.UpdatePresenter();
+            return presenter;
+         }
+
         /// <summary>
         /// Конструктор наследника XMLDB
         /// </summary>
         /// <param name="path">Путь к файлу бд .xml </param>
-        public DataPresenter(string path)
+        private DataPresenter(string path)
          : base(path)
         {
             db_directory = path;
             ///Обработка событий базы
             FileDeleteFromDB += Presenter_FileDeleteFromDB;
             NoFilesDuringSave += Presenter_NoFilesDuringSave;
-            ChangeFS += Presenter_ChangeFS;
-            UpdatePresenter();
+            ChangeFS += Presenter_ChangeFS;           
         }
 
         private void UpdatePresenter()
         {
-            Load(db_directory);
-            if (!State)
-            {
-                return;
-            }
+            LoadResult result = Load();
+            State = LoadResult.Ok == result;
+            if (!State)  { return;}
             SetCatalog();
         }
 
@@ -86,28 +102,7 @@ namespace CatalogPdf
             SetCurrentDocument(0);
         }
 
-        /// <summary>
-        /// Загружает базу по указанному пути
-        /// </summary>
-        /// <param name="path"></param>
-        public void Load(string path)
-        {
-            LoadResult loadResult = Load();
-            if (loadResult == LoadResult.Ok)
-            {
-                State = true;
-            }
-            else if (loadResult == LoadResult.NotInit)
-            {
-                InitDirectory();
-                Load(db_directory);
-            }
-            else if (loadResult == LoadResult.DBError)
-            {
-                ResetDB();
-            }
-        }
-
+      
         /// <summary>
         /// Удаляет базу и создает новую
         /// </summary>
@@ -348,7 +343,7 @@ namespace CatalogPdf
             for (int i = 0; i < docs.Count; i++)
             {
                 Document doc = docs[i];
-                doc.Name = doc.Name ?? DataPresenter.GetShortDocName(doc);
+                doc.Name = doc.Name ?? DataPresenter.GetShortDocName(doc);               
             }
             Save();
         }
@@ -479,7 +474,7 @@ namespace CatalogPdf
 
             // doc.AmountPage = GetCountPages(doc);
             doc.Name = GetShortDocName(doc);
-           // Save();
+           // Save(); Был баг файл занят другим процессом 
         }
               
         /// <summary>

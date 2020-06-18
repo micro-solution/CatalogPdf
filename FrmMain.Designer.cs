@@ -157,8 +157,8 @@ namespace CatalogPdf
             this.toolStripMain.Name = "toolStripMain";
             this.toolStripMain.Size = new System.Drawing.Size(1276, 41);
             this.toolStripMain.TabIndex = 0;
-            this.toolStripMain.Text = "toolStripMain";
-            this.toolStripMain.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStripMain_ItemClicked);
+            this.toolStripMain.Text = "Menu";
+        
             this.toolStripMain.SizeChanged += new System.EventHandler(this.toolStripMain_SizeChanged);
             // 
             // menuCatalog
@@ -305,6 +305,7 @@ namespace CatalogPdf
             // 
             // tbPage
             // 
+            this.tbPage.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tbPage.Name = "tbPage";
             this.tbPage.Size = new System.Drawing.Size(50, 41);
             this.tbPage.Text = "1";
@@ -585,6 +586,7 @@ namespace CatalogPdf
             // 
             this.tbSearchCatalog.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.tbSearchCatalog.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbSearchCatalog.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tbSearchCatalog.Name = "tbSearchCatalog";
             this.tbSearchCatalog.Size = new System.Drawing.Size(150, 25);
             this.tbSearchCatalog.ToolTipText = "Поиск";
@@ -653,6 +655,7 @@ namespace CatalogPdf
             // 
             this.tbSearchBookmarks.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.tbSearchBookmarks.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbSearchBookmarks.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tbSearchBookmarks.Name = "tbSearchBookmarks";
             this.tbSearchBookmarks.Size = new System.Drawing.Size(150, 25);
             this.tbSearchBookmarks.ToolTipText = "Поиск";
@@ -716,6 +719,7 @@ namespace CatalogPdf
             // 
             this.tbSearchExplanation.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.tbSearchExplanation.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbSearchExplanation.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tbSearchExplanation.Name = "tbSearchExplanation";
             this.tbSearchExplanation.Size = new System.Drawing.Size(150, 25);
             this.tbSearchExplanation.ToolTipText = "Поиск";

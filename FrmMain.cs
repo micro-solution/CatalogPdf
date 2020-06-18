@@ -31,6 +31,7 @@ namespace CatalogPdf
         }
 
         #region Presenter  XMLDBlib 
+               
 
         /// <summary>
         /// Загрузить базу;
@@ -43,19 +44,38 @@ namespace CatalogPdf
             if (!Directory.Exists(path))
             {
                 lbDocName.Text = "Выберите папку с документами";
+                LockUI();
             }
             else
             {
                 try
-                {
-                    presenter = new DataPresenter(path);
-                    Text = $"CatalogPdf - [{path}]";
+                {                    
+                    presenter = DataPresenter.GetPresenter(path);
+                    UnlockUI();
+                    Text = $"CatalogPdf - [{path}]";                    
                     ShowData();
                 }
                 catch (Exception e)
                 {
                     MessageBox.Show(e.Message);
+                    LockUI();
                 }
+            }
+        }
+
+        private void LockUI()
+        {
+            foreach (ToolStripItem item in toolStripMain.Items)
+            {
+                if (item.Name != "menuCatalog") item.Enabled = false;
+            }
+        }
+
+        private void UnlockUI()
+        {
+            foreach (ToolStripItem item in toolStripMain.Items)
+            {
+                item.Enabled = true;
             }
         }
 
@@ -530,9 +550,15 @@ namespace CatalogPdf
         /// <param name="e"></param>
         private void обновитьКаталогToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+            RefeshPresenter();
+            
+        }
+
+        private void RefeshPresenter()
+        {
             presenter?.Dispose();
             InitPresenter();
-
         }
 
         /// <summary>
@@ -1441,10 +1467,7 @@ namespace CatalogPdf
             }
         }
 
-        private void toolStripMain_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
+   
 
 
         private void flowPanelComments_SizeChanged(object sender, EventArgs e)
