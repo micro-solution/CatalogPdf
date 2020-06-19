@@ -33,7 +33,6 @@
             this.toolStripMenuEditDocument = new System.Windows.Forms.ToolStripMenuItem();
             this.удалитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.открытьФайлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.добавитьФайлВКаталогToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lbTome = new System.Windows.Forms.Label();
             this.lbNumber = new System.Windows.Forms.Label();
             this.LbStartPage = new System.Windows.Forms.Label();
@@ -48,16 +47,15 @@
             this.contextMenuCatalogItem.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuEditDocument,
             this.удалитьToolStripMenuItem,
-            this.открытьФайлToolStripMenuItem,
-            this.добавитьФайлВКаталогToolStripMenuItem});
+            this.открытьФайлToolStripMenuItem});
             this.contextMenuCatalogItem.Name = "contextMenuCatalogItem";
             this.contextMenuCatalogItem.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuCatalogItem.Size = new System.Drawing.Size(217, 92);
+            this.contextMenuCatalogItem.Size = new System.Drawing.Size(181, 92);
             // 
             // toolStripMenuEditDocument
             // 
             this.toolStripMenuEditDocument.Name = "toolStripMenuEditDocument";
-            this.toolStripMenuEditDocument.Size = new System.Drawing.Size(216, 22);
+            this.toolStripMenuEditDocument.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuEditDocument.Text = "Редактировать";
             this.toolStripMenuEditDocument.Click += new System.EventHandler(this.ToolStripMenuEditDocument_Click);
             // 
@@ -65,7 +63,7 @@
             // 
             this.удалитьToolStripMenuItem.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.удалитьToolStripMenuItem.Name = "удалитьToolStripMenuItem";
-            this.удалитьToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.удалитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.удалитьToolStripMenuItem.Text = "Удалить";
             this.удалитьToolStripMenuItem.Click += new System.EventHandler(this.удалитьToolStripMenuItem_Click);
             // 
@@ -73,16 +71,9 @@
             // 
             this.открытьФайлToolStripMenuItem.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.открытьФайлToolStripMenuItem.Name = "открытьФайлToolStripMenuItem";
-            this.открытьФайлToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.открытьФайлToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.открытьФайлToolStripMenuItem.Text = "Открыть файл";
             this.открытьФайлToolStripMenuItem.Click += new System.EventHandler(this.открытьФайлToolStripMenuItem_Click);
-            // 
-            // добавитьФайлВКаталогToolStripMenuItem
-            // 
-            this.добавитьФайлВКаталогToolStripMenuItem.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.добавитьФайлВКаталогToolStripMenuItem.Name = "добавитьФайлВКаталогToolStripMenuItem";
-            this.добавитьФайлВКаталогToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
-            this.добавитьФайлВКаталогToolStripMenuItem.Text = "Добавить файл в каталог";
             // 
             // lbTome
             // 
@@ -172,7 +163,6 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuCatalogItem;
         private System.Windows.Forms.ToolStripMenuItem удалитьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem открытьФайлToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem добавитьФайлВКаталогToolStripMenuItem;
         private System.Windows.Forms.Label lbTome;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuEditDocument;
         private System.Windows.Forms.ToolTip toolTip1;

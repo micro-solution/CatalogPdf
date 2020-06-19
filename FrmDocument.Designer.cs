@@ -201,7 +201,6 @@
             this.TbAmountPages.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.TbAmountPages.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.TbAmountPages.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.TbAmountPages.Enabled = false;
             this.TbAmountPages.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.TbAmountPages.Location = new System.Drawing.Point(31, 16);
             this.TbAmountPages.Margin = new System.Windows.Forms.Padding(6);
