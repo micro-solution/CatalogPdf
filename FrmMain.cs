@@ -31,7 +31,7 @@ namespace CatalogPdf
         }
 
         #region Presenter  XMLDBlib 
-               
+
 
         /// <summary>
         /// Загрузить базу;
@@ -49,10 +49,10 @@ namespace CatalogPdf
             else
             {
                 try
-                {                    
+                {
                     presenter = DataPresenter.GetPresenter(path);
                     UnlockUI();
-                    Text = $"CatalogPdf - [{path}]";                    
+                    Text = $"CatalogPdf - [{path}]";
                     ShowData();
                 }
                 catch (Exception e)
@@ -140,7 +140,7 @@ namespace CatalogPdf
             string pageS = tbPage.Text;
             int pageI;
             if (!int.TryParse(pageS, out pageI))
-            { pageI = 1; }           
+            { pageI = 1; }
             return pageI;
         }
 
@@ -151,8 +151,8 @@ namespace CatalogPdf
         private void PageNextTextBox(int page)
         {
             ++page;
-            tbPage.Text = page.ToString();                
-            
+            tbPage.Text = page.ToString();
+
         }
         /// <summary>
         /// Переход на предыдущую страницу
@@ -272,13 +272,13 @@ namespace CatalogPdf
                 ToolStripTextBox textBox = (ToolStripTextBox)sender;
 
                 int page = PageFromTextBox();
-                     //показать последняя страница если пытаются выйти за пределы страниц тома
+                //показать последняя страница если пытаются выйти за пределы страниц тома
                 if (page >= presenter.LastPage)
                 {
-                    page=presenter.LastPage;
+                    page = presenter.LastPage;
                     textBox.Text = page.ToString();
-                }                
-                NavigateCatalog(page);                
+                }
+                NavigateCatalog(page);
                 textBox.Select();
                 textBox.SelectionStart = textBox.Text.Length;
                 onepress = false;
@@ -307,7 +307,7 @@ namespace CatalogPdf
 
                 pdfRenderer.Page = pageDoc;
                 ShowContentPage(page);
-            }            
+            }
         }
 
         /// <summary>
@@ -552,7 +552,7 @@ namespace CatalogPdf
         {
 
             RefeshPresenter();
-            
+
         }
 
         private void RefeshPresenter()
@@ -683,10 +683,10 @@ namespace CatalogPdf
         /// Добавляем метки томов
         /// </summary>
         /// <param name="currentTome"></param>
-        private void SetCatalogItems(int currentTome)
+        private void SetCatalogItems(int currentTome= -1)
         {
             PanelCatalog.Controls.Clear();
-            SortedSet<int> tomes = new SortedSet<int>();  
+            SortedSet<int> tomes = new SortedSet<int>();
             List<Document> docs = presenter.Catalog.Documents;
             docs.ForEach(d => tomes.Add(d.Tome));
 
@@ -729,9 +729,18 @@ namespace CatalogPdf
         /// <param name="tome"></param>
         private void SelectTome(int tome)
         {
-            presenter.CurrentTomeNumber = tome;
-            SetCatalogItems(tome);
-            tbPage.Text = "1";
+            if (presenter.CurrentTomeNumber != tome)
+            {
+                presenter.CurrentTomeNumber = tome;
+                SetCatalogItems(tome);
+                tbPage.Text = "1";
+            }
+            else
+            {
+                // Повторное выделение тома - скрыть документы
+                presenter.CurrentTomeNumber = -1;
+                SetCatalogItems();
+            }
         }
 
         /// <summary>
@@ -748,13 +757,13 @@ namespace CatalogPdf
             {
                 List<Document> SortedDocs = docs.
                     OrderBy(o => o.Number).ToList();
-                ProcessBar pb =  ProcessBar.Init("Добавление документов", SortedDocs.Count, 1, "Загрузка каталога Том: "+ tome);
+                ProcessBar pb = ProcessBar.Init("Добавление документов", SortedDocs.Count, 1, "Загрузка каталога Том: " + tome);
                 pb.Show();
                 for (int i = 0; i < SortedDocs.Count; i++)
-                {                       
+                {
                     if (pb.Cancel) break;
                     Document doc = SortedDocs[i];
-                    pb.Action(doc.Name + "№ " +i + " из " + pb.Count);                    
+                    pb.Action(doc.Name + "№ " + i + " из " + pb.Count);
                     AddLineCatalog(doc);
                 }
                 pb.Close();
@@ -830,7 +839,7 @@ namespace CatalogPdf
             }
             mousePressed = false;
             LineCatalogDocument line = (LineCatalogDocument)sender;
-           Document doc = presenter.Catalog.GetByPath(e.Data.GetData(DataFormats.Text).ToString());
+            Document doc = presenter.Catalog.GetByPath(e.Data.GetData(DataFormats.Text).ToString());
             if (doc != null)
             {
                 presenter.ChangeDocNumber(doc, line.DocNumber);
@@ -841,7 +850,7 @@ namespace CatalogPdf
         private void CatalogLine_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.Text))
-            {  
+            {
                 e.Effect = DragDropEffects.Move;
             }
             else
@@ -868,13 +877,13 @@ namespace CatalogPdf
 
                 frmDocument.Tome = doc.Tome;
                 frmDocument.TomeName = doc.TomeName;
-                frmDocument.Fullname = path;                            
+                frmDocument.Fullname = path;
                 frmDocument.Number = doc.Number;
                 frmDocument.PageStart = doc.StartPage;
                 frmDocument.NameDocument = doc.Name;
                 frmDocument.TypeDocument = doc.DocType;
                 frmDocument.Date = doc.Date;
-                frmDocument.AmountPage = doc.EndPage - doc.StartPage +1  ;
+                frmDocument.AmountPage = doc.EndPage - doc.StartPage + 1;
                 frmDocument.documents = presenter?.Catalog.Documents;
                 frmDocument.presenter = presenter;
                 frmDocument.Init();
@@ -1083,7 +1092,7 @@ namespace CatalogPdf
             {
                 mark = presenter?.Explanations.Bookmarks?.Where(b => b.ID == id)?.First();
             }
-            GotoBookmark(mark);             
+            GotoBookmark(mark);
         }
 
         private void GotoBookmark(Bookmark mark)
@@ -1095,7 +1104,7 @@ namespace CatalogPdf
                 {
                     ViewerShowDocument(mark?.Document);
                 }
-                tbPage.Text = mark.Reference.ToString();                 
+                tbPage.Text = mark.Reference.ToString();
             }
         }
 
@@ -1467,7 +1476,7 @@ namespace CatalogPdf
             }
         }
 
-   
+
 
 
         private void flowPanelComments_SizeChanged(object sender, EventArgs e)
@@ -1565,7 +1574,7 @@ namespace CatalogPdf
 
         private void fitWidth_Click(object sender, EventArgs e)
         {
-            pdfRenderer.Select();           
+            pdfRenderer.Select();
             pdfRenderer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitBest;
             pdfRenderer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitWidth;
             pdfRenderer.Refresh();

@@ -60,7 +60,7 @@
     <ApplicationIcon>application-pdf_36278.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>A39B55A4E01FFC62DFADAFD4C2F39222553AD3A9</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>1D34DD048DEEAEEC13D3CAF06AF6C4C7EC738375</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>
@@ -239,7 +239,6 @@
     <EmbeddedResource Include="TomMarck.resx">
       <DependentUpon>TomMarck.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="CatalogPdf_TemporaryKey.pfx" />
     <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

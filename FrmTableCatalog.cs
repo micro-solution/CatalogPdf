@@ -136,8 +136,7 @@ namespace CatalogPdf
                     default:
                         break;
                 }
-                presenter.Save();
-                GetData();
+                presenter.Save();               
                 // dataGridView1.Update();
             }
         }
@@ -195,12 +194,7 @@ namespace CatalogPdf
             dataGridView1.Columns[GetNumberColumn("Путь")].DefaultCellStyle = linkStyle;
         }
 
-        private void btnOK_Click(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.OK;
-            presenter.Save();
-            Close();
-        }
+     
 
 
         private int GetNumberColumn(string title)
@@ -349,5 +343,25 @@ namespace CatalogPdf
             presenter.Save();
             GetData();
         }
+
+        private void BtnCancel_Click(object sender, EventArgs e)
+        {
+         //   Close();
+        }      
+
+        private void btnApply_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.OK;
+            //UpdateDataGridChanges();
+            presenter.Save();
+            GetData();
+        }
+
+        private void UpdateDataGridChanges()
+        {
+
+        }
+
+        
     }
 }

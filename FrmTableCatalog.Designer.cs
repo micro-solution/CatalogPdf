@@ -30,10 +30,11 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmTableCatalog));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.btnOK = new System.Windows.Forms.Button();
+            this.btnUpdate = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnNumerDocumentByPage = new System.Windows.Forms.ToolStripButton();
             this.btnSetPageNumber = new System.Windows.Forms.ToolStripButton();
+            this.BtnCancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -61,16 +62,22 @@
             this.dataGridView1.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellMouseLeave);
             this.dataGridView1.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_ColumnHeaderMouseClick);
             // 
-            // btnOK
+            // btnUpdate
             // 
-            this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOK.Location = new System.Drawing.Point(837, 394);
-            this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(125, 24);
-            this.btnOK.TabIndex = 1;
-            this.btnOK.Text = "Принять";
-            this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            this.btnUpdate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnUpdate.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnUpdate.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.btnUpdate.Location = new System.Drawing.Point(689, 394);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnUpdate.Size = new System.Drawing.Size(148, 24);
+            this.btnUpdate.TabIndex = 1;
+            this.btnUpdate.Text = "Обновить таблицу";
+            this.btnUpdate.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Visible = false;
+            this.btnUpdate.Click += new System.EventHandler(this.btnApply_Click);
             // 
             // toolStrip1
             // 
@@ -104,18 +111,32 @@
             this.btnSetPageNumber.ToolTipText = "Расставить нумерацию страниц";
             this.btnSetPageNumber.Click += new System.EventHandler(this.btnSetPageNumber_Click);
             // 
+            // BtnCancel
+            // 
+            this.BtnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.BtnCancel.Location = new System.Drawing.Point(843, 394);
+            this.BtnCancel.Name = "BtnCancel";
+            this.BtnCancel.Size = new System.Drawing.Size(125, 24);
+            this.BtnCancel.TabIndex = 1;
+            this.BtnCancel.Text = "Выйти";
+            this.BtnCancel.UseVisualStyleBackColor = true;
+            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
+            // 
             // FrmTableCatalog
             // 
-            this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.BtnCancel;
             this.ClientSize = new System.Drawing.Size(989, 419);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.btnOK);
+            this.Controls.Add(this.BtnCancel);
+            this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.dataGridView1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmTableCatalog";
             this.Text = "Опись каталога";
+           
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
@@ -127,9 +148,10 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button btnOK;
+        private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton btnNumerDocumentByPage;
         private System.Windows.Forms.ToolStripButton btnSetPageNumber;
+        private System.Windows.Forms.Button BtnCancel;
     }
 }
