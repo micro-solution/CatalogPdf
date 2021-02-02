@@ -176,15 +176,13 @@ namespace CatalogPdf
         private void удалитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DeleteDoc.Invoke(FullName);
-            //Hide();
-            //Dispose();
+            Hide();
+            Dispose();
         }
 
         private void CatalogItem_Leave(object sender, EventArgs e)
         {
            // BackColor = Color.FromArgb(247, 250, 250);
         }
-
-
     }
 }

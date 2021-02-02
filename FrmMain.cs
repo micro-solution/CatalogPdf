@@ -1193,6 +1193,7 @@ namespace CatalogPdf
             try
             {
                 Document doc = presenter.Catalog.GetByPath(path);
+                
                 ViewerShowDocument(doc);
                 SetPageTextBox(doc.StartPage);
             }
@@ -1519,15 +1520,13 @@ namespace CatalogPdf
                 string name = frmAdd.NameNewDoc.Replace("\\", "");
                 string fullname = path + @"\" + name + ".pdf";
                 PdfFeatures features = new PdfFeatures();
-
                 try
                 {
-                    features.AddSpaceDoc(path, name, frmAdd.Description);
-                    //  presenter.Save();
+                    features.AddSpaceDoc(path, name, frmAdd.Description);                    
                     Document spaceDocument = presenter.Catalog.GetByPath(fullname);
-                    spaceDocument.AmountPage = frmAdd.AmountPages;
-                    if (presenter.CurrentDoc != null)
+                    if (spaceDocument != null && presenter.CurrentDoc != null)
                     {
+                        spaceDocument.AmountPage = frmAdd.AmountPages;
                         spaceDocument.Tome = presenter.CurrentDoc.Tome;
                         spaceDocument.Number = presenter.CurrentDoc.Number + 1;
                         spaceDocument.StartPage = presenter.CurrentDoc.StartPage + presenter.CurrentDoc.AmountPage;

@@ -1,6 +1,7 @@
 ﻿using PdfSharp.Drawing;
 using PdfSharp.Drawing.Layout;
 using PdfSharp.Pdf;
+using System.Threading;
 
 namespace CatalogPdf
 {
@@ -30,6 +31,7 @@ namespace CatalogPdf
             tf.DrawString(description, font, XBrushes.Black, rect, XStringFormats.TopLeft);
 
             document.Save(fullname);
+            Thread.Sleep(300);
             document.Dispose();
 
         }
