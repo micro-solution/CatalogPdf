@@ -69,7 +69,7 @@ namespace CatalogPdf
         {
 
             int row = e.RowIndex;
-            string path = dataGridView1.Rows[row].Cells[GetNumberColumn("Путь")].Value.ToString();
+            string path = dataGridView1.Rows[row].Cells[GetNumberColumn("Путь")].Value?.ToString()??"";
 
             XMLDBLib.Document doc = presenter.Catalog.GetByPath(path);
 
@@ -82,7 +82,7 @@ namespace CatalogPdf
                         doc.Tome = tome;
                         break;
                     case "Название тома":
-                        string tomeName = dataGridView1.Rows[row].Cells[GetNumberColumn("Название тома")].Value.ToString();
+                        string tomeName = dataGridView1.Rows[row].Cells[GetNumberColumn("Название тома")].Value?.ToString()??"";
                         doc.TomeName = tomeName;
                         break;
                     case "Номер":
@@ -90,7 +90,7 @@ namespace CatalogPdf
                         doc.Number = number;
                         break;
                     case "Название"://6:
-                        string name = dataGridView1.Rows[row].Cells[GetNumberColumn("Название")].Value.ToString();
+                        string name = dataGridView1.Rows[row].Cells[GetNumberColumn("Название")].Value?.ToString()??"";
                         if (!string.IsNullOrWhiteSpace(name))
                         {
                             doc.Name = name;
@@ -102,7 +102,7 @@ namespace CatalogPdf
                         doc.Date = date;
                         break;
                     case "Тип"://7:
-                        string type = dataGridView1.Rows[row].Cells[GetNumberColumn("Тип")].Value.ToString();
+                        string type = dataGridView1.Rows[row].Cells[GetNumberColumn("Тип")].Value?.ToString()??"";
                         if (!string.IsNullOrWhiteSpace(type))
                         {
                             doc.DocType = type;
@@ -132,11 +132,11 @@ namespace CatalogPdf
                         }
 
                         break;
-
                     default:
                         break;
                 }
-                presenter.Save();               
+                presenter.Save();
+                BtnUpdateTable.Visible = true;
                 // dataGridView1.Update();
             }
         }
@@ -346,22 +346,31 @@ namespace CatalogPdf
 
         private void BtnCancel_Click(object sender, EventArgs e)
         {
-         //   Close();
-        }      
-
-        private void btnApply_Click(object sender, EventArgs e)
-        {
+            //   Close();
             DialogResult = DialogResult.OK;
-            //UpdateDataGridChanges();
-            presenter.Save();
-            GetData();
-        }
+        }      
+           
 
         private void UpdateDataGridChanges()
         {
-
+           
+            //UpdateDataGridChanges();
+            presenter.Save();
+            GetData();
+            BtnUpdateTable.Visible = false;
+        }
+            
+        private void BtnUpdateTable_Click(object sender, EventArgs e)
+        {
+            UpdateDataGridChanges();
         }
 
-        
+        private void dataGridView1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.F)
+            {
+                UpdateDataGridChanges();
+            }
+        }
     }
 }
