@@ -104,11 +104,13 @@
             // 
             // tbPage
             // 
+            this.tbPage.Font = new System.Drawing.Font("Tahoma", 8.25F);
             this.tbPage.Name = "tbPage";
             this.tbPage.Size = new System.Drawing.Size(50, 42);
             this.tbPage.Text = "1";
             this.tbPage.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbPage.ToolTipText = "Переход на страницу";
+            this.tbPage.TextChanged += new System.EventHandler(this.tbPage_TextChanged);
             // 
             // btnNextPage
             // 

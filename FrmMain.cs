@@ -205,28 +205,30 @@ namespace CatalogPdf
                 if (oldPage == pdfRenderer.Page) { return; }
 
                 int referencePage = presenter.GetReferencePage(pdfRenderer.Page);
-                if (e.Delta > 0)
-                {
-                    if (pdfRenderer.Page + presenter.CurrentDoc.StartPage == presenter.CurrentDoc.StartPage)
-                    {
-                        TbxPageSetValue(referencePage - 1, true);
-                    }
-                    else
-                    {
-                        TbxPageSetValue(referencePage, true);
-                    }
-                }
-                else
-                {
-                    if (pdfRenderer.Page == (presenter.CurrentDoc.EndPage - presenter.CurrentDoc.StartPage))
-                    {
-                        TbxPageSetValue(referencePage + 1, true);
-                    }
-                    else
-                    {
-                        TbxPageSetValue(referencePage, true);
-                    }
-                }
+                TbxPageSetValue(referencePage, true);
+                //if (e.Delta > 0)
+                //{
+                //    if (pdfRenderer.Page + presenter.CurrentDoc.StartPage == presenter.CurrentDoc.StartPage)
+                //    {
+                //        //TbxPageSetValue(referencePage - 1, true);
+                //        TbxPageSetValue(referencePage , true);
+                //    }
+                //    else
+                //    {
+                //        TbxPageSetValue(referencePage, true);
+                //    }
+                //}
+                //else
+                //{
+                //    if (pdfRenderer.Page == (presenter.CurrentDoc.EndPage - presenter.CurrentDoc.StartPage))
+                //    {
+                //        TbxPageSetValue(referencePage, true);
+                //    }
+                //    else
+                //    {
+                //        TbxPageSetValue(referencePage, true);
+                //    }
+                //}
             }
         }
 
@@ -240,35 +242,33 @@ namespace CatalogPdf
             if (pdfRenderer.Page < pdfRenderer.Document.PageCount )
             {
                 if (oldPage == pdfRenderer.Page) { return; }
-
-
-                int referencePage = presenter.GetReferencePage(pdfRenderer.Page);
+                int referencePage = presenter.GetReferencePage(pdfRenderer.Page);               
                 TbxPageSetValue(referencePage, true);
 
-                Debug.WriteLine($"NewValue {e.NewValue}/ OldValue{e.OldValue}");
+                //Debug.WriteLine($"NewValue {e.NewValue}/ OldValue{e.OldValue}");
 
-                if (e.NewValue < e.OldValue)
-                {
-                    if (pdfRenderer.Page + presenter.CurrentDoc.StartPage == presenter.CurrentDoc.StartPage)
-                    {
-                        TbxPageSetValue(referencePage - 1, true);
-                    }
-                    else
-                    {
-                        TbxPageSetValue(referencePage, true);
-                    }
-                }
-                else
-                {
-                    if (pdfRenderer.Page == (presenter.CurrentDoc.EndPage - presenter.CurrentDoc.StartPage))
-                    {
-                        TbxPageSetValue(referencePage + 1, true);
-                    }
-                    else
-                    {
-                        TbxPageSetValue(referencePage, true);
-                    }
-                }
+                //if (e.NewValue < e.OldValue)
+                //{
+                //    if (pdfRenderer.Page + presenter.CurrentDoc.StartPage == presenter.CurrentDoc.StartPage)
+                //    {
+                //        TbxPageSetValue(referencePage - 1, true);
+                //    }
+                //    else
+                //    {
+                //        TbxPageSetValue(referencePage, true);
+                //    }
+                //}
+                //else
+                //{
+                //    if (pdfRenderer.Page == (presenter.CurrentDoc.EndPage - presenter.CurrentDoc.StartPage))
+                //    {
+                //        TbxPageSetValue(referencePage + 1, true);
+                //    }
+                //    else
+                //    {
+                //        TbxPageSetValue(referencePage, true);
+                //    }
+                //}
             }
         }
 
@@ -1627,18 +1627,20 @@ namespace CatalogPdf
         {
             pdfRenderer.Select();
             pdfRenderer.Zoom = 1;
-            pdfRenderer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitBest;
+            //pdfRenderer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitBest;
             pdfRenderer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitHeight;
-            pdfRenderer.Refresh();
+            pdfRenderer.Update();
+            //pdfRenderer.Refresh();
         }
 
         private void fitWidth_Click(object sender, EventArgs e)
         {
             pdfRenderer.Select();
             pdfRenderer.Zoom = 1;
-            pdfRenderer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitBest;
+         //   pdfRenderer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitBest;
             pdfRenderer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitWidth;
-            pdfRenderer.Refresh();
+            pdfRenderer.Update();
+            //pdfRenderer.Refresh();
         }
 
 
@@ -1697,55 +1699,55 @@ namespace CatalogPdf
             //}
         }
 
-        private void toolStripMain_SizeChanged(object sender, EventArgs e)
-        {
-            ChangeSizePanelControls();
-        }
-        private void ChangeSizePanelControls()
-        {
-            double widthDocumentName = lbDocName.Text.Length * lbDocName.Font.Size;
-            //Свободное место
-            double spaseWidth = toolStripMain.Width - WhidthControls;
-            string title = lbDocName.Text;
-            int len = (int)Math.Round(spaseWidth / lbDocName.Font.Size) + 3;
+        //private void toolStripMain_SizeChanged(object sender, EventArgs e)
+        //{
+        //    ChangeSizePanelControls();
+        //}
+        //private void ChangeSizePanelControls()
+        //{
+        //    double widthDocumentName = lbDocName.Text.Length * lbDocName.Font.Size;
+        //    //Свободное место
+        //    double spaseWidth = toolStripMain.Width - WhidthControls;
+        //    string title = lbDocName.Text;
+        //    int len = (int)Math.Round(spaseWidth / lbDocName.Font.Size) + 3;
 
 
-            //int index = title.Length - len;
-            if (spaseWidth - widthDocumentName < 10 && len > 5 && len < lbDocName.Text.Length)
-            {
-                lbDocName.Text = title.Remove(len) + "...";
-            }
-            else if (presenter?.CurrentDoc != null && lbDocName.Text != presenter.CurrentDoc.Name)
-            {
-                lbDocName.Text = presenter.CurrentDoc.Name;
-            }
-            toolStripSpace.Width = (int)Math.Round((spaseWidth - lbDocName.Width) / 2);
+        //    //int index = title.Length - len;
+        //    if (spaseWidth - widthDocumentName < 10 && len > 5 && len < lbDocName.Text.Length)
+        //    {
+        //        lbDocName.Text = title.Remove(len) + "...";
+        //    }
+        //    else if (presenter?.CurrentDoc != null && lbDocName.Text != presenter.CurrentDoc.Name)
+        //    {
+        //        lbDocName.Text = presenter.CurrentDoc.Name;
+        //    }
+        //    //toolStripSpace.Width = (int)Math.Round((spaseWidth - lbDocName.Width) / 2);
 
-        }
+        //}
 
 
-        private void lbDocName_TextChanged(object sender, EventArgs e)
-        {
-            ChangeSizePanelControls();
-        }
+        //private void lbDocName_TextChanged(object sender, EventArgs e)
+        //{
+        //    ChangeSizePanelControls();
+        //}
 
-        private double WhidthControls
-        {
-            get
-            {
-                double width = 0;
-                toolStripSpace.Width = 0;
-                foreach (ToolStripItem item in toolStripMain.Items)
-                {
-                    if (item.Name != "lbDocName")
-                    {
-                        width += item.Width;
+        //private double WhidthControls
+        //{
+        //    get
+        //    {
+        //        double width = 0;
+        //        //toolStripSpace.Width = 0;
+        //        foreach (ToolStripItem item in toolStripMain.Items)
+        //        {
+        //            if (item.Name != "lbDocName")
+        //            {
+        //                width += item.Width;
 
-                    }
-                }
-                return width;
-            }
-        }
+        //            }
+        //        }
+        //        return width;
+        //    }
+        //}
         private void btnFullScreen_Click(object sender, EventArgs e)
         {
             FullScreen fullScreen = new FullScreen();
@@ -1755,7 +1757,7 @@ namespace CatalogPdf
             fullScreen.SetLocationPanel();
         }
 
-
+      
     }
 
 

@@ -24,7 +24,6 @@ namespace CatalogPdf
         public FullScreen()
         {
             InitializeComponent();
-
             Controls.Add(fpPanel);           
         } 
 
@@ -33,12 +32,17 @@ namespace CatalogPdf
             if (Doc != null)
             {               
                 View(Doc.File.FullName);
+                pdfRenderer.MouseWheel += PdfRenderer_MouseWheel;
             }
         }
 
-        void View(string fileName)
+        private void PdfRenderer_MouseWheel(object sender, MouseEventArgs e)
         {
-            
+            PageTb();
+        }
+
+        void View(string fileName)
+        {            
             documentV = PdfiumViewer.PdfDocument.Load(fileName);
             pdfRenderer.Load(documentV);
         }    
@@ -57,11 +61,9 @@ namespace CatalogPdf
         private void rotateLeft_Click_1(object sender, EventArgs e)
         {
             RotationLeft();
-           // pdfRenderer.RotateLeft();
         }
         private void rotateRight_Click_1(object sender, EventArgs e)
         {
-            //pdfRenderer.RotateRight();
             RotationRight();
         }
         private void RotationLeft()
@@ -70,7 +72,7 @@ namespace CatalogPdf
             if (rotateIx > 3) rotateIx = 0;
             if (rotateIx < 0) rotateIx = 3;
             pdfRenderer.Document.RotatePage(pdfRenderer.Page, (PdfRotation)rotateIx);
-           // pdfRenderer.Zoom = zoom;
+            pdfRenderer.Zoom = 1;
             pdfRenderer.Refresh();
         }
         private void RotationRight()
@@ -79,7 +81,7 @@ namespace CatalogPdf
             if (rotateIx > 3) rotateIx = 0;
             if (rotateIx < 0) rotateIx = 3;
             pdfRenderer.Document.RotatePage(pdfRenderer.Page, (PdfRotation)rotateIx);
-            //pdfRenderer.Zoom = pdfRenderer.Zoom;
+            pdfRenderer.Zoom = 1;
             pdfRenderer.Refresh();
 
         }
@@ -104,8 +106,7 @@ namespace CatalogPdf
 
         private void fitWidth_Click_1(object sender, EventArgs e)
         {
-            pdfRenderer.Select();
-            //pdfRenderer.s
+            pdfRenderer.Select();           
             pdfRenderer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitBest;
             pdfRenderer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitWidth;
             pdfRenderer.Refresh();
@@ -118,22 +119,31 @@ namespace CatalogPdf
 
         private void pdfRenderer_Scroll(object sender, ScrollEventArgs e)
         {
-            tbPage.Text = pdfRenderer.Page.ToString();
+            PageTb();
+        }
+        private void PageTb()
+        {
+            int page = pdfRenderer.Page +1; 
+            tbPage.Text = page.ToString();
         }
 
         private void btnNextPage_Click(object sender, EventArgs e)
         {
             pdfRenderer.Page = pdfRenderer.Page + 1;
-            tbPage.Text = pdfRenderer.Page.ToString();
+            PageTb();
         }
 
         private void btnPreviousPage_Click(object sender, EventArgs e)
         {
             pdfRenderer.Page = pdfRenderer.Page - 1;
-            tbPage.Text = pdfRenderer.Page.ToString();
+            PageTb();
         }
 
-      
-        
+        private void tbPage_TextChanged(object sender, EventArgs e)
+        {
+            int.TryParse(tbPage.Text, out int p);
+            int page = p >= 1 ? p - 1 : 0;
+            pdfRenderer.Page = page;
+        }
     }
 }
