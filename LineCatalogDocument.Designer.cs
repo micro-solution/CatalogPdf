@@ -145,8 +145,7 @@
             this.Cursor = System.Windows.Forms.Cursors.NoMoveVert;
             this.Name = "LineCatalogDocument";
             this.Size = new System.Drawing.Size(323, 32);
-            this.Enter += new System.EventHandler(this.CatalogItem_Enter);
-            this.Leave += new System.EventHandler(this.CatalogItem_Leave);
+            this.Enter += new System.EventHandler(this.CatalogItem_Enter);          
             this.contextMenuCatalogItem.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

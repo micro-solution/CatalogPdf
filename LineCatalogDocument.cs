@@ -47,9 +47,7 @@ namespace CatalogPdf
                 LbTitleDocument.Text = NameDoc;
                 LbStartPage.Text = "стр. " + PageStart.ToString();
             }
-        }
-
-        //private void 
+        }    
 
 
         private bool clicked;
@@ -76,12 +74,10 @@ namespace CatalogPdf
                 ShowDoc.Invoke(FullName);
             }
         }
-        //private void activa
-
-
+       
         private void CatalogItem_Enter(object sender, EventArgs e)
         {
-            BackColor = UserSettings.catalogDocItem_ActiveColor;//    Color.FromArgb(240, 246, 255);
+            BackColor = UserSettings.catalogDocItem_ActiveColor; // Color.FromArgb(240, 246, 255);
             ShowDoc.Invoke(FullName);
         }
 
@@ -179,10 +175,6 @@ namespace CatalogPdf
             Hide();
             Dispose();
         }
-
-        private void CatalogItem_Leave(object sender, EventArgs e)
-        {
-           // BackColor = Color.FromArgb(247, 250, 250);
-        }
+       
     }
 }

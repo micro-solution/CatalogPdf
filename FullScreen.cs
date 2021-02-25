@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PdfiumViewer;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -55,12 +56,35 @@ namespace CatalogPdf
 
         private void rotateLeft_Click_1(object sender, EventArgs e)
         {
-            pdfRenderer.RotateLeft();
+            RotationLeft();
+           // pdfRenderer.RotateLeft();
         }
         private void rotateRight_Click_1(object sender, EventArgs e)
         {
-            pdfRenderer.RotateRight();
+            //pdfRenderer.RotateRight();
+            RotationRight();
         }
+        private void RotationLeft()
+        {
+            rotateIx--;
+            if (rotateIx > 3) rotateIx = 0;
+            if (rotateIx < 0) rotateIx = 3;
+            pdfRenderer.Document.RotatePage(pdfRenderer.Page, (PdfRotation)rotateIx);
+           // pdfRenderer.Zoom = zoom;
+            pdfRenderer.Refresh();
+        }
+        private void RotationRight()
+        {
+            rotateIx++;
+            if (rotateIx > 3) rotateIx = 0;
+            if (rotateIx < 0) rotateIx = 3;
+            pdfRenderer.Document.RotatePage(pdfRenderer.Page, (PdfRotation)rotateIx);
+            //pdfRenderer.Zoom = pdfRenderer.Zoom;
+            pdfRenderer.Refresh();
+
+        }
+        int rotateIx = 0;
+
         private void zoomIn_Click(object sender, EventArgs e)
         {
             pdfRenderer.ZoomIn();
