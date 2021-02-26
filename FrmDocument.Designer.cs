@@ -325,7 +325,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(436, 364);
+            this.ClientSize = new System.Drawing.Size(436, 365);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.groupBox5);
@@ -343,6 +343,7 @@
             this.Name = "FrmDocument";
             this.Text = "Документ";
             this.TopMost = true;
+            this.Load += new System.EventHandler(this.FrmDocument_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox4.ResumeLayout(false);

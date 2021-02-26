@@ -33,6 +33,7 @@ namespace CatalogPdf
             {               
                 View(Doc.File.FullName);
                 pdfRenderer.MouseWheel += PdfRenderer_MouseWheel;
+                pdfRenderer.ZoomFactor = 1.05;
             }
         }
 

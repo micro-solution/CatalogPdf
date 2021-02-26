@@ -69,7 +69,7 @@ namespace CatalogPdf
         {
 
             int row = e.RowIndex;
-            string path = dataGridView1.Rows[row].Cells[GetNumberColumn("Путь")].Value?.ToString()??"";
+            string path = dataGridView1.Rows[row].Cells[GetNumberColumn("Путь")].Value?.ToString() ?? "";
 
             XMLDBLib.Document doc = presenter.Catalog.GetByPath(path);
 
@@ -82,7 +82,7 @@ namespace CatalogPdf
                         doc.Tome = tome;
                         break;
                     case "Название тома":
-                        string tomeName = dataGridView1.Rows[row].Cells[GetNumberColumn("Название тома")].Value?.ToString()??"";
+                        string tomeName = dataGridView1.Rows[row].Cells[GetNumberColumn("Название тома")].Value?.ToString() ?? "";
                         doc.TomeName = tomeName;
                         break;
                     case "Номер":
@@ -90,7 +90,7 @@ namespace CatalogPdf
                         doc.Number = number;
                         break;
                     case "Название"://6:
-                        string name = dataGridView1.Rows[row].Cells[GetNumberColumn("Название")].Value?.ToString()??"";
+                        string name = dataGridView1.Rows[row].Cells[GetNumberColumn("Название")].Value?.ToString() ?? "";
                         if (!string.IsNullOrWhiteSpace(name))
                         {
                             doc.Name = name;
@@ -102,7 +102,7 @@ namespace CatalogPdf
                         doc.Date = date;
                         break;
                     case "Тип"://7:
-                        string type = dataGridView1.Rows[row].Cells[GetNumberColumn("Тип")].Value?.ToString()??"";
+                        string type = dataGridView1.Rows[row].Cells[GetNumberColumn("Тип")].Value?.ToString() ?? "";
                         if (!string.IsNullOrWhiteSpace(type))
                         {
                             doc.DocType = type;
@@ -132,6 +132,17 @@ namespace CatalogPdf
                         }
 
                         break;
+                    case "Конец":
+                        string endPageStr = dataGridView1.Rows[row].Cells[GetNumberColumn("Конец")].Value.ToString();
+
+                        if (int.TryParse(endPageStr, out int endP))
+                        {
+                            int.TryParse(dataGridView1.Rows[row].Cells[GetNumberColumn("Начало")].Value.ToString(), out int start);
+                            int.TryParse(dataGridView1.Rows[row].Cells[GetNumberColumn("Страниц")].Value.ToString(), out int amount);
+                            doc.AmountPage = endP - start + 1;
+                        }
+
+                        break;
                     default:
                         break;
                 }
@@ -151,7 +162,7 @@ namespace CatalogPdf
             dataGridView1.Columns[i].Visible = false;  //HeaderText = "Код"; //№0
             dataGridView1.Columns[i].Width = 0;
 
-            dataGridView1.Columns[++i].HeaderText = "Том";  //№1
+            dataGridView1.Columns[++i].HeaderText = "Том"; //№1
             dataGridView1.Columns[i].Width = 36;
 
             dataGridView1.Columns[++i].HeaderText = "Номер"; //№3
@@ -194,7 +205,7 @@ namespace CatalogPdf
             dataGridView1.Columns[GetNumberColumn("Путь")].DefaultCellStyle = linkStyle;
         }
 
-     
+
 
 
         private int GetNumberColumn(string title)
@@ -320,7 +331,7 @@ namespace CatalogPdf
             }
             foreach (int tome in tomes)
             {
-                int endPage = 0;
+                int startPage = 0;
                 int num = 0;
                 for (int i = 0; i < rows; i++)
                 {
@@ -330,11 +341,9 @@ namespace CatalogPdf
                         string path = dataGridView1.Rows[i].Cells[GetNumberColumn("Путь")].Value.ToString();
                         XMLDBLib.Document doc = presenter.Catalog.GetByPath(path);
                         doc.Number = ++num;
-                        doc.StartPage = ++endPage;
-                        doc.EndPage = doc.StartPage + doc.AmountPage-1;
-                        endPage = doc.EndPage;
-                        //dataGridView1.Rows[i].Cells[GetNumberColumn("Номер")].Value=num ;
-                        // dataGridView1.Rows[i].Cells[GetNumberColumn("Том")].Value;
+                        doc.StartPage = ++startPage;
+                        doc.EndPage = doc.StartPage + doc.AmountPage - 1;
+                        startPage = doc.EndPage;
 
                     }
                 }
@@ -348,18 +357,16 @@ namespace CatalogPdf
         {
             //   Close();
             DialogResult = DialogResult.OK;
-        }      
-           
+        }
+
 
         private void UpdateDataGridChanges()
         {
-           
-            //UpdateDataGridChanges();
             presenter.Save();
             GetData();
             BtnUpdateTable.Visible = false;
         }
-            
+
         private void BtnUpdateTable_Click(object sender, EventArgs e)
         {
             UpdateDataGridChanges();

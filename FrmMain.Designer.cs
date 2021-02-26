@@ -56,21 +56,21 @@ namespace CatalogPdf
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.AddExplanation = new System.Windows.Forms.ToolStripButton();
             this.AddBookmark = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripTBoxZoom = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.btnFullScreen = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
-            this.rotateLeft = new System.Windows.Forms.ToolStripButton();
+            this.toolStripTBoxZoom = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.rotateRight = new System.Windows.Forms.ToolStripButton();
+            this.rotateLeft = new System.Windows.Forms.ToolStripButton();
             this.fitHeight = new System.Windows.Forms.ToolStripButton();
             this.fitWidth = new System.Windows.Forms.ToolStripButton();
-            this.btnFullScreen = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnPreviousPage = new System.Windows.Forms.ToolStripButton();
-            this.tbPage = new System.Windows.Forms.ToolStripTextBox();
             this.btnNextPage = new System.Windows.Forms.ToolStripButton();
+            this.tbPage = new System.Windows.Forms.ToolStripTextBox();
+            this.btnPreviousPage = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.splitConteiner = new System.Windows.Forms.SplitContainer();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -358,6 +358,12 @@ namespace CatalogPdf
             this.AddBookmark.ToolTipText = "Новая закладка";
             this.AddBookmark.Click += new System.EventHandler(this.AddBookmark_Click);
             // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 41);
+            // 
             // toolStripButton1
             // 
             this.toolStripButton1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -372,36 +378,17 @@ namespace CatalogPdf
             this.toolStripButton1.ToolTipText = "Открыть в стандартном приложении";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
-            // toolStripSeparator6
+            // btnFullScreen
             // 
-            this.toolStripSeparator6.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 41);
-            // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 41);
-            // 
-            // toolStripButton7
-            // 
-            this.toolStripButton7.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripButton7.AutoSize = false;
-            this.toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton7.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton7.Image")));
-            this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton7.Name = "toolStripButton7";
-            this.toolStripButton7.Size = new System.Drawing.Size(38, 38);
-            this.toolStripButton7.Text = "Уменьшить";
-            this.toolStripButton7.Click += new System.EventHandler(this.toolStripButton7_Click);
-            // 
-            // toolStripTBoxZoom
-            // 
-            this.toolStripTBoxZoom.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripTBoxZoom.Name = "toolStripTBoxZoom";
-            this.toolStripTBoxZoom.ReadOnly = true;
-            this.toolStripTBoxZoom.Size = new System.Drawing.Size(50, 41);
+            this.btnFullScreen.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnFullScreen.AutoSize = false;
+            this.btnFullScreen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnFullScreen.Image = ((System.Drawing.Image)(resources.GetObject("btnFullScreen.Image")));
+            this.btnFullScreen.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnFullScreen.Name = "btnFullScreen";
+            this.btnFullScreen.Size = new System.Drawing.Size(38, 38);
+            this.btnFullScreen.Text = "Полноэкранный режим";
+            this.btnFullScreen.Click += new System.EventHandler(this.btnFullScreen_Click);
             // 
             // toolStripButton6
             // 
@@ -415,17 +402,31 @@ namespace CatalogPdf
             this.toolStripButton6.Text = "Увеличить";
             this.toolStripButton6.Click += new System.EventHandler(this.toolStripButton6_Click_1);
             // 
-            // rotateLeft
+            // toolStripTBoxZoom
             // 
-            this.rotateLeft.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.rotateLeft.AutoSize = false;
-            this.rotateLeft.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.rotateLeft.Image = ((System.Drawing.Image)(resources.GetObject("rotateLeft.Image")));
-            this.rotateLeft.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.rotateLeft.Name = "rotateLeft";
-            this.rotateLeft.Size = new System.Drawing.Size(38, 38);
-            this.rotateLeft.Text = "Повернуть против часовой";
-            this.rotateLeft.Click += new System.EventHandler(this.rotateLeft_Click);
+            this.toolStripTBoxZoom.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripTBoxZoom.Font = new System.Drawing.Font("Tahoma", 8.25F);
+            this.toolStripTBoxZoom.Name = "toolStripTBoxZoom";
+            this.toolStripTBoxZoom.ReadOnly = true;
+            this.toolStripTBoxZoom.Size = new System.Drawing.Size(50, 41);
+            // 
+            // toolStripButton7
+            // 
+            this.toolStripButton7.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripButton7.AutoSize = false;
+            this.toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton7.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton7.Image")));
+            this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton7.Name = "toolStripButton7";
+            this.toolStripButton7.Size = new System.Drawing.Size(38, 38);
+            this.toolStripButton7.Text = "Уменьшить";
+            this.toolStripButton7.Click += new System.EventHandler(this.toolStripButton7_Click);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 41);
             // 
             // rotateRight
             // 
@@ -438,6 +439,18 @@ namespace CatalogPdf
             this.rotateRight.Size = new System.Drawing.Size(38, 38);
             this.rotateRight.Text = "Повернуть по часовой";
             this.rotateRight.Click += new System.EventHandler(this.rotateRight_Click);
+            // 
+            // rotateLeft
+            // 
+            this.rotateLeft.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.rotateLeft.AutoSize = false;
+            this.rotateLeft.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rotateLeft.Image = ((System.Drawing.Image)(resources.GetObject("rotateLeft.Image")));
+            this.rotateLeft.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rotateLeft.Name = "rotateLeft";
+            this.rotateLeft.Size = new System.Drawing.Size(38, 38);
+            this.rotateLeft.Text = "Повернуть против часовой";
+            this.rotateLeft.Click += new System.EventHandler(this.rotateLeft_Click);
             // 
             // fitHeight
             // 
@@ -463,48 +476,11 @@ namespace CatalogPdf
             this.fitWidth.Text = "Вписать по ширине";
             this.fitWidth.Click += new System.EventHandler(this.fitWidth_Click);
             // 
-            // btnFullScreen
-            // 
-            this.btnFullScreen.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnFullScreen.AutoSize = false;
-            this.btnFullScreen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnFullScreen.Image = ((System.Drawing.Image)(resources.GetObject("btnFullScreen.Image")));
-            this.btnFullScreen.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnFullScreen.Name = "btnFullScreen";
-            this.btnFullScreen.Size = new System.Drawing.Size(38, 38);
-            this.btnFullScreen.Text = "Полноэкранный режим";
-            this.btnFullScreen.Click += new System.EventHandler(this.btnFullScreen_Click);
-            // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 41);
-            // 
-            // btnPreviousPage
-            // 
-            this.btnPreviousPage.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnPreviousPage.AutoSize = false;
-            this.btnPreviousPage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnPreviousPage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnPreviousPage.Image = ((System.Drawing.Image)(resources.GetObject("btnPreviousPage.Image")));
-            this.btnPreviousPage.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnPreviousPage.Name = "btnPreviousPage";
-            this.btnPreviousPage.Size = new System.Drawing.Size(28, 28);
-            this.btnPreviousPage.Text = "Предыдущая страница";
-            this.btnPreviousPage.Click += new System.EventHandler(this.btnPreviousPage_Click);
-            // 
-            // tbPage
-            // 
-            this.tbPage.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tbPage.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.tbPage.Name = "tbPage";
-            this.tbPage.Size = new System.Drawing.Size(50, 41);
-            this.tbPage.Text = "1";
-            this.tbPage.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.tbPage.ToolTipText = "Переход на страницу";
-            this.tbPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPage_KeyPress);
-            this.tbPage.TextChanged += new System.EventHandler(this.tbPage_TextChanged);
             // 
             // btnNextPage
             // 
@@ -518,6 +494,31 @@ namespace CatalogPdf
             this.btnNextPage.Size = new System.Drawing.Size(28, 28);
             this.btnNextPage.Text = "Следующая страница";
             this.btnNextPage.Click += new System.EventHandler(this.btnNextPage_Click);
+            // 
+            // tbPage
+            // 
+            this.tbPage.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tbPage.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.tbPage.Name = "tbPage";
+            this.tbPage.Size = new System.Drawing.Size(50, 41);
+            this.tbPage.Text = "1";
+            this.tbPage.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbPage.ToolTipText = "Переход на страницу";
+            this.tbPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPage_KeyPress);
+            this.tbPage.TextChanged += new System.EventHandler(this.tbPage_TextChanged);
+            // 
+            // btnPreviousPage
+            // 
+            this.btnPreviousPage.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnPreviousPage.AutoSize = false;
+            this.btnPreviousPage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnPreviousPage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnPreviousPage.Image = ((System.Drawing.Image)(resources.GetObject("btnPreviousPage.Image")));
+            this.btnPreviousPage.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnPreviousPage.Name = "btnPreviousPage";
+            this.btnPreviousPage.Size = new System.Drawing.Size(28, 28);
+            this.btnPreviousPage.Text = "Предыдущая страница";
+            this.btnPreviousPage.Click += new System.EventHandler(this.btnPreviousPage_Click);
             // 
             // toolStripSeparator4
             // 

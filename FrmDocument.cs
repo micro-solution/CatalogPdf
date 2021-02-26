@@ -20,7 +20,6 @@ namespace CatalogPdf
         public string Fullname { get; set; }
         public string NameDocument { get; set; }
         public string TomeName { get; set; }
-
         public int Number { get; set; }
         public int PageStart { get; set; }
         public int AmountPage { get; set; }
@@ -36,8 +35,7 @@ namespace CatalogPdf
         public FrmDocument()
         {
             InitializeComponent();
-            DialogResult = DialogResult.None;
-          
+            DialogResult = DialogResult.None;          
         }
 
         /// <summary>
@@ -80,7 +78,7 @@ namespace CatalogPdf
             }
 
             if (!string.IsNullOrWhiteSpace(TbAmountPages.Text))
-            {
+            { 
                 AmountPage = int.Parse(TbAmountPages.Text);
             }
 
@@ -91,12 +89,10 @@ namespace CatalogPdf
 
             string fildTome = TbTome.Text;
             if (!string.IsNullOrWhiteSpace(fildTome))
-            { Tome = int.Parse(fildTome); }
-
+            { Tome = int.Parse(fildTome);}
             Date = dateTimePicker1.Value;
             TypeDocument = tbTypeDocument.Text;
             TomeName = tbTomeName.Text;
-
             Hide();
         }
 
@@ -202,6 +198,11 @@ namespace CatalogPdf
         private void btnCancel_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void FrmDocument_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

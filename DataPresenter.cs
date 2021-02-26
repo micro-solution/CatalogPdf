@@ -343,7 +343,8 @@ namespace CatalogPdf
             for (int i = 0; i < docs.Count; i++)
             {
                 Document doc = docs[i];
-                doc.Name = doc.Name ?? DataPresenter.GetShortDocName(doc);               
+                doc.Name = doc.Name ?? DataPresenter.GetShortDocName(doc);
+                doc.AmountPage = doc.EndPage - doc.StartPage+1;
             }
             Save();
         }
@@ -351,7 +352,7 @@ namespace CatalogPdf
         
         public void SetPages()
         {
-            GetAmountPages();            
+           // GetAmountPages();            
             SetBookmarksPages();
         }
         /// <summary>
@@ -380,11 +381,8 @@ namespace CatalogPdf
             foreach (Document doc in docs)
             {
                 if (doc.AmountPage == 0)
-                {
-                    if    (doc.AmountPage == 0)
-                    {
-                    doc.AmountPage = GetCountPages(doc);
-                    }
+                {                   
+                    doc.AmountPage = GetCountPages(doc);                 
                 }
            }
         }                       
@@ -464,17 +462,17 @@ namespace CatalogPdf
         }
 
         public int GetReferencePage(int pageDoc)
-        {
+        {            
             return CurrentDoc.StartPage + pageDoc;
         }
         internal void NewDocument(FileInfo fileInfo)
         {
             AddDocument(fileInfo);
             Document doc = Catalog.GetByPath(fileInfo.FullName);
-
-            // doc.AmountPage = GetCountPages(doc);
-            doc.Name = GetShortDocName(doc);
-           // Save(); Был баг файл занят другим процессом 
+          //doc.AmountPage = GetCountPages(doc);
+          doc.Name = GetShortDocName(doc);
+       
+       // Save(); Был баг файл занят другим процессом 
         }
               
         /// <summary>
@@ -522,10 +520,7 @@ namespace CatalogPdf
             bm.Page = page - document.StartPage + 1;
             bm.Content = content;
             bm.Number = 1 + GetLastNumberBookmarks();
-
             Save();
-
-
             return bm;
         }
         public Bookmark AddExplanation(string title, int page, string content)
@@ -551,8 +546,7 @@ namespace CatalogPdf
                                     string title,
                                     int page,
                                     string content,
-                                    typeSticker type
-            )
+                                    typeSticker type)
         {
             try
             {

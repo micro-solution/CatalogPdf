@@ -15,16 +15,11 @@ namespace CatalogPdf
         public delegate void UserChanges(string newName, string path);
         public delegate void UserChangeDocFile(string path);
         public delegate void UserChangeDocNum(int docNumber, string path);
-
-
-
         public event UserChanges ChangeDocName;
         public event UserChangeDocNum ChangeDoc;
         public event UserChangeDocFile ShowDoc;
         public event UserChangeDocFile DeleteDoc;
-        
-
-       
+               
         public LineCatalogDocument()
         {
             InitializeComponent();
