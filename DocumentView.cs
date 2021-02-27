@@ -21,9 +21,6 @@
 
         public string DateCreate { get; set; }
         public string FullName { get; set; }
-
-
-
-
+        public int Row { get; set; }
     }
 }

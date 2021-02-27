@@ -138,7 +138,7 @@ namespace CatalogPdf
                         if (int.TryParse(endPageStr, out int endP))
                         {
                             int.TryParse(dataGridView1.Rows[row].Cells[GetNumberColumn("Начало")].Value.ToString(), out int start);
-                            int.TryParse(dataGridView1.Rows[row].Cells[GetNumberColumn("Страниц")].Value.ToString(), out int amount);
+                           // int.TryParse(dataGridView1.Rows[row].Cells[GetNumberColumn("Страниц")].Value.ToString(), out int amount);
                             doc.AmountPage = endP - start + 1;
                         }
 
@@ -198,6 +198,10 @@ namespace CatalogPdf
 
             dataGridView1.Columns[++i].HeaderText = "Путь";//№10
             dataGridView1.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            dataGridView1.Columns[++i].Visible = false;
+            dataGridView1.Columns[i].HeaderText = "Стока";//№6
+            dataGridView1.Columns[i].Width = 0;
 
             DataGridViewCellStyle linkStyle = new DataGridViewCellStyle();
             linkStyle.Font = new Font(FontFamily.GenericSansSerif, 8, FontStyle.Underline);
@@ -324,30 +328,36 @@ namespace CatalogPdf
             if (rows == 0) return;
             SortData("Номер");
             SortedSet<int> tomes = new SortedSet<int>();
+
+            List<DocumentView> documents = new List<DocumentView>();
             for (int i = 0; i < rows; i++)
             {
-                int tome = int.TryParse(dataGridView1.Rows[i].Cells[GetNumberColumn("Том")].Value.ToString(), out int t) ? t : 0;
+                DocumentView doc = new DocumentView();
+                doc.Row = i;
+                int.TryParse(dataGridView1.Rows[i].Cells[GetNumberColumn("Том")].Value.ToString(), out int tome);
+                doc.Tome = tome;
+                int.TryParse(dataGridView1.Rows[i].Cells[GetNumberColumn("Номер")].Value.ToString(), out int numberDoc);
+                doc.Number = numberDoc;
+                int.TryParse(dataGridView1.Rows[i].Cells[GetNumberColumn("Начало")].Value.ToString(), out int start);
+                doc.StartPage = start;
+                string path = dataGridView1.Rows[i].Cells[GetNumberColumn("Путь")].Value.ToString();
+                doc.FullName = path;
+                documents.Add(doc);
                 tomes.Add(tome);
             }
             foreach (int tome in tomes)
             {
+                List<DocumentView> documentsSort = documents.Where(d => d.Tome == tome).OrderBy(a => a.Number).ThenBy(b => b.StartPage).ToList();
                 int startPage = 0;
                 int num = 0;
-                for (int i = 0; i < rows; i++)
+                foreach (DocumentView documentView in documentsSort)
                 {
-                    int tomeRow = int.TryParse(dataGridView1.Rows[i].Cells[GetNumberColumn("Том")].Value.ToString(), out int t) ? t : 0;
-                    if (tomeRow == tome)
-                    {
-                        string path = dataGridView1.Rows[i].Cells[GetNumberColumn("Путь")].Value.ToString();
-                        XMLDBLib.Document doc = presenter.Catalog.GetByPath(path);
-                        doc.Number = ++num;
-                        doc.StartPage = ++startPage;
-                        doc.EndPage = doc.StartPage + doc.AmountPage - 1;
-                        startPage = doc.EndPage;
-
-                    }
+                    XMLDBLib.Document doc = presenter.Catalog.GetByPath(documentView.FullName);
+                    doc.Number = ++num;
+                    doc.StartPage = ++startPage;
+                    doc.EndPage = doc.StartPage + doc.AmountPage - 1;
+                    startPage = doc.EndPage;
                 }
-
             }
             presenter.Save();
             GetData();

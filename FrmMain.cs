@@ -191,7 +191,8 @@ namespace CatalogPdf
             }
         }
 
-
+      //  bool flagWheel = false;
+        DateTime flagWheelDate =default ;
         /// <summary>
         /// Менять страницу при вращении колеса мыши 
         /// </summary>
@@ -199,33 +200,39 @@ namespace CatalogPdf
         /// <param name="e"></param>
         private void PdfRenderer1_MouseWheel(object sender, MouseEventArgs e)
         {
-            if (System.Windows.Forms.Control.ModifierKeys == Keys.Control) return;
+            if (System.Windows.Forms.Control.ModifierKeys == Keys.Control ) return;
+            TimeSpan timeSpan =DateTime.Now.Subtract(flagWheelDate);
+           
+            if (timeSpan.TotalMilliseconds<300) return;  
 
-            int referencePage = presenter.GetReferencePage(pdfRenderer.Page);
-            SetPageTextBox(referencePage);
-            if (e.Delta > 0)
-            {
-                if (pdfRenderer.Page + presenter.CurrentDoc.StartPage == presenter.CurrentDoc.StartPage)
-                {
-                    TbxPageSetValue(referencePage - 1, true);
-                }
-                //else if (referencePage  )
-                //{
-                //    PagePreviousTextBox(PageFromTextBox());
-                //}
-            }
-            else if (e.Delta < 0)
-            {
-                if ( pdfRenderer.Page + presenter.CurrentDoc.StartPage == presenter.CurrentDoc.StartPage)
-                {
-                    TbxPageSetValue(referencePage + 1, true);
-                }
-                //else
-                //{
-                //    PageNextTextBox(PageFromTextBox());
-                //}
-            }
+            int referencePage = pdfRenderer.Page + presenter.CurrentDoc.StartPage;
+            int pagefromTb = PageFromTextBox();
 
+            if (referencePage >= pdfRenderer.Page + presenter.CurrentDoc.StartPage &&
+                referencePage <= presenter.CurrentDoc.EndPage)
+            {
+                TbxPageSetValue(referencePage, true);                
+            }
+            //переход на новую книгу
+            if (referencePage == presenter.CurrentDoc.StartPage)
+            {
+                if (e.Delta > 0 && pagefromTb > 1)
+                {
+                    PagePreviousTextBox(pagefromTb);
+                    Debug.WriteLine(pagefromTb);
+                    flagWheelDate = DateTime.Now;
+                }
+            }
+            else
+            {
+                int lastPageoDoc = presenter.CurrentDoc.StartPage + pdfRenderer.Document.PageCount - 1;
+                if (pagefromTb >= lastPageoDoc && pagefromTb <= presenter.CurrentDoc.EndPage + 1 && e.Delta < 0)
+                {
+                    PageNextTextBox(pagefromTb);
+                    Debug.WriteLine(pagefromTb);
+                    flagWheelDate = DateTime.Now;
+                }
+            }
         }
         /// <summary>
         /// Менять страницу при движении скролбара вьюшки
