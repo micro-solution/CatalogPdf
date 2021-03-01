@@ -13,7 +13,7 @@ namespace CatalogPdf
         // internal Document document;
 
         public delegate void UserChanges(string newName, string path);
-        public delegate void UserChangeDocFile(string path);
+        public delegate void UserChangeDocFile(string path,LineCatalogDocument currentLine);
         public delegate void UserChangeDocNum(int docNumber, string path);
         public event UserChanges ChangeDocName;
         public event UserChangeDocNum ChangeDoc;
@@ -66,14 +66,14 @@ namespace CatalogPdf
             else
             {
                 clicked = false;
-                ShowDoc.Invoke(FullName);
+                ShowDoc.Invoke(FullName,this);
             }
         }
        
         private void CatalogItem_Enter(object sender, EventArgs e)
         {
             BackColor = UserSettings.catalogDocItem_ActiveColor; // Color.FromArgb(240, 246, 255);
-            ShowDoc.Invoke(FullName);
+            ShowDoc.Invoke(FullName, this);
         }
 
         #region Изменить текст в лейблах
@@ -166,9 +166,9 @@ namespace CatalogPdf
         }
         private void удалитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DeleteDoc.Invoke(FullName);
-            Hide();
-            Dispose();
+            DeleteDoc.Invoke(FullName,this);
+           // Hide();
+           // Dispose();
         }
        
     }

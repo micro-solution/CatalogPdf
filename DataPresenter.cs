@@ -14,7 +14,7 @@ namespace CatalogPdf
     {
         public Document CurrentDoc { set; get; }
         public bool State { private set; get; } = false;
-        public int PageCount { private set; get; } = 0;
+      //  public int PageCount { private set; get; } = 0;
 
         public int CurrentPageCurDoc = 1;
 
@@ -156,10 +156,12 @@ namespace CatalogPdf
             {
                 if (Catalog.GetByPath(fi.FullName) == null)
                 {
+                    if (!fi.Directory.Name.Contains("spaceDoc"))
+                    {
                     NewDocument(fi);
+                    }
                 }
             }
-
             UpdatePresenter();
             //}
         }
@@ -214,13 +216,53 @@ namespace CatalogPdf
             try
             {
                 Debug.WriteLine(Catalog.Documents.Count);
+                    int tome = CurrentDoc?.Tome ?? 0;
+
                 if (Catalog.Documents.Count > 0)
                 {
-                    List<Document> docs = Catalog.Documents.OrderBy(o => o.Number).ToList();
-                    CurrentDoc = docs[num]; //GetByNumber(num);
-                    CurrentTomeNumber = CurrentDoc.Tome;
-                    Debug.WriteLine("Current tom " + CurrentTomeNumber);
+                    List<Document> docs = Catalog.Documents.Where(d => d.Tome == tome)?.OrderBy(m => m.Number)?.ToList();
+                    int count = docs?.Count ?? 0;
+                    if (count > 0 && num >= 0 && num < count)
+                    {
+                        CurrentDoc = docs[num];
+                        CurrentTomeNumber = CurrentDoc.Tome;                      
+                    }
+                    else
+                    {
+                       CurrentDoc = Catalog.Documents.First();
+                       CurrentTomeNumber = CurrentDoc.Tome;
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+                State = false;
+                RefreshDB();
+                MessageBox.Show(e.Message);
+            }
+        }
+
+        public void SetCurrentDocument(int tome, int number)
+        {
+            try
+            {
+                List<Document> docs = Catalog.Documents.Where(t => t.Tome == tome && t.Number == number).ToList();
+                if ((docs?.Count ?? 0) > 0)
+                {
+                    if (number + 1 >= docs.Count)
+                    {
+                        CurrentDoc = docs.Last();
+                        CurrentTomeNumber = CurrentDoc.Tome;
+                        return;
+                    }
+                    else if (number >= 0)
+                    {
+                        CurrentDoc = docs[number + 1];
+                         CurrentTomeNumber = CurrentDoc.Tome;
+                        return;
+                    }
+                }
+                SetCurrentDocument(0);
             }
             catch (Exception e)
             {
@@ -318,11 +360,15 @@ namespace CatalogPdf
         public void RemoveDoc()
         {
             string fullName = CurrentDoc.File.FullName;
-            CurrentDoc?.Delete();
+            int tome = CurrentDoc.Tome;
+            int num = CurrentDoc.Number;
             DeleteDocumentContent(CurrentDoc);
+            SetCurrentDocument(tome, num);
             Save();
             try
             {
+                CurrentDoc = null; 
+                
                 File.Delete(fullName);
             }
             catch (Exception e)
@@ -345,13 +391,17 @@ namespace CatalogPdf
                 Document doc = docs[i];
                 doc.Name = doc.Name ?? DataPresenter.GetShortDocName(doc);
                 Debug.WriteLine(doc.Name);
-                PdfiumViewer.PdfDocument pdfDoc = PdfiumViewer.PdfDocument.Load(doc.File.FullName);
-                PdfiumViewer.PdfInformation pdfInfo = pdfDoc.GetInformation();
-                if (doc.Date == DateTime.MinValue)
-                {
-                    doc.Date = (DateTime)pdfInfo.CreationDate;
-                    Debug.WriteLine(pdfInfo.CreationDate + "CreationDate");
-                }
+                //try
+                //{
+                //    PdfiumViewer.PdfDocument pdfDoc = PdfiumViewer.PdfDocument.Load(doc.File.FullName);
+                //    PdfiumViewer.PdfInformation pdfInfo = pdfDoc.GetInformation();
+                //}
+                //catch (Exception) { };
+                //if (doc.Date == DateTime.MinValue)
+                //{
+                //    doc.Date = (DateTime)pdfInfo.CreationDate;
+                //    Debug.WriteLine(pdfInfo.CreationDate + "CreationDate");
+                //}
                 //if (string.IsNullOrEmpty(doc.DocType)) doc.DocType = pdfInfo.Title;
                 //Debug.WriteLine(pdfInfo.Creator + "Creator");
                 //Debug.WriteLine(pdfInfo.Author + "Author");
@@ -383,8 +433,7 @@ namespace CatalogPdf
             foreach (Bookmark expl in Explanations.Bookmarks)
             {
                 expl.Reference = expl.Document.StartPage + expl.Page - 1;
-            }
-            Save();
+            }           
         }
 
         /// <summary>
@@ -406,15 +455,18 @@ namespace CatalogPdf
                     ++startpage;
                     ++number;
                     doc.Number = number;
-                    doc.StartPage = startpage;
 
                     if (doc.AmountPage == 0)
                     {
                         if (doc.EndPage != 0 && doc.StartPage != 0)
-                        { doc.AmountPage = doc.EndPage - doc.StartPage + 1; }
+                        { 
+                            doc.AmountPage = doc.EndPage - doc.StartPage + 1; 
+                        }
                         else
                         { doc.AmountPage = GetCountPages(doc); }
-                    }
+                    }                  
+
+                    doc.StartPage = startpage;
                     doc.EndPage = startpage + doc.AmountPage - 1;
                     startpage = doc.EndPage;
                 }
@@ -478,7 +530,7 @@ namespace CatalogPdf
         /// Удаление документа из каталога
         /// </summary>
         /// <param name="path"></param>
-        internal void DeleteDoc(string path)
+        internal bool DeleteDoc(string path)
         {
             Document doc = Catalog.GetByPath(path);
             DialogResult dialogResult = MessageBox.Show(
@@ -491,8 +543,9 @@ namespace CatalogPdf
                 DeleteDocumentContent(doc);
                 SetPages();
                 Save();
-
+                return true;
             }
+            return false;
         }
 
         public int GetReferencePage(int pageDoc)
@@ -501,8 +554,9 @@ namespace CatalogPdf
         }
         internal void NewDocument(FileInfo fileInfo)
         {
+            string path = fileInfo.FullName;          
             AddDocument(fileInfo);
-            Document doc = Catalog.GetByPath(fileInfo.FullName);
+            Document doc = Catalog.GetByPath(path);
             doc.AmountPage = GetCountPages(doc);
             doc.Name = GetShortDocName(doc);
 
@@ -527,8 +581,9 @@ namespace CatalogPdf
             docs.Skip(countPrevious).ToList().ForEach(d => d.Number = ++i);
 
             Catalog.Documents.ForEach(x => Debug.WriteLine($"{x.Number} {x.Name}"));
+            SetPages();
             Save();
-            SetBookmarksPages();
+           // SetBookmarksPages();
         }
         #endregion Документ 
 

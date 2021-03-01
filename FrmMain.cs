@@ -125,7 +125,7 @@ namespace CatalogPdf
             try
             {
                 ViewerShowDocument(presenter.CurrentDoc);
-                lbDocName.Text = presenter.CurrentDoc.Name;
+                lbDocName.Text = presenter.CurrentDoc?.Name ?? "";
                 SetCatalogItems(presenter.CurrentTomeNumber);
                 ShowBookmarkItems();
                 ShowExplanationItems();
@@ -191,8 +191,9 @@ namespace CatalogPdf
             }
         }
 
-      //  bool flagWheel = false;
-        DateTime flagWheelDate =default ;
+
+        DateTime flagWheelDate = default;
+        DateTime flagNewDoc = default;
         /// <summary>
         /// Менять страницу при вращении колеса мыши 
         /// </summary>
@@ -200,39 +201,65 @@ namespace CatalogPdf
         /// <param name="e"></param>
         private void PdfRenderer1_MouseWheel(object sender, MouseEventArgs e)
         {
-            if (System.Windows.Forms.Control.ModifierKeys == Keys.Control ) return;
-            TimeSpan timeSpan =DateTime.Now.Subtract(flagWheelDate);
-           
-            if (timeSpan.TotalMilliseconds<300) return;  
+            if (System.Windows.Forms.Control.ModifierKeys == Keys.Control) return;
+            TimeSpan timeSpan = DateTime.Now.Subtract(flagWheelDate);
+
+            if (timeSpan.TotalMilliseconds < 300) return;
 
             int referencePage = pdfRenderer.Page + presenter.CurrentDoc.StartPage;
             int pagefromTb = PageFromTextBox();
 
-            if (referencePage >= pdfRenderer.Page + presenter.CurrentDoc.StartPage &&
-                referencePage <= presenter.CurrentDoc.EndPage)
+
+            if (referencePage >= presenter.CurrentDoc.StartPage &&
+                referencePage < presenter.CurrentDoc.StartPage + pdfRenderer.Document.PageCount-1)
             {
-                TbxPageSetValue(referencePage, true);                
-            }
-            //переход на новую книгу
-            if (referencePage == presenter.CurrentDoc.StartPage)
+                if (pdfRenderer.Page != oldPage) ShowContentPage(referencePage);
+                TbxPageSetValue(referencePage, false);
+           }
+            int nextPage = pagefromTb;
+            if (e.Delta > 0 && pagefromTb > 1)
+            { nextPage--; }
+            if (e.Delta < 0)
+            { nextPage++; }
+            int lastPageoDoc = presenter.CurrentDoc.StartPage + pdfRenderer.Document.PageCount - 1;
+            int firstPageNextDocument = presenter.CurrentDoc.EndPage + 1;
+            if ((nextPage >= lastPageoDoc &&
+                nextPage <= firstPageNextDocument && e.Delta < 0) ||
+               (nextPage < presenter.CurrentDoc.StartPage && e.Delta > 0))
             {
-                if (e.Delta > 0 && pagefromTb > 1)
+                TimeSpan timeSpanNewDoc = DateTime.Now.Subtract(flagNewDoc);
+                if (timeSpanNewDoc.TotalMilliseconds > 350 && timeSpanNewDoc.TotalMilliseconds < 1200)
                 {
-                    PagePreviousTextBox(pagefromTb);
-                    Debug.WriteLine(pagefromTb);
-                    flagWheelDate = DateTime.Now;
+                    flagNewDoc = DateTime.Now;
+                    TbxPageSetValue(nextPage, false);
+                    NavigatePageChange(nextPage);
+                    Debug.WriteLine(nextPage);
                 }
+                flagNewDoc = DateTime.Now;
             }
-            else
-            {
-                int lastPageoDoc = presenter.CurrentDoc.StartPage + pdfRenderer.Document.PageCount - 1;
-                if (pagefromTb >= lastPageoDoc && pagefromTb <= presenter.CurrentDoc.EndPage + 1 && e.Delta < 0)
-                {
-                    PageNextTextBox(pagefromTb);
-                    Debug.WriteLine(pagefromTb);
-                    flagWheelDate = DateTime.Now;
-                }
-            }
+            ////переход на новую книгу
+            //if (referencePage == presenter.CurrentDoc.StartPage)
+            //{
+            //    if (e.Delta > 0 && pagefromTb > 1)
+            //    {
+            //        flagNewDoc = DateTime.Now;
+            //        TbxPageSetValue(pagefromTb - 1, false);
+            //        NavigatePageChange(pagefromTb - 1);
+            //        //PagePreviousTextBox(pagefromTb);
+            //        Debug.WriteLine(pagefromTb);
+            //        return;
+            //    }
+            //}
+
+            //int lastPageoDoc = presenter.CurrentDoc.StartPage + pdfRenderer.Document.PageCount - 1;
+            //if (pagefromTb >= lastPageoDoc && pagefromTb <= presenter.CurrentDoc.EndPage + 1 && e.Delta < 0)
+            //{
+            //    flagNewDoc = DateTime.Now;
+            //    TbxPageSetValue(pagefromTb + 1, false);
+            //    NavigatePageChange(pagefromTb + 1);
+            //    //  PageNextTextBox(pagefromTb);
+            //    Debug.WriteLine(pagefromTb);
+            //}
         }
         /// <summary>
         /// Менять страницу при движении скролбара вьюшки
@@ -243,22 +270,32 @@ namespace CatalogPdf
         {
             if (pdfRenderer.Page < pdfRenderer.Document.PageCount)
             {
-                if (oldPage == pdfRenderer.Page) { return; }
                 int referencePage = presenter.GetReferencePage(pdfRenderer.Page);
-                SetPageTextBox(referencePage);
+                TbxPageSetValue(referencePage, false);
+                if (referencePage != oldPage) ShowContentPage(referencePage);
+               // if (oldPage == pdfRenderer.Page) { return; }
+                // SetPageTextBox(referencePage);
             }
         }
         //Установить значение текстбокса с номером страницы по условию       
-        private void TbxPageSetValue(int page, bool doevent)
+        private void TbxPageSetValue(int page, bool doevent = true)
         {
+            onepress = false;
             if (!doevent)
             {
-                tbPage.Tag = "not to do";
+                if(tbPage.Text != page.ToString())
+                {
+                    tbPage.Tag = "not to do";
+                    tbPage.Text = page.ToString();
+                    oldPage = pdfRenderer.Page;
+                }
+                tbPage.Tag = null;
             }
             else
             {
                 tbPage.Tag = null; //do event text changed
-                SetPageTextBox(page);
+                tbPage.Text = page.ToString();
+                oldPage = pdfRenderer.Page;              
             }
         }
 
@@ -274,27 +311,48 @@ namespace CatalogPdf
         /// <param name="e"></param>
         private async void tbPage_TextChanged(object sender, EventArgs e)
         {
+            ToolStripTextBox textBox = (ToolStripTextBox)sender;
+            if (!string.IsNullOrEmpty(textBox.Tag?.ToString()))
+            {
+                if (textBox.Tag.ToString() == "not to do")
+                {
+                    textBox.Tag = null;
+                    return;
+                }
+            }
+
             if (onepress) { return; }
             onepress = true;
             await Task.Delay(200);
             if (!onepress)
             { return; }
+
             else
             {
-                ToolStripTextBox textBox = (ToolStripTextBox)sender;
-                int page = PageFromTextBox();
-                //показать последняя страница если пытаются выйти за пределы страниц тома
-                if (page >= presenter.LastPage)
-                {
-                    page = presenter.LastPage;
-                    textBox.Text = page.ToString();
-                }
-                NavigateCatalog(page);
-                textBox.Select();
-                textBox.SelectionStart = textBox.Text.Length;
                 onepress = false;
+                int page = PageFromTextBox();
+                NavigatePageChange(page);
+                tbPage.Select();
+                tbPage.SelectionStart = tbPage.Text.Length;
             }
         }
+        private void NavigatePageChange(int page)
+        {
+            //показать последняя страница если пытаются выйти за пределы страниц тома
+            if (page < 1)
+            {
+                page = 1;
+                TbxPageSetValue(page, false);
+            }
+            else if (page >= presenter.LastPage)
+            {
+                page = presenter.LastPage;
+                TbxPageSetValue(page, false);
+            }
+            NavigateCatalog(page);
+        }
+
+
         /// <summary>
         /// Переход на страницу каталога
         /// </summary>
@@ -305,6 +363,7 @@ namespace CatalogPdf
             {
                 return;
             }
+            
             Document doc = presenter.Catalog.GetByPage(page);
             if (doc != null)
             {
@@ -315,6 +374,7 @@ namespace CatalogPdf
                     ViewerShowDocument(doc);
                 }
                 pdfRenderer.Page = pageDoc;
+                oldPage = pageDoc;
                 ShowContentPage(page);
             }
         }
@@ -323,12 +383,13 @@ namespace CatalogPdf
         /// Вставить номер текущей страницы в текстбокс
         /// </summary>
         /// <param name="page"></param>
-        private void SetPageTextBox(int page)
-        {
-            page = page == 0 ? 1 : page;
-            tbPage.Text = page.ToString();
-            oldPage = pdfRenderer.Page;
-        }
+        //private void SetPageTextBox(int page)
+        //{
+            
+         
+        //    tbPage.Text = page.ToString();
+        //    oldPage = pdfRenderer.Page;
+        //}
 
         /// <summary>
         /// Запрет ввода не чисел в поле номера страницы
@@ -518,10 +579,7 @@ namespace CatalogPdf
         /// <param name="e"></param>
         private void удалитьФайлИзКаталогаИПапкиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            documentV?.Dispose();
-            //pdfRenderer?.Container.Dispose();
             pdfRenderer?.Document?.Dispose();
-            //PdfiumViewer.
             presenter.RemoveDoc();
             ShowData();
         }
@@ -562,9 +620,7 @@ namespace CatalogPdf
         /// <param name="e"></param>
         private void обновитьКаталогToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             RefeshPresenter();
-
         }
 
         private void RefeshPresenter()
@@ -1101,6 +1157,9 @@ namespace CatalogPdf
                 {
                     ViewerShowDocument(mark?.Document);
                 }
+
+                // NavigateCatalog(mark.Reference);
+                tbPage.Tag = null;
                 tbPage.Text = mark.Reference.ToString();
             }
         }
@@ -1178,14 +1237,14 @@ namespace CatalogPdf
         /// Отобразить документ по его пути
         /// </summary>
         /// <param name="path"></param>
-        private void ShowDocument(string path)
+        private void ShowDocument(string path, LineCatalogDocument lineCatalog)
         {
             try
             {
                 Document doc = presenter.Catalog.GetByPath(path);
 
                 ViewerShowDocument(doc);
-                SetPageTextBox(doc.StartPage);
+                TbxPageSetValue(doc.StartPage);
             }
             catch (Exception ex)
             {
@@ -1196,9 +1255,15 @@ namespace CatalogPdf
         /// Удаление документа
         /// </summary>
         /// <param name="path"></param>
-        private void CatalogLine_DeleteDoc(string path)
+        private void CatalogLine_DeleteDoc(string path, LineCatalogDocument currentLine)
         {
-            presenter.DeleteDoc(path);
+            if (presenter.DeleteDoc(path))
+            {
+                // Удалить строку каталога
+                PanelCatalog.Controls.Remove(currentLine);
+                //currentLine.Hide();
+                //currentLine.Dispose();
+            }
         }
         private void CatalogLine_UserChangeDocName(string newName, string path)
         {
@@ -1229,15 +1294,12 @@ namespace CatalogPdf
                 lbCurrentTome.Text = string.IsNullOrWhiteSpace(tomeName) ?
                         $"Том {currentDocument.Tome}" :
                        $"{currentDocument.Tome}. {tomeName}";
-                //pdfRenderer.Rotation = PdfiumViewer.PdfRotation.Rotate0;
-                SelectionCatalogRow(currentDocument);
-                //if (fileName != presenter.CurrentDoc)
-                presenter.SetCurrentDocument(fileName);
-                lbDocName.Text = presenter.CurrentDoc.Name;
-
+            
                 Cursor = Cursors.WaitCursor;
-                //  await Task.Run(() => viewPdfFile(fileName));
-                documentV = PdfiumViewer.PdfDocument.Load(fileName);
+                SelectionCatalogRow(currentDocument);            
+                presenter.SetCurrentDocument(fileName);
+                lbDocName.Text = presenter.CurrentDoc.Name;            
+                documentV = PdfDocument.Load(fileName);
                 pdfRenderer.Load(documentV);
                 pdfRenderer.MouseWheel += PdfRenderer1_MouseWheel;
                 Cursor = Cursors.Default;
@@ -1355,9 +1417,6 @@ namespace CatalogPdf
                 dropZone.Dispose();
             }
         }
-
-
-
         #endregion DragDrop File
 
 
@@ -1454,9 +1513,6 @@ namespace CatalogPdf
             }
         }
 
-
-
-
         private void flowPanelComments_SizeChanged(object sender, EventArgs e)
         {
             foreach (Control control in flowPanelComments.Controls)
@@ -1503,11 +1559,12 @@ namespace CatalogPdf
                     {
                         spaceDocument.AmountPage = frmAdd.AmountPages;
                         spaceDocument.Tome = presenter.CurrentDoc.Tome;
-                        spaceDocument.Number = presenter.CurrentDoc.Number + 1;
-                        spaceDocument.StartPage = presenter.CurrentDoc.StartPage + presenter.CurrentDoc.AmountPage;
+                        spaceDocument.Number = presenter.CurrentDoc.Number;// При сортировке страниц SetPages будет установлен номер +1
+                        spaceDocument.StartPage = presenter.CurrentDoc.EndPage + 1;// StartPage + presenter.CurrentDoc.AmountPage;
                         spaceDocument.EndPage = spaceDocument.StartPage + spaceDocument.AmountPage - 1;
                     }
                     presenter.Save();
+                    presenter.SetPages();
                     ShowData();
                 }
                 catch (Exception ex)

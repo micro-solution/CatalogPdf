@@ -114,8 +114,9 @@ namespace CatalogPdf
 
                         if (startPage != 0)
                         {
-                            int.TryParse(dataGridView1.Rows[row].Cells[GetNumberColumn("Страниц")].Value.ToString(), out int amount);
-                            int endPage = startPage + amount - 1;
+                           // int.TryParse(dataGridView1.Rows[row].Cells[GetNumberColumn("Страниц")].Value.ToString(), out int amount);
+                          
+                            int endPage = startPage + doc.AmountPage - 1;
                             dataGridView1.Rows[row].Cells[GetNumberColumn("Конец")].Value = endPage;
                             doc.StartPage = startPage;
                             doc.EndPage = endPage;
@@ -138,8 +139,12 @@ namespace CatalogPdf
                         if (int.TryParse(endPageStr, out int endP))
                         {
                             int.TryParse(dataGridView1.Rows[row].Cells[GetNumberColumn("Начало")].Value.ToString(), out int start);
-                           // int.TryParse(dataGridView1.Rows[row].Cells[GetNumberColumn("Страниц")].Value.ToString(), out int amount);
-                            doc.AmountPage = endP - start + 1;
+                            // int.TryParse(dataGridView1.Rows[row].Cells[GetNumberColumn("Страниц")].Value.ToString(), out int amount);
+                            int amount = endP - start + 1;
+                            if (amount > 0)
+                            {
+                                doc.AmountPage = endP - start + 1;
+                            }
                         }
 
                         break;
@@ -147,8 +152,7 @@ namespace CatalogPdf
                         break;
                 }
                 presenter.Save();
-                BtnUpdateTable.Visible = true;
-                // dataGridView1.Update();
+                BtnUpdateTable.Visible = true;               
             }
         }
 
