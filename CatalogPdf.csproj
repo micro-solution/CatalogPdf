@@ -60,7 +60,7 @@
     <ApplicationIcon>application-pdf_36278.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>1D34DD048DEEAEEC13D3CAF06AF6C4C7EC738375</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>A39B55A4E01FFC62DFADAFD4C2F39222553AD3A9</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>
@@ -106,7 +106,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
     <Reference Include="XMLDB">
-      <HintPath>packages\XMLDB.dll</HintPath>
+      <HintPath>D:\YandexDisk\YandexDisk\Разработка\@Архив текущий\Р-19-33 Пепеляев Каталог дела\Рабочая\XMLDB\XMLDB\bin\Release\XMLDB.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

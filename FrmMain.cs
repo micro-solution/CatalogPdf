@@ -580,6 +580,7 @@ namespace CatalogPdf
         private void удалитьФайлИзКаталогаИПапкиToolStripMenuItem_Click(object sender, EventArgs e)
         {
             pdfRenderer?.Document?.Dispose();
+            documentV.Dispose();
             presenter.RemoveDoc();
             ShowData();
         }

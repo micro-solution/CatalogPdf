@@ -170,34 +170,34 @@ namespace CatalogPdf
             this.menuCatalog.Image = ((System.Drawing.Image)(resources.GetObject("menuCatalog.Image")));
             this.menuCatalog.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.menuCatalog.Name = "menuCatalog";
-            this.menuCatalog.Size = new System.Drawing.Size(78, 38);
+            this.menuCatalog.Size = new System.Drawing.Size(79, 38);
             this.menuCatalog.Text = "Каталог";
             // 
             // выбратьПапкуСКаталогомToolStripMenuItem1
             // 
             this.выбратьПапкуСКаталогомToolStripMenuItem1.Name = "выбратьПапкуСКаталогомToolStripMenuItem1";
-            this.выбратьПапкуСКаталогомToolStripMenuItem1.Size = new System.Drawing.Size(275, 22);
+            this.выбратьПапкуСКаталогомToolStripMenuItem1.Size = new System.Drawing.Size(285, 22);
             this.выбратьПапкуСКаталогомToolStripMenuItem1.Text = "Выбрать папку с каталогом";
             this.выбратьПапкуСКаталогомToolStripMenuItem1.Click += new System.EventHandler(this.выбратьПапкуСКаталогомToolStripMenuItem1_Click);
             // 
             // обновитьКаталогToolStripMenuItem
             // 
             this.обновитьКаталогToolStripMenuItem.Name = "обновитьКаталогToolStripMenuItem";
-            this.обновитьКаталогToolStripMenuItem.Size = new System.Drawing.Size(275, 22);
+            this.обновитьКаталогToolStripMenuItem.Size = new System.Drawing.Size(285, 22);
             this.обновитьКаталогToolStripMenuItem.Text = "Обновить каталог";
             this.обновитьКаталогToolStripMenuItem.Click += new System.EventHandler(this.обновитьКаталогToolStripMenuItem_Click);
             // 
             // открытьРасположениеToolStripMenuItem
             // 
             this.открытьРасположениеToolStripMenuItem.Name = "открытьРасположениеToolStripMenuItem";
-            this.открытьРасположениеToolStripMenuItem.Size = new System.Drawing.Size(275, 22);
+            this.открытьРасположениеToolStripMenuItem.Size = new System.Drawing.Size(285, 22);
             this.открытьРасположениеToolStripMenuItem.Text = "Открыть расположение";
             this.открытьРасположениеToolStripMenuItem.Click += new System.EventHandler(this.открытьРасположениеToolStripMenuItem_Click);
             // 
             // очиститьВсеИСоздатьНовыйКаталогToolStripMenuItem
             // 
             this.очиститьВсеИСоздатьНовыйКаталогToolStripMenuItem.Name = "очиститьВсеИСоздатьНовыйКаталогToolStripMenuItem";
-            this.очиститьВсеИСоздатьНовыйКаталогToolStripMenuItem.Size = new System.Drawing.Size(275, 22);
+            this.очиститьВсеИСоздатьНовыйКаталогToolStripMenuItem.Size = new System.Drawing.Size(285, 22);
             this.очиститьВсеИСоздатьНовыйКаталогToolStripMenuItem.Text = "Очистить все и создать новый каталог";
             this.очиститьВсеИСоздатьНовыйКаталогToolStripMenuItem.Click += new System.EventHandler(this.очиститьВсеИСоздатьНовыйКаталогToolStripMenuItem_Click);
             // 
@@ -211,34 +211,34 @@ namespace CatalogPdf
             this.MenuFile.Image = ((System.Drawing.Image)(resources.GetObject("MenuFile.Image")));
             this.MenuFile.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.MenuFile.Name = "MenuFile";
-            this.MenuFile.Size = new System.Drawing.Size(62, 38);
+            this.MenuFile.Size = new System.Drawing.Size(65, 38);
             this.MenuFile.Text = "Файл";
             // 
             // addSpase
             // 
             this.addSpase.Name = "addSpase";
-            this.addSpase.Size = new System.Drawing.Size(234, 22);
+            this.addSpase.Size = new System.Drawing.Size(239, 22);
             this.addSpase.Text = "Добавить пустой документ";
             this.addSpase.Click += new System.EventHandler(this.addSpase_Click);
             // 
             // открытьАктивныйФайлToolStripMenuItem
             // 
             this.открытьАктивныйФайлToolStripMenuItem.Name = "открытьАктивныйФайлToolStripMenuItem";
-            this.открытьАктивныйФайлToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.открытьАктивныйФайлToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
             this.открытьАктивныйФайлToolStripMenuItem.Text = "Открыть активный файл";
             this.открытьАктивныйФайлToolStripMenuItem.Click += new System.EventHandler(this.открытьАктивныйФайлToolStripMenuItem_Click);
             // 
             // добавитьФайлВКаталогToolStripMenuItem
             // 
             this.добавитьФайлВКаталогToolStripMenuItem.Name = "добавитьФайлВКаталогToolStripMenuItem";
-            this.добавитьФайлВКаталогToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.добавитьФайлВКаталогToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
             this.добавитьФайлВКаталогToolStripMenuItem.Text = "Добавить файл в каталог";
             this.добавитьФайлВКаталогToolStripMenuItem.Click += new System.EventHandler(this.добавитьФайлВКаталогToolStripMenuItem_Click);
             // 
             // удалитьФайлИзКаталогаИПапкиToolStripMenuItem
             // 
             this.удалитьФайлИзКаталогаИПапкиToolStripMenuItem.Name = "удалитьФайлИзКаталогаИПапкиToolStripMenuItem";
-            this.удалитьФайлИзКаталогаИПапкиToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.удалитьФайлИзКаталогаИПапкиToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
             this.удалитьФайлИзКаталогаИПапкиToolStripMenuItem.Text = "Удалить документ из каталога";
             this.удалитьФайлИзКаталогаИПапкиToolStripMenuItem.Click += new System.EventHandler(this.удалитьФайлИзКаталогаИПапкиToolStripMenuItem_Click);
             // 
@@ -300,7 +300,7 @@ namespace CatalogPdf
             // lbDocName
             // 
             this.lbDocName.Name = "lbDocName";
-            this.lbDocName.Size = new System.Drawing.Size(190, 38);
+            this.lbDocName.Size = new System.Drawing.Size(202, 38);
             this.lbDocName.Text = "\"Краткое имя текущего документа\"";
             this.lbDocName.ToolTipText = "Текущий документ";
             // 

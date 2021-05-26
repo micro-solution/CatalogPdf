@@ -368,12 +368,13 @@ namespace CatalogPdf
             try
             {
                 CurrentDoc = null; 
-                
                 File.Delete(fullName);
+                
             }
             catch (Exception e)
             {
                 Debug.WriteLine(e.Message);
+                MessageBox.Show("Заройте файл перед удалением." +"\n" +e.Message, "Не удается удалить файл" , MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             SetCurrentDocument(0);
             State = CurrentDoc != null;
