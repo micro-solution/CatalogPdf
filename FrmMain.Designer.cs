@@ -260,6 +260,7 @@ namespace CatalogPdf
             this.toolStripButton4.Text = "btnSettings";
             this.toolStripButton4.ToolTipText = "Настройки";
             this.toolStripButton4.Visible = false;
+            this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
             // 
             // btnTableCatalog
             // 

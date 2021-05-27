@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 using XMLDBLib;
 
@@ -363,13 +364,16 @@ namespace CatalogPdf
             int tome = CurrentDoc.Tome;
             int num = CurrentDoc.Number;
             DeleteDocumentContent(CurrentDoc);
+            CurrentDoc = null;
             SetCurrentDocument(tome, num);
             Save();
             try
             {
-                CurrentDoc = null; 
+                if (!IsLocked(fullName))
+                {
+                    File.Delete(fullName);
+                }
                 File.Delete(fullName);
-                
             }
             catch (Exception e)
             {
@@ -379,6 +383,35 @@ namespace CatalogPdf
             SetCurrentDocument(0);
             State = CurrentDoc != null;
         }
+
+        public bool IsLocked(string fileName)
+        {
+            try
+            {
+                using (FileStream fs = File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.None))
+                {
+                    fs.Close();
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                if (ex.HResult == -2147024894)
+                    return false;
+            }
+            return true;
+        }
+
+        /*
+          string fullName = presenter.CurrentDoc.File.FullName;
+            //presenter.CurrentDoc = null;
+
+            if (!IsLocked(fullName))
+            {
+                File.Delete(fullName);
+            }
+         */
+
 
         /// <summary>
         /// Создает документ устанавливает свойства и добавляет в коллекцию
@@ -482,9 +515,11 @@ namespace CatalogPdf
         public int GetCountPages(Document doc)
         {
             int pageCount = 0;
+            //PdfiumViewer.PdfDocument documentV = PdfiumViewer.PdfDocument.Load(doc.File.FullName);
+            Thread.Sleep(300);
             PdfiumViewer.PdfDocument documentV = PdfiumViewer.PdfDocument.Load(doc.File.FullName);
             pageCount = documentV.PageCount;
-
+            documentV.Dispose();
             return pageCount;
         }
         /// <summary>

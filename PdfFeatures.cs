@@ -30,8 +30,7 @@ namespace CatalogPdf
             XTextFormatter tf = new XTextFormatter(gfx);
             tf.DrawString(description, font, XBrushes.Black, rect, XStringFormats.TopLeft);
 
-            document.Save(fullname);
-            Thread.Sleep(300);
+            document.Save(fullname);            
             document.Dispose();
 
         }

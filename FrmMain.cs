@@ -201,6 +201,7 @@ namespace CatalogPdf
         /// <param name="e"></param>
         private void PdfRenderer1_MouseWheel(object sender, MouseEventArgs e)
         {
+            return;
             if (System.Windows.Forms.Control.ModifierKeys == Keys.Control) return;
             TimeSpan timeSpan = DateTime.Now.Subtract(flagWheelDate);
 
@@ -211,11 +212,11 @@ namespace CatalogPdf
 
 
             if (referencePage >= presenter.CurrentDoc.StartPage &&
-                referencePage < presenter.CurrentDoc.StartPage + pdfRenderer.Document.PageCount-1)
+                referencePage < presenter.CurrentDoc.StartPage + pdfRenderer.Document.PageCount - 1)
             {
                 if (pdfRenderer.Page != oldPage) ShowContentPage(referencePage);
                 TbxPageSetValue(referencePage, false);
-           }
+            }
             int nextPage = pagefromTb;
             if (e.Delta > 0 && pagefromTb > 1)
             { nextPage--; }
@@ -273,7 +274,7 @@ namespace CatalogPdf
                 int referencePage = presenter.GetReferencePage(pdfRenderer.Page);
                 TbxPageSetValue(referencePage, false);
                 if (referencePage != oldPage) ShowContentPage(referencePage);
-               // if (oldPage == pdfRenderer.Page) { return; }
+                // if (oldPage == pdfRenderer.Page) { return; }
                 // SetPageTextBox(referencePage);
             }
         }
@@ -283,7 +284,7 @@ namespace CatalogPdf
             onepress = false;
             if (!doevent)
             {
-                if(tbPage.Text != page.ToString())
+                if (tbPage.Text != page.ToString())
                 {
                     tbPage.Tag = "not to do";
                     tbPage.Text = page.ToString();
@@ -295,7 +296,7 @@ namespace CatalogPdf
             {
                 tbPage.Tag = null; //do event text changed
                 tbPage.Text = page.ToString();
-                oldPage = pdfRenderer.Page;              
+                oldPage = pdfRenderer.Page;
             }
         }
 
@@ -363,7 +364,7 @@ namespace CatalogPdf
             {
                 return;
             }
-            
+
             Document doc = presenter.Catalog.GetByPage(page);
             if (doc != null)
             {
@@ -385,8 +386,8 @@ namespace CatalogPdf
         /// <param name="page"></param>
         //private void SetPageTextBox(int page)
         //{
-            
-         
+
+
         //    tbPage.Text = page.ToString();
         //    oldPage = pdfRenderer.Page;
         //}
@@ -580,10 +581,11 @@ namespace CatalogPdf
         private void удалитьФайлИзКаталогаИПапкиToolStripMenuItem_Click(object sender, EventArgs e)
         {
             pdfRenderer?.Document?.Dispose();
-            documentV.Dispose();
             presenter.RemoveDoc();
             ShowData();
         }
+
+
 
         #endregion Меню Файл
 
@@ -763,10 +765,10 @@ namespace CatalogPdf
                 tomeLine.MouseClick += TomeLine_MouseClick; ;
                 tomeLine.ClickTomeSelect += TomeLine_ClickTomeSelect;
                 tomeLine.Width = PanelCatalog.Width - 10;
-                if (tome == currentTome)
-                {
+               // if (tome == currentTome)
+               // {
                     ShowDocumentItems(tome);
-                }
+               // }
             }
         }
         /// <summary>
@@ -788,20 +790,67 @@ namespace CatalogPdf
         /// При нажатии на маркер тома вывести список его документов
         /// </summary>
         /// <param name="tome"></param>
+        //private void SelectTome(int tome)
+        //{
+        //    if (presenter.CurrentTomeNumber != tome)
+        //    {
+        //        presenter.CurrentTomeNumber = tome;
+        //        SetCatalogItems(tome);
+        //        tbPage.Text = "1";
+        //    }
+        //    else
+        //    {
+        //        // Повторное выделение тома - скрыть документы
+        //        presenter.CurrentTomeNumber = -1;
+        //        SetCatalogItems();
+        //    }
+        //}
+
+        //private void SelectTome(int tome)
+        //{
+        //    SetVisibleTomes(tome);
+        //    //if (presenter.CurrentTomeNumber != tome)
+        //    //{
+        //    //    presenter.CurrentTomeNumber = tome;
+        //    //    SetVisibleTomes(tome);
+        //    //   // SetCatalogItems(tome);
+        //    //    tbPage.Text = "1";
+        //    //}
+        //    //else
+        //    //{
+        //    //    // Повторное выделение тома - скрыть документы
+        //    //    presenter.CurrentTomeNumber = -1;
+        //    //    SetCatalogItems();
+        //    //}
+        //}
+
         private void SelectTome(int tome)
         {
             if (presenter.CurrentTomeNumber != tome)
             {
+                foreach (Control control in PanelCatalog.Controls)
+                {
+                    if (control is LineCatalogDocument)
+                    {
+                        LineCatalogDocument catalogLine = (LineCatalogDocument)control;
+                        catalogLine.Visible = catalogLine.Tome == tome;
+                    }
+                }
                 presenter.CurrentTomeNumber = tome;
-                SetCatalogItems(tome);
-                tbPage.Text = "1";
             }
             else
             {
-                // Повторное выделение тома - скрыть документы
+                foreach (Control control in PanelCatalog.Controls)
+                {
+                    if (control is LineCatalogDocument)
+                    {
+                        LineCatalogDocument catalogLine = (LineCatalogDocument)control;
+                        catalogLine.Visible = false;
+                    }
+                }            
                 presenter.CurrentTomeNumber = -1;
-                SetCatalogItems();
             }
+
         }
 
         /// <summary>
@@ -1278,7 +1327,7 @@ namespace CatalogPdf
         #endregion CatalogItems (UserControl)
 
         #region  Viewer axAcroPdf
-        private PdfiumViewer.PdfDocument documentV;
+        // private PdfiumViewer.PdfDocument documentV;
         /// <summary>
         /// Отобразить текущий документ в контейнере pdf
         /// </summary>
@@ -1295,14 +1344,14 @@ namespace CatalogPdf
                 lbCurrentTome.Text = string.IsNullOrWhiteSpace(tomeName) ?
                         $"Том {currentDocument.Tome}" :
                        $"{currentDocument.Tome}. {tomeName}";
-            
+
                 Cursor = Cursors.WaitCursor;
-                SelectionCatalogRow(currentDocument);            
+                SelectionCatalogRow(currentDocument);
                 presenter.SetCurrentDocument(fileName);
-                lbDocName.Text = presenter.CurrentDoc.Name;            
-                documentV = PdfDocument.Load(fileName);
+                lbDocName.Text = presenter.CurrentDoc.Name;
+                PdfiumViewer.PdfDocument documentV = PdfDocument.Load(fileName);
                 pdfRenderer.Load(documentV);
-                pdfRenderer.MouseWheel += PdfRenderer1_MouseWheel;
+                //pdfRenderer.MouseWheel += PdfRenderer1_MouseWheel;
                 Cursor = Cursors.Default;
             }
 
@@ -1747,7 +1796,39 @@ namespace CatalogPdf
             fullScreen.SetLocationPanel();
         }
 
+        private void toolStripButton8_Click(object sender, EventArgs e)
+        {
+            pdfRenderer.Document.Dispose();
+            string fn = presenter.CurrentDoc.File.FullName;
+            presenter.CurrentDoc = null;
+            if (!IsLocked(fn))
+            {
+                File.Delete(fn);
+            }
+        }
 
+        public bool IsLocked(string fileName)
+        {
+            try
+            {
+                using (FileStream fs = File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.None))
+                {
+                    fs.Close();
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                if (ex.HResult == -2147024894)
+                    return false;
+            }
+            return true;
+        }
+
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
 
