@@ -44,7 +44,6 @@ namespace CatalogPdf
             this.добавитьФайлВКаталогToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.удалитьФайлИзКаталогаИПапкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.btnTableCatalog = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
@@ -125,7 +124,6 @@ namespace CatalogPdf
             this.menuCatalog,
             this.MenuFile,
             this.toolStripSeparator1,
-            this.toolStripButton4,
             this.btnTableCatalog,
             this.toolStripSeparator9,
             this.toolStripLabel2,
@@ -246,21 +244,6 @@ namespace CatalogPdf
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 41);
-            // 
-            // toolStripButton4
-            // 
-            this.toolStripButton4.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripButton4.AutoSize = false;
-            this.toolStripButton4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
-            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(28, 28);
-            this.toolStripButton4.Text = "btnSettings";
-            this.toolStripButton4.ToolTipText = "Настройки";
-            this.toolStripButton4.Visible = false;
-            this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
             // 
             // btnTableCatalog
             // 
@@ -873,7 +856,6 @@ namespace CatalogPdf
         private System.Windows.Forms.FlowLayoutPanel flowPanelComments;
         private System.Windows.Forms.TabPage PageComments;
         private System.Windows.Forms.Button btnShowHideCatalog;
-        private System.Windows.Forms.ToolStripButton toolStripButton4;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton btnPreviousPage;

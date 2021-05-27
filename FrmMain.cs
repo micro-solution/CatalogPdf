@@ -201,7 +201,6 @@ namespace CatalogPdf
         /// <param name="e"></param>
         private void PdfRenderer1_MouseWheel(object sender, MouseEventArgs e)
         {
-            return;
             if (System.Windows.Forms.Control.ModifierKeys == Keys.Control) return;
             TimeSpan timeSpan = DateTime.Now.Subtract(flagWheelDate);
 
@@ -787,44 +786,10 @@ namespace CatalogPdf
         }
 
         /// <summary>
-        /// При нажатии на маркер тома вывести список его документов
+        /// При нажатии на маркер тома вывести\ скрыть  список его документов
         /// </summary>
         /// <param name="tome"></param>
-        //private void SelectTome(int tome)
-        //{
-        //    if (presenter.CurrentTomeNumber != tome)
-        //    {
-        //        presenter.CurrentTomeNumber = tome;
-        //        SetCatalogItems(tome);
-        //        tbPage.Text = "1";
-        //    }
-        //    else
-        //    {
-        //        // Повторное выделение тома - скрыть документы
-        //        presenter.CurrentTomeNumber = -1;
-        //        SetCatalogItems();
-        //    }
-        //}
-
-        //private void SelectTome(int tome)
-        //{
-        //    SetVisibleTomes(tome);
-        //    //if (presenter.CurrentTomeNumber != tome)
-        //    //{
-        //    //    presenter.CurrentTomeNumber = tome;
-        //    //    SetVisibleTomes(tome);
-        //    //   // SetCatalogItems(tome);
-        //    //    tbPage.Text = "1";
-        //    //}
-        //    //else
-        //    //{
-        //    //    // Повторное выделение тома - скрыть документы
-        //    //    presenter.CurrentTomeNumber = -1;
-        //    //    SetCatalogItems();
-        //    //}
-        //}
-
-        private void SelectTome(int tome)
+         private void SelectTome(int tome)
         {
             if (presenter.CurrentTomeNumber != tome)
             {
@@ -1351,7 +1316,7 @@ namespace CatalogPdf
                 lbDocName.Text = presenter.CurrentDoc.Name;
                 PdfiumViewer.PdfDocument documentV = PdfDocument.Load(fileName);
                 pdfRenderer.Load(documentV);
-                //pdfRenderer.MouseWheel += PdfRenderer1_MouseWheel;
+                pdfRenderer.MouseWheel += PdfRenderer1_MouseWheel;
                 Cursor = Cursors.Default;
             }
 
@@ -1552,7 +1517,6 @@ namespace CatalogPdf
 
 
 
-
         #endregion Поиск
 
         private void toolStripButton1_Click(object sender, EventArgs e)
@@ -1659,12 +1623,12 @@ namespace CatalogPdf
 
         private void rotateLeft_Click(object sender, EventArgs e)
         {
-            RotationLeft();  //pdfRenderer.RotateLeft();
+            RotationLeft(); 
         }
 
         private void rotateRight_Click(object sender, EventArgs e)
         {
-            RotationRight();  //pdfRenderer.RotateRight();
+            RotationRight();  
         }
 
         private void fitHeight_Click(object sender, EventArgs e)
@@ -1673,7 +1637,6 @@ namespace CatalogPdf
             pdfRenderer.Zoom = 1;
             pdfRenderer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitHeight;
             pdfRenderer.Update();
-            //pdfRenderer.Refresh();
         }
 
         private void fitWidth_Click(object sender, EventArgs e)
@@ -1682,7 +1645,6 @@ namespace CatalogPdf
             pdfRenderer.Zoom = 1;
             pdfRenderer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitWidth;
             pdfRenderer.Update();
-            //pdfRenderer.Refresh();
         }
 
 
@@ -1730,63 +1692,9 @@ namespace CatalogPdf
             else if (e.KeyCode == Keys.F && e.Control)
             {
                 tbPage.Select();
-            }
-            //else if (e.KeyCode == Keys.Add && e.Control)
-            //{
-            //    pdfRenderer.ZoomIn();
-            //}
-            //else if (e.KeyCode == Keys.Subtract && e.Control)
-            //{
-            //    pdfRenderer.ZoomOut();
-            //}
+            }  
         }
-
-        //private void toolStripMain_SizeChanged(object sender, EventArgs e)
-        //{
-        //    ChangeSizePanelControls();
-        //}
-        //private void ChangeSizePanelControls()
-        //{
-        //    double widthDocumentName = lbDocName.Text.Length * lbDocName.Font.Size;
-        //    //Свободное место
-        //    double spaseWidth = toolStripMain.Width - WhidthControls;
-        //    string title = lbDocName.Text;
-        //    int len = (int)Math.Round(spaseWidth / lbDocName.Font.Size) + 3;
-
-
-        //    //int index = title.Length - len;
-        //    if (spaseWidth - widthDocumentName < 10 && len > 5 && len < lbDocName.Text.Length)
-        //    {
-        //        lbDocName.Text = title.Remove(len) + "...";
-        //    }
-        //    else if (presenter?.CurrentDoc != null && lbDocName.Text != presenter.CurrentDoc.Name)
-        //    {
-        //        lbDocName.Text = presenter.CurrentDoc.Name;
-        //    }
-        //    //toolStripSpace.Width = (int)Math.Round((spaseWidth - lbDocName.Width) / 2);
-
-        //}
-        //private void lbDocName_TextChanged(object sender, EventArgs e)
-        //{
-        //    ChangeSizePanelControls();
-        //}
-        //private double WhidthControls
-        //{
-        //    get
-        //    {
-        //        double width = 0;
-        //        //toolStripSpace.Width = 0;
-        //        foreach (ToolStripItem item in toolStripMain.Items)
-        //        {
-        //            if (item.Name != "lbDocName")
-        //            {
-        //                width += item.Width;
-
-        //            }
-        //        }
-        //        return width;
-        //    }
-        //}
+ 
         private void btnFullScreen_Click(object sender, EventArgs e)
         {
             FullScreen fullScreen = new FullScreen();
@@ -1795,40 +1703,7 @@ namespace CatalogPdf
             fullScreen.Show();
             fullScreen.SetLocationPanel();
         }
-
-        private void toolStripButton8_Click(object sender, EventArgs e)
-        {
-            pdfRenderer.Document.Dispose();
-            string fn = presenter.CurrentDoc.File.FullName;
-            presenter.CurrentDoc = null;
-            if (!IsLocked(fn))
-            {
-                File.Delete(fn);
-            }
-        }
-
-        public bool IsLocked(string fileName)
-        {
-            try
-            {
-                using (FileStream fs = File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.None))
-                {
-                    fs.Close();
-                    return false;
-                }
-            }
-            catch (Exception ex)
-            {
-                if (ex.HResult == -2147024894)
-                    return false;
-            }
-            return true;
-        }
-
-        private void toolStripButton4_Click(object sender, EventArgs e)
-        {
-
-        }
+              
     }
 
 
