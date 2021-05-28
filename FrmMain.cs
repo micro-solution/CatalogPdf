@@ -236,30 +236,7 @@ namespace CatalogPdf
                     Debug.WriteLine(nextPage);
                 }
                 flagNewDoc = DateTime.Now;
-            }
-            ////переход на новую книгу
-            //if (referencePage == presenter.CurrentDoc.StartPage)
-            //{
-            //    if (e.Delta > 0 && pagefromTb > 1)
-            //    {
-            //        flagNewDoc = DateTime.Now;
-            //        TbxPageSetValue(pagefromTb - 1, false);
-            //        NavigatePageChange(pagefromTb - 1);
-            //        //PagePreviousTextBox(pagefromTb);
-            //        Debug.WriteLine(pagefromTb);
-            //        return;
-            //    }
-            //}
-
-            //int lastPageoDoc = presenter.CurrentDoc.StartPage + pdfRenderer.Document.PageCount - 1;
-            //if (pagefromTb >= lastPageoDoc && pagefromTb <= presenter.CurrentDoc.EndPage + 1 && e.Delta < 0)
-            //{
-            //    flagNewDoc = DateTime.Now;
-            //    TbxPageSetValue(pagefromTb + 1, false);
-            //    NavigatePageChange(pagefromTb + 1);
-            //    //  PageNextTextBox(pagefromTb);
-            //    Debug.WriteLine(pagefromTb);
-            //}
+            }          
         }
         /// <summary>
         /// Менять страницу при движении скролбара вьюшки
@@ -272,9 +249,7 @@ namespace CatalogPdf
             {
                 int referencePage = presenter.GetReferencePage(pdfRenderer.Page);
                 TbxPageSetValue(referencePage, false);
-                if (referencePage != oldPage) ShowContentPage(referencePage);
-                // if (oldPage == pdfRenderer.Page) { return; }
-                // SetPageTextBox(referencePage);
+                if (referencePage != oldPage) ShowContentPage(referencePage);               
             }
         }
         //Установить значение текстбокса с номером страницы по условию       
@@ -785,13 +760,15 @@ namespace CatalogPdf
             SelectTome(tomeLine.Tome);
         }
 
+
+        int panelCurentTome = 0;
         /// <summary>
         /// При нажатии на маркер тома вывести\ скрыть  список его документов
         /// </summary>
         /// <param name="tome"></param>
          private void SelectTome(int tome)
         {
-            if (presenter.CurrentTomeNumber != tome)
+            if (panelCurentTome != tome)
             {
                 foreach (Control control in PanelCatalog.Controls)
                 {
@@ -801,7 +778,8 @@ namespace CatalogPdf
                         catalogLine.Visible = catalogLine.Tome == tome;
                     }
                 }
-                presenter.CurrentTomeNumber = tome;
+                panelCurentTome = tome;
+                //presenter.CurrentTomeNumber = tome;
             }
             else
             {
@@ -813,7 +791,8 @@ namespace CatalogPdf
                         catalogLine.Visible = false;
                     }
                 }            
-                presenter.CurrentTomeNumber = -1;
+            panelCurentTome = -1;
+                //presenter.CurrentTomeNumber = -1;
             }
 
         }
