@@ -60,7 +60,7 @@
     <ApplicationIcon>application-pdf_36278.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>5298EDF1155350F6D5D036C7C84EFC86FDB3490B</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>A39B55A4E01FFC62DFADAFD4C2F39222553AD3A9</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>
@@ -70,7 +70,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>false</SignManifests>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
