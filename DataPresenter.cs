@@ -16,13 +16,8 @@ namespace CatalogPdf
         public Document CurrentDoc { set; get; }
         public bool State { private set; get; } = false;
       //  public int PageCount { private set; get; } = 0;
-
         public int CurrentPageCurDoc = 1;
-
-
-
         private readonly string db_directory;
-
 
         /// <summary>
         /// Последняя страница текущего тома
@@ -39,7 +34,6 @@ namespace CatalogPdf
             }
         }
 
-
         public SortedSet<int> GetAllTomsNumbers()
         {
             SortedSet<int> t = new SortedSet<int>();
@@ -52,7 +46,7 @@ namespace CatalogPdf
         {
             DataPresenter presenter = new DataPresenter(path);
             LoadResult loadResult = presenter.Load();
-            //Если файл базы не существует, создадим его  
+            //Если файл базы не существует, создадим его 
             if (loadResult == LoadResult.NotInit)
             {
                 presenter.InitDirectory();
